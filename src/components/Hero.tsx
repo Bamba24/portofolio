@@ -18,12 +18,12 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className={`min-h-screen flex items-center justify-center ${theme === "light" ? "bg-white text-black" : "bg-gray-900 text-white"}`}>
+    <section id="hero" className={`min-h-screen flex items-center justify-center ${theme === "light" ? "bg-white text-black" : "bg-gray-800 text-white"}`}>
       <div className="container-max text-center">
         <div className="animate-fade-in">
-          <h1 className={`text-5xl md:text-7xl font-bold text-gray-900 mb-6 ${theme === "light" ? "text-gray-900" : "text-gray-50"}`}>
+          <h1 className={`text-5xl md:text-7xl font-bold  mb-6 ${theme === "light" ? "text-gray-900" : "text-white"}`}>
             {langue === 'fr' ? 'Bonjour, je suis ' : 'Hello, I am '}
-            <span className={`text-primary ${theme === "light" ? "text-gray-900" : "text-gray-50"}`}>Bamba</span>
+            <span className={` ${theme === "light" ? "text-blue-900" : "text-blue-900"}`}>Bamba</span>
           </h1>
           <h2 className={`text-2xl md:text-3xl font-light ${theme === "light" ? "text-gray-600" : "text-gray-200"} mb-8`}>
             {langue === 'fr' ? 'Développeur Fullstack Web & Mobile' : 'Fullstack Web & Mobile Developer'}
@@ -35,7 +35,7 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button onClick={scrollToProjects} className={`btn-primary ${theme === "light" ? "bg-primary text-white" : "bg-gray-800 text-gray-200"} flex items-center gap-2`}>
+            <button onClick={scrollToProjects} className={`btn-primary ${theme === "light" ? "bg-primary text-white" : "bg-white text-gray-900"} flex items-center gap-2`}>
               {langue === 'fr' ? 'Voir mes projets' : 'View My Projects'}
             </button>
             <button className={`btn-secondary flex items-center gap-2 ${theme === "light" ? "bg-gray-200 text-gray-900" : "bg-gray-700 text-gray-200"}`}>

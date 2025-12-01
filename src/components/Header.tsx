@@ -51,7 +51,7 @@ export default function Header() {
       }`}
     >
       <div className="container-max">
-        <nav className="flex items-center justify-between py-4">
+        <nav className="flex items-center justify-between py-4 px-4">
           <div className={`text-2xl font-bold ${colors.text}`}>Portfolio</div>
 
           {/* Desktop Menu */}
@@ -94,12 +94,12 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className={`${colors.bgMenu} border-t ${colors.borderMenu} md:hidden`}>
-            <div className="py-4 space-y-4">
+            <div className="py-4 space-y-4 px-5">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-4 py-2 ${colors.textSecondary} hover:text-primary transition-colors duration-300`}
+                  className={`block w-full text-left px-4 ${colors.textSecondary} hover:text-primary transition-colors duration-300`}
                 >
                   {langue === 'fr' ? item.fr : item.en}
                 </button>
@@ -108,7 +108,7 @@ export default function Header() {
               {/* Langue Mobile */}
               <button
                 onClick={toggleLangue}
-                className={`flex items-center gap-2 px-4 py-2 ${colors.textSecondary} hover:text-primary transition`}
+                className={`flex items-center gap-2 px-4 ${colors.textSecondary} hover:text-primary transition`}
               >
                 <Languages size={18} />
                 {langue === 'fr' ? 'EN' : 'FR'}

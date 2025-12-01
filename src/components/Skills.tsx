@@ -1,11 +1,15 @@
 import { Code, Database, Smartphone, Globe, Server, Palette } from 'lucide-react';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
+import { LangueContext } from '../context/langueContext';
 
 export default function  Skills () {
 
   const context = useContext(ThemeContext);
   const theme = context?.theme ?? "light";
+
+  const contextLangue = useContext(LangueContext);
+  const langue = contextLangue?.langue
 
   const skillCategories = [
     {
@@ -45,11 +49,10 @@ export default function  Skills () {
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "light" ? "text-gray-900" : "text-gray-50"}`}>
-            Stack Technique
+            { langue === "fr" ?  "Stack Technique": "My Stack"}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Technologies et outils que je maîtrise pour créer des applications 
-            performantes et innovantes
+             { langue === "fr" ?  "Technologies et outils que je maitrise pour créer des applications performantes et innovantes": "Technologies and tools that I master to create high-performance and innovative applications"}
           </p>
         </div>
         

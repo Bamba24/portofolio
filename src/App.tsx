@@ -10,10 +10,6 @@ import Footer from './components/Footer';
 import { ThemeProvider } from './context/ThemeContext';
 import { LangueProvider } from './context/langueContext';
 
-
-
-
-
 function App() {
   
   return (

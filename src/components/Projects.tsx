@@ -1,65 +1,82 @@
 import { useContext, useState } from 'react';
 import { Github, ExternalLink, Smartphone, Globe, Code } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
+import { LangueContext } from '../context/langueContext';
 
 export default function Projects() {
   const { theme } = useContext(ThemeContext) || { theme: 'light' };
+  const { langue } = useContext(LangueContext) || { langue: 'fr' };
 
   const projects = [
     {
-      title: 'Site Immobilier',
-      description: 'Site vitrine immobilier simple développé en HTML, CSS et JavaScript.',
+      titleFr: 'Site Immobilier',
+      titleEn: 'Real Estate Website',
+      descriptionFr: 'Site vitrine immobilier simple développé en HTML, CSS et JavaScript.',
+      descriptionEn: 'Simple real estate showcase website built with HTML, CSS, and JavaScript.',
       image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800',
       category: 'Web',
       icon: <Globe className="text-primary" size={24} />,
       technologies: ['HTML', 'CSS', 'JavaScript'],
       github: 'https://github.com/tonCompte/immobilier',
       demo: 'https://immobilier-demo.com',
-      features: ['Liste de biens', 'Filtre par prix et localisation', 'Design responsive']
+      featuresFr: ['Liste de biens', 'Filtre par prix et localisation', 'Design responsive'],
+      featuresEn: ['Property listings', 'Filter by price and location', 'Responsive design']
     },
     {
-      title: 'E-Commerce Chaussures',
-      description: 'Plateforme e-commerce de vente de chaussures avec Next.js, MySQL et TypeScript.',
+      titleFr: 'E-Commerce Chaussures',
+      titleEn: 'Shoes E-Commerce',
+      descriptionFr: 'Plateforme e-commerce de vente de chaussures avec Next.js, MySQL et TypeScript.',
+      descriptionEn: 'E-commerce platform for selling shoes built with Next.js, MySQL, and TypeScript.',
       image: 'https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800',
       category: 'Web',
       icon: <Globe className="text-primary" size={24} />,
       technologies: ['Next.js', 'TypeScript', 'Prisma', 'MySQL', 'TailwindCSS'],
       github: 'https://github.com/tonCompte/ecommerce-chaussures',
       demo: 'https://ecommerce-chaussures.com',
-      features: ['Gestion produits', 'Panier et paiement', 'Dashboard admin', 'Responsive']
+      featuresFr: ['Gestion produits', 'Panier et paiement', 'Dashboard admin', 'Responsive'],
+      featuresEn: ['Product management', 'Cart & payment', 'Admin dashboard', 'Responsive']
     },
     {
-      title: 'App Mobile E-Commerce',
-      description: 'Version mobile de l’e-commerce de chaussures avec React Native et Expo.',
+      titleFr: 'App Mobile E-Commerce',
+      titleEn: 'E-Commerce Mobile App',
+      descriptionFr: 'Version mobile de l’e-commerce de chaussures avec React Native et Expo.',
+      descriptionEn: 'Mobile version of the shoe e-commerce built with React Native and Expo.',
       image: 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=800',
       category: 'Mobile',
       icon: <Smartphone className="text-primary" size={24} />,
       technologies: ['React Native', 'Expo', 'Firebase', 'Redux'],
       github: 'https://github.com/tonCompte/app-chaussures',
       demo: 'https://expo.dev/@tonCompte/app-chaussures',
-      features: ['Navigation par onglets', 'Panier et commandes', 'Notifications push', 'Mode hors-ligne']
+      featuresFr: ['Navigation par onglets', 'Panier et commandes', 'Notifications push', 'Mode hors-ligne'],
+      featuresEn: ['Tab navigation', 'Cart & orders', 'Push notifications', 'Offline mode']
     },
     {
-      title: 'Recital Coran',
-      description: 'Application web pour récital du Coran avec Next.js et NestJS (TypeORM).',
+      titleFr: 'Récital Coran',
+      titleEn: 'Quran Recital',
+      descriptionFr: 'Application web pour récital du Coran avec Next.js et NestJS (TypeORM).',
+      descriptionEn: 'Quran recital web app built with Next.js and NestJS (TypeORM).',
       image: 'https://images.pexels.com/photos/2088176/pexels-photo-2088176.jpeg?auto=compress&cs=tinysrgb&w=800',
       category: 'Web',
       icon: <Code className="text-primary" size={24} />,
       technologies: ['Next.js', 'NestJS', 'TypeORM', 'TailwindCSS'],
       github: 'https://github.com/tonCompte/recital-coran',
       demo: 'https://recital-coran.com',
-      features: ['Lecture audio', 'Liste des sourates', 'Mode sombre', 'Responsive']
+      featuresFr: ['Lecture audio', 'Liste des sourates', 'Mode sombre', 'Responsive'],
+      featuresEn: ['Audio playback', 'Surah list', 'Dark mode', 'Responsive']
     },
     {
-      title: 'Blog Portfolio',
-      description: 'Blog personnel intégré au portfolio avec Next.js et NestJS.',
+      titleFr: 'Blog Portfolio',
+      titleEn: 'Portfolio Blog',
+      descriptionFr: 'Blog personnel intégré au portfolio avec Next.js et NestJS.',
+      descriptionEn: 'Personal blog integrated into portfolio with Next.js and NestJS.',
       image: 'https://images.pexels.com/photos/207413/pexels-photo-207413.jpeg?auto=compress&cs=tinysrgb&w=800',
       category: 'Web',
       icon: <Code className="text-primary" size={24} />,
       technologies: ['Next.js', 'NestJS', 'TypeScript', 'TailwindCSS'],
       github: 'https://github.com/tonCompte/blog-portfolio',
       demo: 'https://blog-portfolio.com',
-      features: ['Articles', 'Commentaires', 'Gestion admin', 'Mode sombre']
+      featuresFr: ['Articles', 'Commentaires', 'Gestion admin', 'Mode sombre'],
+      featuresEn: ['Articles', 'Comments', 'Admin management', 'Dark mode']
     }
   ];
 
@@ -75,10 +92,12 @@ export default function Projects() {
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'light' ? 'text-gray-900' : 'text-gray-50'}`}>
-            Mes Projets
+            {langue === "fr" ? "Mes Projets" : "My Projects"}
           </h2>
           <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
-            Découvrez mes réalisations récentes, des sites web aux applications mobiles.
+            {langue === "fr" 
+              ? "Découvrez mes réalisations récentes, des sites web aux applications mobiles." 
+              : "Discover my recent work, from websites to mobile applications."}
           </p>
 
           {/* Filtres */}
@@ -93,12 +112,15 @@ export default function Projects() {
                     : 'bg-gray-200 dark:bg-gray-700 dark:text-gray-300 text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
-                {cat}
+                {langue === "fr" 
+                  ? cat 
+                  : cat === "Tous" ? "All" : cat}
               </button>
             ))}
           </div>
         </div>
 
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <div
@@ -108,7 +130,7 @@ export default function Projects() {
               }`}
             >
               <div className="relative">
-                <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                <img src={project.image} alt={langue === "fr" ? project.titleFr : project.titleEn} className="w-full h-48 object-cover" />
                 <div className="absolute top-4 left-4 bg-white rounded-full p-2">
                   {project.icon}
                 </div>
@@ -118,15 +140,21 @@ export default function Projects() {
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="mb-4 text-gray-600 dark:text-gray-300">{project.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {langue === "fr" ? project.titleFr : project.titleEn}
+                </h3>
+                <p className="mb-4 text-gray-600 dark:text-gray-300">
+                  {langue === "fr" ? project.descriptionFr : project.descriptionEn}
+                </p>
 
                 <div className="mb-4">
-                  <h4 className="font-semibold mb-2">Fonctionnalités :</h4>
+                  <h4 className="font-semibold mb-2">
+                    {langue === "fr" ? "Fonctionnalités :" : "Features:"}
+                  </h4>
                   <ul className="space-y-1">
-                    {project.features.map((feat, idx) => (
+                    {(langue === "fr" ? project.featuresFr : project.featuresEn).map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
+                        <span className={`text-primary mt-1 ${theme === "light" ? "" : "text-white"}`}>•</span>
                         <span className="text-gray-600 dark:text-gray-300 text-sm">{feat}</span>
                       </li>
                     ))}

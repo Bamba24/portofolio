@@ -23,6 +23,12 @@ export default function Experience() {
         'Intégration des fonctionnalités de panier et commande',
         'Gestion de l’authentification et rôles utilisateurs'
       ],
+      missionsEn: [
+        'Frontend development with Next.js and TailwindCSS',
+        'Database management with MySQL and Prisma',
+        'Integration of shopping cart and ordering features',
+        'Authentication management and user roles'
+      ],
       stack: ['Next.js', 'TypeScript', 'MySQL', 'Prisma', 'TailwindCSS', 'Stripe']
     },
     {
@@ -39,6 +45,12 @@ export default function Experience() {
         'Connexion à l’API backend du site e-commerce',
         'Gestion de l’état global avec Context API',
         'Test et déploiement sur simulateurs iOS et Android'
+      ],
+      missionsEn: [
+        'Developing product and shopping cart screens',
+        "Connecting to the e-commerce site's backend API",
+        'Managing global state with Context API',
+        'Testing and deployment on iOS and Android simulators'
       ],
       stack: ['React Native', 'Expo', 'TypeScript', 'Axios', 'Context API']
     },
@@ -57,6 +69,12 @@ export default function Experience() {
         'Gestion des médias audio et affichage des récitateurs',
         'Implémentation de l’authentification et rôles admin/utilisateur'
       ],
+      missionsEn: [
+        'API Creation with NestJS and TypeORM',
+        'Frontend Development with Next.js and TailwindCSS',
+        'Audio Media Management and Reciter Display',
+        'Authentication Implementation and Admin/User Roles'
+      ],
       stack: ['Next.js', 'NestJS', 'TypeORM', 'PostgreSQL', 'TailwindCSS']
     },
     {
@@ -74,6 +92,12 @@ export default function Experience() {
         'Intégration d’un CMS pour publication d’articles',
         'Optimisation SEO et performances'
       ],
+      missionsEn: [
+        'Creation of a backend API for article and comment management',
+        'Responsive frontend development with Next.js',
+        'Integration of a CMS for article publishing',
+        'SEO and performance optimization'
+      ],
       stack: ['Next.js', 'NestJS', 'TypeORM', 'TailwindCSS', 'SEO']
     },
     {
@@ -90,6 +114,12 @@ export default function Experience() {
         'Intégration des projets et expériences professionnelles',
         'Gestion du thème clair/sombre et responsive design',
         'Optimisation des animations et UX'
+      ],
+      missionsEn: [
+        'Frontend development with Next.js and TailwindCSS',
+        'Project integration and professional experiences',
+        'Light/dark theme management and responsive design',
+        'Animation and UX optimization'
       ],
       stack: ['Next.js', 'TailwindCSS', 'TypeScript', 'React', 'Framer Motion']
     }
@@ -151,7 +181,7 @@ export default function Experience() {
                     {langue === 'fr' ? 'Missions principales :' : 'Main Responsibilities:'}
                   </h4>
                   <ul className="space-y-2">
-                    {exp.missions.map((mission, missionIndex) => (
+                    {(langue === "fr" ? exp.missions : exp.missionsEn).map((mission, missionIndex) => (
                       <li key={missionIndex} className="flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
                         <span className="text-gray-600 dark:text-gray-300">{mission}</span>

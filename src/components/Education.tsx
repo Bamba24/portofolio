@@ -22,6 +22,13 @@ export default function Education() {
         'Développement Frontend avec React / React Native / Next.js',
         'Développement Backend avec Node.js / NestJS / Prisma / MySQL',
         'Gestion de projets et déploiement d’applications'
+      ],
+      achievementsEn: [
+        'Web and Mobile Project Implementation',
+        'Mastery of JavaScript and TypeScript Fundamentals',
+        'Frontend Development with React / React Native / Next.js',
+        'Backend Development with Node.js / NestJS / Prisma / MySQL',
+        'Project Management and Application Deployment'
       ]
     }
   ];
@@ -66,7 +73,7 @@ export default function Education() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h4 className="text-xl font-semibold mb-1">
+                      <h4 className="text-xl font-semibold mb-1 text-primary">
                         {langue === 'fr' ? edu.degreeFr : edu.degreeEn}
                       </h4>
                       <p className="text-primary font-medium">{edu.school}</p>
@@ -87,7 +94,7 @@ export default function Education() {
                       {langue === 'fr' ? 'Compétences & Réalisations :' : 'Skills & Achievements:'}
                     </h5>
                     <ul className="space-y-1">
-                      {edu.achievements.map((achievement, achIndex) => (
+                      {(langue === "fr" ? edu.achievements : edu.achievementsEn).map((achievement, achIndex) => (
                         <li key={achIndex} className="flex items-start gap-2">
                           <span className="text-primary mt-1">•</span>
                           <span className="text-gray-600 dark:text-gray-300">{achievement}</span>
@@ -116,7 +123,7 @@ export default function Education() {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h4 className="text-lg font-semibold mb-1">
+                      <h4 className="text-lg font-semibold mb-1 text-primary">
                         {langue === 'fr' ? cert.titleFr : cert.titleEn}
                       </h4>
                       <p className="text-primary font-medium">{cert.issuer}</p>

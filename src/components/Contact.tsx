@@ -128,13 +128,13 @@ export default function Contact() {
           {/* Contact Form */}
           <div className="animate-slide-in-right">
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold mb-6">
+              <h3 className="text-2xl font-bold mb-6 text-primary">
                 {langue === 'fr' ? 'Envoyez-moi un message' : 'Send me a message'}
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-primary">
                     {langue === 'fr' ? 'Nom complet' : 'Full Name'}
                   </label>
                   <input
@@ -150,7 +150,7 @@ export default function Contact() {
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-primary">
                     {langue === 'fr' ? 'Email' : 'Email'}
                   </label>
                   <input
@@ -166,7 +166,7 @@ export default function Contact() {
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-primary">
                     {langue === 'fr' ? 'Message' : 'Message'}
                   </label>
                   <textarea
