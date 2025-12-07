@@ -1,10 +1,10 @@
+"use client";
 import { GraduationCap, Award, Calendar } from 'lucide-react';
 import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
 import { LangueContext } from '../context/langueContext';
+import { motion } from 'framer-motion';
 
 export default function Education() {
-  const { theme } = useContext(ThemeContext) || { theme: 'light' };
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
 
   const education = [
@@ -41,105 +41,149 @@ export default function Education() {
       date: 'Août 2025',
       descriptionFr: 'Certification officielle après la formation fullstack JS et mobile avec projets pratiques.',
       descriptionEn: 'Official certification after fullstack JS & mobile training with practical projects.'
+    },
+    {
+      titleFr: 'Comprendre le Web',
+      titleEn: 'Understanding the Web',
+      issuer: 'OpenClassrooms',
+      date: '2024',
+      descriptionFr: 'Certification sur le fonctionnement du web, les serveurs, clients, protocoles et rendu des pages.',
+      descriptionEn: 'Certification on how the web works, servers, clients, protocols and page rendering.'
+    },
+    {
+      titleFr: 'Apprenez à programmer avec JavaScript',
+      titleEn: 'Learn to Program with JavaScript',
+      issuer: 'OpenClassrooms',
+      date: '2024',
+      descriptionFr: 'Certification d’initiation à JavaScript avec les bases de la logique et de la programmation.',
+      descriptionEn: 'Certification covering JavaScript fundamentals and programming logic.'
+    },
+    {
+      titleFr: 'Créez des pages web dynamiques avec JavaScript',
+      titleEn: 'Create Dynamic Web Pages with JavaScript',
+      issuer: 'OpenClassrooms',
+      date: '2024',
+      descriptionFr: 'Certification sur la manipulation du DOM, les événements et l’interactivité web.',
+      descriptionEn: 'Certification on DOM manipulation, events handling and interactive web features.'
+    },
+    {
+      titleFr: 'Créez votre site web avec HTML5 et CSS3',
+      titleEn: 'Build Your Website with HTML5 and CSS3',
+      issuer: 'OpenClassrooms',
+      date: '2024',
+      descriptionFr: 'Certification sur les bases du HTML, CSS, structure de page et responsive design.',
+      descriptionEn: 'Certification covering HTML, CSS, page structure and responsive design.'
     }
   ];
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
-    <section id="education" className={`section-padding ${theme === "light" ? "bg-gray-50 text-gray-900" : "bg-gray-900 text-gray-50"}`}>
+    <section id="education" className="section-padding bg-gray-50 text-primary">
       <div className="container-max">
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'light' ? 'text-gray-900' : 'text-gray-50'}`}>
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-6"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             {langue === 'fr' ? 'Formation & Certifications' : 'Education & Certifications'}
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            {langue === 'fr' ? "Mon parcours académique et les certifications obtenues" : "My academic background and obtained certifications"}
-          </p>
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-600 max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            {langue === 'fr'
+              ? "Mon parcours académique et les certifications obtenues"
+              : "My academic background and obtained certifications"}
+          </motion.p>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Formation */}
-          <div>
-            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-              <GraduationCap className="text-primary" size={32} />
-              {langue === 'fr' ? 'Formation Académique' : 'Academic Education'}
-            </h3>
-            
-            <div className="space-y-8">
-              {education.map((edu, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 card-hover animate-slide-in-left"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h4 className="text-xl font-semibold mb-1 text-primary">
-                        {langue === 'fr' ? edu.degreeFr : edu.degreeEn}
-                      </h4>
-                      <p className="text-primary font-medium">{edu.school}</p>
-                      <p className="text-gray-600 dark:text-gray-300">{edu.location}</p>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                      <Calendar size={16} />
-                      <span>{edu.period}</span>
-                    </div>
-                  </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {langue === 'fr' ? edu.descriptionFr : edu.descriptionEn}
-                  </p>
-                  
-                  <div>
-                    <h5 className="font-semibold text-gray-900 dark:text-gray-50 mb-2">
-                      {langue === 'fr' ? 'Compétences & Réalisations :' : 'Skills & Achievements:'}
-                    </h5>
-                    <ul className="space-y-1">
-                      {(langue === "fr" ? edu.achievements : edu.achievementsEn).map((achievement, achIndex) => (
-                        <li key={achIndex} className="flex items-start gap-2">
-                          <span className="text-primary mt-1">•</span>
-                          <span className="text-gray-600 dark:text-gray-300">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+          {education.map((edu, index) => (
+            <motion.div
+              key={`edu-${index}`}
+              className="bg-white rounded-2xl p-6"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h4 className="text-xl font-semibold mb-1">
+                    {langue === 'fr' ? edu.degreeFr : edu.degreeEn}
+                  </h4>
+                  <p className="font-medium">{edu.school}</p>
+                  <p className="text-gray-600">{edu.location}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-          
+                <div className="flex items-center gap-1 text-gray-600">
+                  <Calendar size={16} />
+                  <span>{edu.period}</span>
+                </div>
+              </div>
+
+              <p className="text-gray-600 mb-4">
+                {langue === 'fr' ? edu.descriptionFr : edu.descriptionEn}
+              </p>
+
+              <div>
+                <h5 className="font-semibold text-gray-900 mb-2">
+                  {langue === 'fr' ? 'Compétences & Réalisations :' : 'Skills & Achievements:'}
+                </h5>
+                <ul className="space-y-1">
+                  {(langue === 'fr' ? edu.achievements : edu.achievementsEn).map((ach, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span className="text-gray-600">{ach}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+
           {/* Certifications */}
-          <div>
-            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-              <Award className="text-primary" size={32} />
-              {langue === 'fr' ? 'Certifications' : 'Certifications'}
-            </h3>
-            
-            <div className="space-y-6">
-              {certifications.map((cert, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 card-hover animate-slide-in-right"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h4 className="text-lg font-semibold mb-1 text-primary">
-                        {langue === 'fr' ? cert.titleFr : cert.titleEn}
-                      </h4>
-                      <p className="text-primary font-medium">{cert.issuer}</p>
-                    </div>
-                    <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
-                      {cert.date}
-                    </span>
-                  </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-300">
-                    {langue === 'fr' ? cert.descriptionFr : cert.descriptionEn}
-                  </p>
+          {certifications.map((cert, index) => (
+            <motion.div
+              key={`cert-${index}`}
+              className="bg-white rounded-2xl p-6"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: (education.length + index) * 0.1 }}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <h4 className="text-lg font-semibold mb-1">
+                    {langue === 'fr' ? cert.titleFr : cert.titleEn}
+                  </h4>
+                  <p className="font-medium">{cert.issuer}</p>
                 </div>
-              ))}
-            </div>
-          </div>
+                <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
+                  {cert.date}
+                </span>
+              </div>
+              <p className="text-gray-600">
+                {langue === 'fr' ? cert.descriptionFr : cert.descriptionEn}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

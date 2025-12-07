@@ -1,11 +1,20 @@
 import { Calendar, MapPin, Briefcase } from 'lucide-react';
 import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
 import { LangueContext } from '../context/langueContext';
+import {motion} from "framer-motion"
 
 export default function Experience() {
-  const { theme } = useContext(ThemeContext) || { theme: 'light' };
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
+
+ const itemVariants = {
+  hidden: { opacity: 0, x: -20 }, // Commencer plus bas
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { duration: 0.6 } // Animation plus simple
+  },
+};
+
 
   const experiences = [
     {
@@ -126,8 +135,13 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className={`section-padding ${theme === "light" ? "bg-white text-gray-900" : "bg-gray-900 text-gray-50"}`}>
-      <div className="container-max">
+    <section id="experience" className={`section-padding bg-white text-primary`}>
+      <motion.div className="container-max"
+        initial={{opacity:0, y:20}}
+        whileInView={{opacity:1, y:0}}
+        viewport={{ once: true}}
+        transition={{duration: 0.5 }}
+      >
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             {langue === 'fr' ? 'Expériences Professionnelles' : 'Professional Experiences'}
@@ -139,10 +153,14 @@ export default function Experience() {
         
         <div className="space-y-12">
           {experiences.map((exp, index) => (
-            <div 
+            <motion.div 
               key={index} 
               className="relative pl-8 border-l-4 border-primary animate-slide-in-left"
               style={{ animationDelay: `${index * 0.2}s` }}
+              initial="hidden" 
+              whileInView="visible" 
+              variants={itemVariants}
+              viewport={{ once: true, amount: 0.4 }}
             >
               <div className="absolute -left-3 top-0 w-6 h-6 bg-primary rounded-full"></div>
               
@@ -163,7 +181,7 @@ export default function Experience() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-primary font-medium">
+                  <div className="flex items-center gap-2 text-white font-medium">
                     <Calendar size={16} />
                     <span>{exp.period}</span>
                     <span className="bg-primary text-white px-3 py-1 rounded-full text-sm ml-2">
@@ -203,10 +221,10 @@ export default function Experience() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,17 +1,14 @@
 import { Heart, Code } from 'lucide-react';
 import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
 import { LangueContext } from '../context/langueContext';
 
 export default function Footer() {
-  const themeContext = useContext(ThemeContext);
-  const theme = themeContext?.theme ?? "light";
 
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
 
   return (
-    <footer className={`py-12 ${theme === "light" ? "bg-blue-900 text-white" : "bg-gray-800 text-gray-200"}`}>
+    <footer className={"bg-primary text-white py-8"}>
       <div className="container-max">
         <div className="text-center">
           <div className="flex items-center justify-center gap-2 mb-4">

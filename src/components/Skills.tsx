@@ -1,15 +1,22 @@
 import { Code, Database, Smartphone, Globe, Server, Palette } from 'lucide-react';
 import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
 import { LangueContext } from '../context/langueContext';
+import {motion} from "framer-motion"
 
 export default function  Skills () {
 
-  const context = useContext(ThemeContext);
-  const theme = context?.theme ?? "light";
-
   const contextLangue = useContext(LangueContext);
   const langue = contextLangue?.langue
+
+
+ const itemVariants = {
+  hidden: { opacity: 0, y: -20 }, // Commencer plus bas
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6 } // Animation plus simple
+  },
+};
 
   const skillCategories = [
     {
@@ -45,10 +52,15 @@ export default function  Skills () {
   ];
 
   return (
-    <section id="skills" className={`section-padding bg-gray-50 ${theme === "light" ? "bg-gray-50 text-gray-900" : "bg-gray-800 text-gray-200"}`}>
-      <div className="container-max">
+    <section id="skills" className={`section-padding bg-gray-50  text-gray-900`}>
+      <motion.div className="container-max"
+      initial={{opacity:0, y:20}}
+      whileInView={{opacity:1 , y:0}}
+      viewport={{once: true}}
+      transition={{duration: 0.5}}
+      >
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "light" ? "text-gray-900" : "text-gray-50"}`}>
+          <h2 className={`text-4xl md:text-5xl font-bold mb-6 text-primary`}>
             { langue === "fr" ?  "Stack Technique": "My Stack"}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -56,12 +68,17 @@ export default function  Skills () {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {skillCategories.map((category, index) => (
-            <div 
+            <motion.div 
+              className="bg-white rounded-2xl p-8 card-hover "
               key={index} 
-              className="bg-white rounded-2xl p-8 card-hover animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
+              initial="hidden" 
+              whileInView="visible" 
+              variants={itemVariants}
+              viewport={{ once: true, amount: 0.4 }}
             >
               <div className="flex items-center mb-6">
                 <div className="bg-gray-100 rounded-full p-3 mr-4">
@@ -76,10 +93,10 @@ export default function  Skills () {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

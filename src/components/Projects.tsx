@@ -1,13 +1,12 @@
 import { useContext, useState } from 'react';
 import { Github, ExternalLink, Smartphone, Globe, Code } from 'lucide-react';
-import { ThemeContext } from '../context/ThemeContext';
 import { LangueContext } from '../context/langueContext';
+import { motion } from "framer-motion";
 
 export default function Projects() {
-  const { theme } = useContext(ThemeContext) || { theme: 'light' };
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
 
-  const projects = [
+   const projects = [
     {
       titleFr: 'Site Immobilier',
       titleEn: 'Real Estate Website',
@@ -83,18 +82,39 @@ export default function Projects() {
   const categories = ['Tous', 'Web', 'Mobile'];
   const [selectedCategory, setSelectedCategory] = useState('Tous');
 
-  const filteredProjects = selectedCategory === 'Tous' 
-    ? projects 
+  const filteredProjects = selectedCategory === 'Tous'
+    ? projects
     : projects.filter(project => project.category === selectedCategory);
 
+  // 🔥 Animation du container (stagger)
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.20, // animation entre les cards
+      },
+    },
+  };
+
+  // 🔥 Animation de chaque card
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6},
+    },
+  };
+
   return (
-    <section id="projects" className={`section-padding ${theme === 'light' ? 'bg-white text-gray-900' : 'bg-gray-900 text-gray-50'}`}>
+    <section id="projects" className="section-padding bg-white text-primary">
       <div className="container-max">
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'light' ? 'text-gray-900' : 'text-gray-50'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
             {langue === "fr" ? "Mes Projets" : "My Projects"}
           </h2>
-          <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
+          <p className="text-lg mb-8 max-w-3xl mx-auto text-black">
             {langue === "fr" 
               ? "Découvrez mes réalisations récentes, des sites web aux applications mobiles." 
               : "Discover my recent work, from websites to mobile applications."}
@@ -112,28 +132,37 @@ export default function Projects() {
                     : 'bg-gray-200 dark:bg-gray-700 dark:text-gray-300 text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
-                {langue === "fr" 
-                  ? cat 
-                  : cat === "Tous" ? "All" : cat}
+                {langue === "fr" ? cat : cat === "Tous" ? "All" : cat}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 🔥 Grille animée */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {filteredProjects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:-translate-y-1 ${
-                theme === 'light' ? 'bg-white text-gray-900' : 'bg-gray-800 text-gray-200'
-              }`}
+              className="rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:-translate-y-1 bg-white text-gray-900"
+              variants={cardVariants}
             >
               <div className="relative">
-                <img src={project.image} alt={langue === "fr" ? project.titleFr : project.titleEn} className="w-full h-48 object-cover" />
+                <img
+                  src={project.image}
+                  alt={langue === "fr" ? project.titleFr : project.titleEn}
+                  className="w-full h-48 object-cover"
+                />
+
                 <div className="absolute top-4 left-4 bg-white rounded-full p-2">
                   {project.icon}
                 </div>
+
                 <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
                   {project.category}
                 </div>
@@ -143,7 +172,8 @@ export default function Projects() {
                 <h3 className="text-xl font-semibold mb-2">
                   {langue === "fr" ? project.titleFr : project.titleEn}
                 </h3>
-                <p className="mb-4 text-gray-600 dark:text-gray-300">
+
+                <p className="mb-4 text-primary">
                   {langue === "fr" ? project.descriptionFr : project.descriptionEn}
                 </p>
 
@@ -151,11 +181,12 @@ export default function Projects() {
                   <h4 className="font-semibold mb-2">
                     {langue === "fr" ? "Fonctionnalités :" : "Features:"}
                   </h4>
+
                   <ul className="space-y-1">
                     {(langue === "fr" ? project.featuresFr : project.featuresEn).map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <span className={`text-primary mt-1 ${theme === "light" ? "" : "text-white"}`}>•</span>
-                        <span className="text-gray-600 dark:text-gray-300 text-sm">{feat}</span>
+                        <span className="text-primary mt-1">•</span>
+                        <span className="text-primary text-sm">{feat}</span>
                       </li>
                     ))}
                   </ul>
@@ -178,9 +209,9 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
