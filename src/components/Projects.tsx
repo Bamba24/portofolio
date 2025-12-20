@@ -297,7 +297,7 @@ export default function Projects() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
-          whileInView="show"
+          animate="show"
           viewport={{ once: true, amount: 0.2 }}
           key={selectedCategory}
         >
