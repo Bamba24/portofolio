@@ -6,78 +6,158 @@ import { motion } from "framer-motion";
 export default function Projects() {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
 
-   const projects = [
-    {
-      titleFr: 'Site Immobilier',
-      titleEn: 'Real Estate Website',
-      descriptionFr: 'Site vitrine immobilier simple développé en HTML, CSS et JavaScript.',
-      descriptionEn: 'Simple real estate showcase website built with HTML, CSS, and JavaScript.',
-      image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'Web',
-      icon: <Globe className="text-primary" size={24} />,
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      github: 'https://github.com/tonCompte/immobilier',
-      demo: 'https://immobilier-demo.com',
-      featuresFr: ['Liste de biens', 'Filtre par prix et localisation', 'Design responsive'],
-      featuresEn: ['Property listings', 'Filter by price and location', 'Responsive design']
-    },
-    {
-      titleFr: 'E-Commerce Chaussures',
-      titleEn: 'Shoes E-Commerce',
-      descriptionFr: 'Plateforme e-commerce de vente de chaussures avec Next.js, MySQL et TypeScript.',
-      descriptionEn: 'E-commerce platform for selling shoes built with Next.js, MySQL, and TypeScript.',
-      image: '/images/e-commerce.png',
-      category: 'Web',
-      icon: <Globe className="text-primary" size={24} />,
-      technologies: ['Next.js', 'TypeScript', 'Prisma', 'MySQL', 'TailwindCSS'],
-      github: 'https://github.com/tonCompte/ecommerce-chaussures',
-      demo: 'https://ecommerce-chaussures.com',
-      featuresFr: ['Gestion produits', 'Panier et paiement', 'Dashboard admin', 'Responsive'],
-      featuresEn: ['Product management', 'Cart & payment', 'Admin dashboard', 'Responsive']
-    },
-    {
-      titleFr: 'App Mobile E-Commerce',
-      titleEn: 'E-Commerce Mobile App',
-      descriptionFr: 'Version mobile de l’e-commerce de chaussures avec React Native et Expo.',
-      descriptionEn: 'Mobile version of the shoe e-commerce built with React Native and Expo.',
-      image: 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'Mobile',
-      icon: <Smartphone className="text-primary" size={24} />,
-      technologies: ['React Native', 'Expo', 'Firebase', 'Redux'],
-      github: 'https://github.com/tonCompte/app-chaussures',
-      demo: 'https://expo.dev/@tonCompte/app-chaussures',
-      featuresFr: ['Navigation par onglets', 'Panier et commandes', 'Notifications push', 'Mode hors-ligne'],
-      featuresEn: ['Tab navigation', 'Cart & orders', 'Push notifications', 'Offline mode']
-    },
-    {
-      titleFr: 'Récital Coran',
-      titleEn: 'Quran Recital',
-      descriptionFr: 'Application web pour récital du Coran avec Next.js et NestJS (TypeORM).',
-      descriptionEn: 'Quran recital web app built with Next.js and NestJS (TypeORM).',
-      image: 'https://images.pexels.com/photos/2088176/pexels-photo-2088176.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'Web',
-      icon: <Code className="text-primary" size={24} />,
-      technologies: ['Next.js', 'NestJS', 'TypeORM', 'TailwindCSS'],
-      github: 'https://github.com/tonCompte/recital-coran',
-      demo: 'https://recital-coran.com',
-      featuresFr: ['Lecture audio', 'Liste des sourates', 'Mode sombre', 'Responsive'],
-      featuresEn: ['Audio playback', 'Surah list', 'Dark mode', 'Responsive']
-    },
-    {
-      titleFr: 'Blog Portfolio',
-      titleEn: 'Portfolio Blog',
-      descriptionFr: 'Blog personnel intégré au portfolio avec Next.js et NestJS.',
-      descriptionEn: 'Personal blog integrated into portfolio with Next.js and NestJS.',
-      image: '/images/portfolio1.png',
-      category: 'Web',
-      icon: <Code className="text-primary" size={24} />,
-      technologies: ['Next.js', 'NestJS', 'TypeScript', 'TailwindCSS'],
-      github: 'https://github.com/tonCompte/blog-portfolio',
-      demo: 'https://blog-portfolio.com',
-      featuresFr: ['Articles', 'Commentaires', 'Gestion admin', 'Mode sombre'],
-      featuresEn: ['Articles', 'Comments', 'Admin management', 'Dark mode']
-    }
-  ];
+    const projects = [
+  {
+    titleFr: "Agence de création de sites web",
+    titleEn: "Web Design Agency",
+    descriptionFr:
+      "Challenge : créer l’identité digitale d’une agence moderne capable de convertir des visiteurs en clients grâce à un design professionnel et une structure claire.",
+    descriptionEn:
+      "Challenge: build a modern web agency identity focused on converting visitors into clients through clean design and clear structure.",
+    image: "/images/agence.png",
+    category: "Web",
+    icon: <Globe className="text-primary" size={24} />,
+    technologies: ["Next.js", "TailwindCSS", "TypeScript"],
+    demo: "https://agence-web.com",
+    featuresFr: [
+      "Pages services dynamiques",
+      "Design orienté conversion",
+      "Formulaire de contact",
+      "Responsive design"
+    ],
+    featuresEn: [
+      "Dynamic service pages",
+      "Conversion-oriented design",
+      "Contact form",
+      "Responsive layout"
+    ]
+  },
+  {
+    titleFr: "Blog Personnel",
+    titleEn: "Personal Blog",
+    descriptionFr:
+      "Histoire : un espace pour partager des idées, documenter mon parcours de développeur et publier du contenu technique optimisé pour le SEO.",
+    descriptionEn:
+      "Story: a space to share ideas, document my developer journey, and publish SEO-optimized technical content.",
+    image: "/images/blog.png",
+    category: "Web",
+    icon: <Code className="text-primary" size={24} />,
+    technologies: ["Next.js", "Markdown", "TailwindCSS"],
+    demo: "https://blog-dev.com",
+    featuresFr: [
+      "Articles en Markdown",
+      "SEO optimisé",
+      "Mode sombre",
+      "Navigation fluide"
+    ],
+    featuresEn: [
+      "Markdown articles",
+      "SEO optimized",
+      "Dark mode",
+      "Smooth navigation"
+    ]
+  },
+  {
+    titleFr: "Application Coran",
+    titleEn: "Quran Application",
+    descriptionFr:
+      "Challenge : concevoir une application spirituelle simple, rapide et accessible permettant la lecture et l’écoute du Coran sur tous les supports.",
+    descriptionEn:
+      "Challenge: design a simple, fast, and accessible spiritual app for reading and listening to the Quran on any device.",
+    image: "/images/coran.png",
+    category: "Web",
+    icon: <Code className="text-primary" size={24} />,
+    technologies: ["Next.js", "API Coran", "TailwindCSS"],
+    featuresFr: [
+      "Lecture des sourates",
+      "Audio des récitations",
+      "Mode sombre",
+      "Interface épurée"
+    ],
+    featuresEn: [
+      "Surah reading",
+      "Audio recitations",
+      "Dark mode",
+      "Clean UI"
+    ]
+  },
+  {
+    titleFr: "E-commerce Chaussures",
+    titleEn: "Shoes E-Commerce",
+    descriptionFr:
+      "Challenge : développer une plateforme e-commerce complète avec gestion des produits, panier, paiement et expérience utilisateur fluide.",
+    descriptionEn:
+      "Challenge: build a complete e-commerce platform with product management, cart, payment, and smooth user experience.",
+    image: "/images/e-commerce.png",
+    category: "Web",
+    icon: <Globe className="text-primary" size={24} />,
+    technologies: ["Next.js", "TypeScript", "Prisma", "MySQL"],
+    featuresFr: [
+      "Catalogue produits",
+      "Panier & paiement",
+      "Dashboard admin",
+      "Responsive"
+    ],
+    featuresEn: [
+      "Product catalog",
+      "Cart & payment",
+      "Admin dashboard",
+      "Responsive"
+    ]
+  },
+  {
+    titleFr: "Portfolio Développeur",
+    titleEn: "Developer Portfolio",
+    descriptionFr:
+      "Histoire : un portfolio pensé comme une vitrine personnelle pour présenter mes compétences, mes projets et mon identité de développeur.",
+    descriptionEn:
+      "Story: a personal showcase designed to present my skills, projects, and developer identity.",
+    image: "/images/portfolio1.png",
+    category: "Web",
+    icon: <Code className="text-primary" size={24} />,
+    technologies: ["React", "TailwindCSS", "Framer Motion"],
+    demo: "https://portfolio-dev.com",
+    featuresFr: [
+      "Présentation personnelle",
+      "Animations modernes",
+      "Section projets",
+      "Responsive"
+    ],
+    featuresEn: [
+      "Personal presentation",
+      "Modern animations",
+      "Projects section",
+      "Responsive"
+    ]
+  },
+  {
+    titleFr: "Landing Page SaaS",
+    titleEn: "SaaS Landing Page",
+    descriptionFr:
+      "Challenge : créer une landing page performante pour un produit SaaS, pensée pour capter l’attention et maximiser les conversions.",
+    descriptionEn:
+      "Challenge: build a high-converting landing page for a SaaS product focused on clarity and performance.",
+    image: "/images/sass.png",
+    category: "Web",
+    icon: <Globe className="text-primary" size={24} />,
+    technologies: ["Next.js", "TailwindCSS", "Framer Motion"],
+    demo: "https://landing-saas.com",
+    featuresFr: [
+      "Hero impactant",
+      "Call-to-action clair",
+      "Sections marketing",
+      "Optimisée conversion"
+    ],
+    featuresEn: [
+      "Impactful hero section",
+      "Clear call-to-action",
+      "Marketing sections",
+      "Conversion optimized"
+    ]
+  }
+];
+
+
 
   const categories = ['Tous', 'Web', 'Mobile'];
   const [selectedCategory, setSelectedCategory] = useState('Tous');
@@ -201,11 +281,8 @@ export default function Projects() {
                 </div>
 
                 <div className="flex gap-4">
-                  <a href={project.github} className="flex items-center gap-2 hover:text-primary transition-colors">
-                    <Github size={20} /> Code
-                  </a>
                   <a href={project.demo} className="flex items-center gap-2 hover:text-primary transition-colors">
-                    <ExternalLink size={20} /> Demo
+                    <ExternalLink size={20} /> Visiter le site
                   </a>
                 </div>
               </div>
