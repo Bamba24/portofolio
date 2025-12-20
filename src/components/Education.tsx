@@ -1,5 +1,5 @@
 "use client";
-import { GraduationCap, Award, Calendar } from 'lucide-react';
+import {Calendar } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from 'framer-motion';

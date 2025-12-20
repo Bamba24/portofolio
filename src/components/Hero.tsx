@@ -2,14 +2,47 @@ import { ChevronDown, Download } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import {motion} from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function Hero() {
 
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
+  const [index, setIndex] = useState(0)
+
+     
+  
+  const titles = langue === 'fr'
+  ? [
+      'Développeur Front-end',
+      'Développeur Back-end',
+      'Développeur Fullstack',
+      'Développeur Mobile',
+    ]
+    : [
+      'Front-end Developer',
+      'Back-end Developer',
+      'Fullstack Developer',
+      'Mobile Developer',
+    ];
+
+    useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % titles.length);
+    }, 2500); // durée entre chaque titre
+  
+    return () => clearInterval(interval);
+    }, [titles.length]);
+
 
   const scrollToProjects = () => {
     const element = document.getElementById('projects');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -23,26 +56,28 @@ export default function Hero() {
         transition={{duration: 0.8}}
       >
         <div className="animate-fade-in">
-          <h1 className={`text-5xl md:text-7xl font-bold  mb-6 text-gray-900" : "text-white"}`}>
+          <h1 className={`text-2xl  mb-6 text-gray-900" : "text-white"}`}>
             {langue === 'fr' ? 'Bonjour, je suis ' : 'Hello, I am '}
-            <span className={` text-blue-900" : "text-blue-900"}`}>Bamba</span>
           </h1>
-          <h2 className={`text-2xl md:text-3xl font-light text-primary mb-8`}>
-            {langue === 'fr' ? 'Développeur Fullstack Web & Mobile' : 'Fullstack Web & Mobile Developer'}
+          <p className='text-5xl font-bold mb-6 '>
+            Mouhamadou bamba 
+            <span className="text-blue-900"> Diagne</span>
+          </p>
+          <h2 className={` text-2xl md:text-3xl font-light text-primary mb-8 `}>
+            {titles[index]}
           </h2>
           <p className={`text-lg md:text-xl mb-12 max-w-3xl mx-auto text-primary`}>
             {langue === 'fr'
-              ? 'Passionné par les technologies modernes, je crée des applications web et mobile innovantes qui allient performance, design et expérience utilisateur exceptionnelle.'
-              : 'Passionate about modern technologies, I create innovative web and mobile applications combining performance, design, and exceptional user experience.'}
+              ? 'Passionné par les technologies modernes, je crée des applications web et mobile innovantes qui allient performance, design et expérience utilisateur.'
+              : 'Passionate about modern technologies, I create innovative web and mobile applications combining performance, design, and  user experience.'}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button onClick={scrollToProjects} className={`btn-primary bg-gray-600 text-white flex items-center gap-2`}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-8 max-w-[600px] m-auto">
+            <button onClick={scrollToProjects} className={`btn-primary bg-primary text-white  w-full text-center`}>
               {langue === 'fr' ? 'Voir mes projets' : 'View My Projects'}
             </button>
-            <button className={`btn-secondary flex items-center gap-2 bg-gray-400 text-gray-900`}>
-              <Download size={20} />
-              {langue === 'fr' ? 'Télécharger CV' : 'Download CV'}
+            <button onClick={scrollToContact} className={`btn-primary  gap-2 bg-gray-400 text-primary w-full `}>
+              {langue === 'fr' ? 'Me contacter' : 'Contact me'}
             </button>
           </div>
         </div>

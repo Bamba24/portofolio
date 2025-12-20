@@ -49,7 +49,7 @@ export default function Header() {
     >
       <div className="container-max">
         <nav className="flex items-center justify-between py-4 px-4">
-          <div className={`text-2xl font-bold ${colors.text}`}>Portfolio</div>
+          <div className={`font-bold ${colors.text} bg-gradient-to-tl from-primary to-white top-6 w-10 h-10 rounded-lg text-white p-2 text-center`}>BD</div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
