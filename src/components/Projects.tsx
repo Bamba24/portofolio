@@ -8,6 +8,7 @@ export default function Projects() {
 
     const projects = [
   {
+    id: 1,
     titleFr: "Agence de création de sites web",
     titleEn: "Web Design Agency",
     descriptionFr:
@@ -18,7 +19,7 @@ export default function Projects() {
     category: "Web",
     icon: <Globe className="text-primary" size={24} />,
     technologies: ["Next.js", "TailwindCSS", "TypeScript"],
-    demo: "https://agence-web.com",
+    demo: "https://agence-beryl.vercel.app/",
     featuresFr: [
       "Pages services dynamiques",
       "Design orienté conversion",
@@ -30,9 +31,16 @@ export default function Projects() {
       "Conversion-oriented design",
       "Contact form",
       "Responsive layout"
+    ],
+    status: [
+      "Terminé"
+    ],
+    statusEn : [
+      "Finished"
     ]
   },
   {
+    id:2,
     titleFr: "Blog Personnel",
     titleEn: "Personal Blog",
     descriptionFr:
@@ -43,7 +51,7 @@ export default function Projects() {
     category: "Web",
     icon: <Code className="text-primary" size={24} />,
     technologies: ["Next.js", "Markdown", "TailwindCSS"],
-    demo: "https://blog-dev.com",
+    demo: "https://blog-app-lx4p.vercel.app/",
     featuresFr: [
       "Articles en Markdown",
       "SEO optimisé",
@@ -55,9 +63,16 @@ export default function Projects() {
       "SEO optimized",
       "Dark mode",
       "Smooth navigation"
+    ],
+    status: [
+      "En cours"
+    ],
+    statusEn : [
+      "In building"
     ]
   },
   {
+    id:3,
     titleFr: "Application Coran",
     titleEn: "Quran Application",
     descriptionFr:
@@ -79,9 +94,16 @@ export default function Projects() {
       "Audio recitations",
       "Dark mode",
       "Clean UI"
+    ],
+     status: [
+      "En cours"
+    ],
+    statusEn : [
+      "In building"
     ]
   },
   {
+    id:4,
     titleFr: "E-commerce Chaussures",
     titleEn: "Shoes E-Commerce",
     descriptionFr:
@@ -103,9 +125,16 @@ export default function Projects() {
       "Cart & payment",
       "Admin dashboard",
       "Responsive"
+    ],
+     status: [
+      "Terminé"
+    ],
+    statusEn : [
+      "Finished"
     ]
   },
   {
+    id:5,
     titleFr: "Portfolio Développeur",
     titleEn: "Developer Portfolio",
     descriptionFr:
@@ -116,7 +145,7 @@ export default function Projects() {
     category: "Web",
     icon: <Code className="text-primary" size={24} />,
     technologies: ["React", "TailwindCSS", "Framer Motion"],
-    demo: "https://portfolio-dev.com",
+    demo: "https://portofolio-one-lake.vercel.app/",
     featuresFr: [
       "Présentation personnelle",
       "Animations modernes",
@@ -128,9 +157,16 @@ export default function Projects() {
       "Modern animations",
       "Projects section",
       "Responsive"
+    ],
+    status: [
+      "Terminé"
+    ],
+    statusEn : [
+      "Finished"
     ]
   },
   {
+    id:6,
     titleFr: "Landing Page SaaS",
     titleEn: "SaaS Landing Page",
     descriptionFr:
@@ -141,7 +177,7 @@ export default function Projects() {
     category: "Web",
     icon: <Globe className="text-primary" size={24} />,
     technologies: ["Next.js", "TailwindCSS", "Framer Motion"],
-    demo: "https://landing-saas.com",
+    demo: "https://sass-phi-eight.vercel.app/",
     featuresFr: [
       "Hero impactant",
       "Call-to-action clair",
@@ -153,6 +189,44 @@ export default function Projects() {
       "Clear call-to-action",
       "Marketing sections",
       "Conversion optimized"
+    ],
+    status: [
+      "Terminé"
+    ],
+    statusEn : [
+      "Finished"
+    ]
+  },
+  {
+    id:7,
+  titleFr: "Application Mobile E-commerce",
+  titleEn: "E-Commerce Mobile App",
+  descriptionFr:
+    "Challenge : concevoir une application mobile performante permettant aux utilisateurs d’acheter des produits facilement depuis leur smartphone, avec une navigation fluide et une expérience optimisée.",
+  descriptionEn:
+    "Challenge: build a high-performance mobile application allowing users to shop easily from their smartphones with a smooth and optimized experience.",
+  image: "/images/mobile-app.png",
+  category: "Mobile",
+  icon: <Smartphone className="text-primary" size={24} />,
+  technologies: ["React Native", "Expo", "Firebase"],
+  demo: "https://expo.dev/@tonCompte/ecommerce-mobile",
+  featuresFr: [
+    "Navigation par onglets",
+    "Ajout au panier",
+    "Notifications push",
+    "Interface mobile intuitive"
+  ],
+  featuresEn: [
+    "Tab navigation",
+    "Add to cart",
+    "Push notifications",
+    "Intuitive mobile UI"
+  ],
+  status: [
+      "Terminé"
+    ],
+    statusEn : [
+      "Finished"
     ]
   }
 ];
@@ -164,7 +238,7 @@ export default function Projects() {
 
   const filteredProjects = selectedCategory === 'Tous'
     ? projects
-    : projects.filter(project => project.category === selectedCategory);
+    : projects.filter(project => project.category.toLowerCase() === selectedCategory.toLowerCase());
 
   // 🔥 Animation du container (stagger)
   const containerVariants = {
@@ -225,10 +299,12 @@ export default function Projects() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
+          key={selectedCategory}
         >
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <motion.div
-              key={index}
+              key={project.titleFr}
+              layout // <--- Permet le mouvement fluide des autres cartes
               className="rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:-translate-y-1 bg-white text-gray-900"
               variants={cardVariants}
             >
@@ -243,9 +319,17 @@ export default function Projects() {
                   {project.icon}
                 </div>
 
-                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
-                  {project.category}
-                </div>
+                 <div
+                    className={`absolute top-4 right-4 px-4 py-1 rounded-full text-sm font-medium ${
+                      (langue === "fr"
+                        ? project.status?.includes("En cours")
+                        : project.statusEn?.includes("In building"))
+                        ? "bg-yellow-400 text-black"
+                        : "bg-primary text-white"
+                    }`}
+                  >
+                    {langue === "fr" ? project.status : project.statusEn}
+                  </div>
               </div>
 
               <div className="p-6">
@@ -280,11 +364,19 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <div className="flex gap-4">
-                  <a href={project.demo} className="flex items-center gap-2 hover:text-primary transition-colors">
-                    <ExternalLink size={20} /> Visiter le site
-                  </a>
-                </div>
+                {project.demo && (
+                      <div className="flex gap-4">
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 hover:text-primary transition-colors"
+                        >
+                          <ExternalLink size={20} />
+                          {langue === "fr" ? "Visiter le site" : "Visit website"}
+                        </a>
+                      </div>
+                    )}
               </div>
             </motion.div>
           ))}

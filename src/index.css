@@ -39,3 +39,20 @@
   }
 }
 
+@layer base {
+  html {
+    /* Force le rendu des couleurs en sRGB pour éviter les écarts entre navigateurs */
+    color-interpolation-filters: sRGB;
+    /* Améliore le rendu des polices (qui impacte la perception de la couleur) */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+body {
+  background-color: #ffffff;
+  color: #0A1F44; /* Votre primary */
+}
+
+:root { --color-primary: 10 31 68; }

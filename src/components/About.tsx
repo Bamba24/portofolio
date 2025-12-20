@@ -98,7 +98,7 @@ export default function About() {
           
           <div className="animate-slide-in-right">
             <div className="bg-gray-800 dark:bg-gray-100 rounded-2xl p-8 h-96 flex items-center justify-center">
-              <img src="/images/profil.jpg" alt="Profil Bamba" className="w-full h-full object-cover rounded-2xl" />
+              <img src="/images/pp.png" alt="Profil Bamba" className="w-full h-full object-cover rounded-2xl" />
             </div>
           </div>
         </div>

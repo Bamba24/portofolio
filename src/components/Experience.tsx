@@ -17,122 +17,158 @@ export default function Experience() {
 
 
   const experiences = [
-    {
-      titleFr: 'Développeur Fullstack - Projet E-Commerce',
-      titleEn: 'Fullstack Developer - E-Commerce Project',
-      company: 'Projet Personnel',
-      location: 'Remote / Sénégal',
-      period: 'Mars 2025 - Avril 2025',
-      type: 'Projet',
-      descriptionFr: 'Développement d’une plateforme de vente de chaussures avec Next.js, MySQL, TypeScript et Prisma.',
-      descriptionEn: 'Developed a shoe e-commerce platform with Next.js, MySQL, TypeScript, and Prisma.',
-      missions: [
-        'Développement frontend avec Next.js et TailwindCSS',
-        'Gestion de la base de données avec MySQL et Prisma',
-        'Intégration des fonctionnalités de panier et commande',
-        'Gestion de l’authentification et rôles utilisateurs'
-      ],
-      missionsEn: [
-        'Frontend development with Next.js and TailwindCSS',
-        'Database management with MySQL and Prisma',
-        'Integration of shopping cart and ordering features',
-        'Authentication management and user roles'
-      ],
-      stack: ['Next.js', 'TypeScript', 'MySQL', 'Prisma', 'TailwindCSS', 'Stripe']
-    },
-    {
-      titleFr: 'Développeur Mobile - Version Mobile E-Commerce',
-      titleEn: 'Mobile Developer - E-Commerce Mobile App',
-      company: 'Projet Personnel',
-      location: 'Remote / Sénégal',
-      period: 'Avril 2025 - Mai 2025',
-      type: 'Projet',
-      descriptionFr: 'Application mobile basée sur le projet e-commerce web pour iOS et Android avec React Native et Expo.',
-      descriptionEn: 'Mobile app based on the e-commerce web project for iOS & Android using React Native and Expo.',
-      missions: [
-        'Développement d’écrans produits et panier',
-        'Connexion à l’API backend du site e-commerce',
-        'Gestion de l’état global avec Context API',
-        'Test et déploiement sur simulateurs iOS et Android'
-      ],
-      missionsEn: [
-        'Developing product and shopping cart screens',
-        "Connecting to the e-commerce site's backend API",
-        'Managing global state with Context API',
-        'Testing and deployment on iOS and Android simulators'
-      ],
-      stack: ['React Native', 'Expo', 'TypeScript', 'Axios', 'Context API']
-    },
-    {
-      titleFr: 'Développeur Fullstack - Projet Recital Coran',
-      titleEn: 'Fullstack Developer - Quran Recital Project',
-      company: 'Projet Personnel',
-      location: 'Remote / Sénégal',
-      period: 'Mai 2025 - Juin 2025',
-      type: 'Projet',
-      descriptionFr: 'Application web de récital du Coran avec Next.js et NestJS, gestion des récitateurs et sourates.',
-      descriptionEn: 'Quran recital web app with Next.js and NestJS, managing reciters and surahs.',
-      missions: [
-        'Création d’API avec NestJS et TypeORM',
-        'Développement frontend avec Next.js et TailwindCSS',
-        'Gestion des médias audio et affichage des récitateurs',
-        'Implémentation de l’authentification et rôles admin/utilisateur'
-      ],
-      missionsEn: [
-        'API Creation with NestJS and TypeORM',
-        'Frontend Development with Next.js and TailwindCSS',
-        'Audio Media Management and Reciter Display',
-        'Authentication Implementation and Admin/User Roles'
-      ],
-      stack: ['Next.js', 'NestJS', 'TypeORM', 'PostgreSQL', 'TailwindCSS']
-    },
-    {
-      titleFr: 'Développeur Fullstack - Blog Personnel',
-      titleEn: 'Fullstack Developer - Personal Blog',
-      company: 'Projet Personnel',
-      location: 'Remote / Sénégal',
-      period: 'Juin 2025 - Juillet 2025',
-      type: 'Projet',
-      descriptionFr: 'Développement d’un blog avec Next.js et NestJS, intégration CMS et gestion des articles.',
-      descriptionEn: 'Developed a blog with Next.js and NestJS, CMS integration and article management.',
-      missions: [
-        'Création d’API backend pour gestion articles et commentaires',
-        'Développement frontend responsive avec Next.js',
-        'Intégration d’un CMS pour publication d’articles',
-        'Optimisation SEO et performances'
-      ],
-      missionsEn: [
-        'Creation of a backend API for article and comment management',
-        'Responsive frontend development with Next.js',
-        'Integration of a CMS for article publishing',
-        'SEO and performance optimization'
-      ],
-      stack: ['Next.js', 'NestJS', 'TypeORM', 'TailwindCSS', 'SEO']
-    },
-    {
-      titleFr: 'Développeur Fullstack - Portfolio Personnel',
-      titleEn: 'Fullstack Developer - Personal Portfolio',
-      company: 'Projet Personnel',
-      location: 'Remote / Sénégal',
-      period: 'Juillet 2025 - Août 2025',
-      type: 'Projet',
-      descriptionFr: 'Création de mon portfolio personnel pour présenter mes projets et compétences en développement.',
-      descriptionEn: 'Created my personal portfolio to showcase my projects and development skills.',
-      missions: [
-        'Développement frontend avec Next.js et TailwindCSS',
-        'Intégration des projets et expériences professionnelles',
-        'Gestion du thème clair/sombre et responsive design',
-        'Optimisation des animations et UX'
-      ],
-      missionsEn: [
-        'Frontend development with Next.js and TailwindCSS',
-        'Project integration and professional experiences',
-        'Light/dark theme management and responsive design',
-        'Animation and UX optimization'
-      ],
-      stack: ['Next.js', 'TailwindCSS', 'TypeScript', 'React', 'Framer Motion']
-    }
-  ];
+  {
+    titleFr: "Développeur Fullstack – Agence Web",
+    titleEn: "Fullstack Developer – Web Agency",
+    company: "Projet Personnel",
+    location: "Remote / Sénégal",
+    period: "Février 2025 – Mars 2025",
+    type: "Projet",
+    descriptionFr:
+      "Création d’un site vitrine d’agence web visant à présenter des services digitaux avec une structure orientée conversion et une identité visuelle moderne.",
+    descriptionEn:
+      "Built a web agency website to showcase digital services with a conversion-focused structure and modern visual identity.",
+    missions: [
+      "Développement frontend avec Next.js et TailwindCSS",
+      "Structuration des pages services et landing sections",
+      "Optimisation des performances et du SEO",
+      "Intégration d’un formulaire de contact"
+    ],
+    missionsEn: [
+      "Frontend development using Next.js and TailwindCSS",
+      "Structuring service pages and landing sections",
+      "Performance and SEO optimization",
+      "Contact form integration"
+    ],
+    stack: ["Next.js", "TypeScript", "TailwindCSS"]
+  },
+  {
+    titleFr: "Développeur Fullstack – Blog Personnel",
+    titleEn: "Fullstack Developer – Personal Blog",
+    company: "Projet Personnel",
+    location: "Remote / Sénégal",
+    period: "Mars 2025 – Avril 2025",
+    type: "Projet",
+    descriptionFr:
+      "Développement d’un blog personnel optimisé pour le SEO avec gestion des articles, publication de contenu technique et mode sombre.",
+    descriptionEn:
+      "Developed a personal blog optimized for SEO with article management, technical content publishing, and dark mode.",
+    missions: [
+      "Développement frontend avec Next.js",
+      "Gestion du contenu via Markdown / CMS",
+      "Optimisation SEO et performances",
+      "Implémentation du mode sombre"
+    ],
+    missionsEn: [
+      "Frontend development with Next.js",
+      "Content management using Markdown / CMS",
+      "SEO and performance optimization",
+      "Dark mode implementation"
+    ],
+    stack: ["Next.js", "TailwindCSS", "Markdown", "SEO"]
+  },
+  {
+    titleFr: "Développeur Fullstack – Application Coran",
+    titleEn: "Fullstack Developer – Quran Application",
+    company: "Projet Personnel",
+    location: "Remote / Sénégal",
+    period: "Avril 2025 – Mai 2025",
+    type: "Projet",
+    descriptionFr:
+      "Application web de récital du Coran permettant la lecture des sourates et l’écoute audio, avec une interface simple et accessible.",
+    descriptionEn:
+      "Quran recital web application enabling surah reading and audio playback with a clean and accessible interface.",
+    missions: [
+      "Développement frontend avec Next.js et TailwindCSS",
+      "Intégration d’API de récitations du Coran",
+      "Gestion de la lecture audio",
+      "Mise en place du mode sombre"
+    ],
+    missionsEn: [
+      "Frontend development with Next.js and TailwindCSS",
+      "Integration of Quran recitation APIs",
+      "Audio playback management",
+      "Dark mode implementation"
+    ],
+    stack: ["Next.js", "TailwindCSS", "API Coran"]
+  },
+  {
+    titleFr: "Développeur Fullstack – E-commerce Chaussures",
+    titleEn: "Fullstack Developer – Shoes E-Commerce",
+    company: "Projet Personnel",
+    location: "Remote / Sénégal",
+    period: "Mai 2025 – Juin 2025",
+    type: "Projet",
+    descriptionFr:
+      "Développement d’une plateforme e-commerce de vente de chaussures avec gestion des produits, panier, commandes et base de données.",
+    descriptionEn:
+      "Developed a shoe e-commerce platform with product management, cart, orders, and database integration.",
+    missions: [
+      "Développement frontend avec Next.js et TailwindCSS",
+      "Gestion de la base de données avec MySQL et Prisma",
+      "Implémentation du panier et du système de commande",
+      "Création d’un dashboard administrateur"
+    ],
+    missionsEn: [
+      "Frontend development with Next.js and TailwindCSS",
+      "Database management using MySQL and Prisma",
+      "Shopping cart and order system implementation",
+      "Admin dashboard creation"
+    ],
+    stack: ["Next.js", "TypeScript", "MySQL", "Prisma", "TailwindCSS"]
+  },
+  {
+    titleFr: "Développeur Mobile – Application E-commerce",
+    titleEn: "Mobile Developer – E-Commerce Mobile App",
+    company: "Projet Personnel",
+    location: "Remote / Sénégal",
+    period: "Juin 2025 – Juillet 2025",
+    type: "Projet",
+    descriptionFr:
+      "Développement d’une application mobile iOS et Android basée sur la plateforme e-commerce web, avec React Native et Expo.",
+    descriptionEn:
+      "Developed an iOS and Android mobile application based on the e-commerce web platform using React Native and Expo.",
+    missions: [
+      "Création des écrans produits et panier",
+      "Connexion à l’API backend e-commerce",
+      "Gestion de l’état global avec Context API",
+      "Tests sur simulateurs iOS et Android"
+    ],
+    missionsEn: [
+      "Building product and cart screens",
+      "Connecting to the e-commerce backend API",
+      "Global state management with Context API",
+      "Testing on iOS and Android simulators"
+    ],
+    stack: ["React Native", "Expo", "TypeScript", "Context API"]
+  },
+  {
+    titleFr: "Développeur Fullstack – Portfolio Personnel",
+    titleEn: "Fullstack Developer – Personal Portfolio",
+    company: "Projet Personnel",
+    location: "Remote / Sénégal",
+    period: "Juillet 2025 – Août 2025",
+    type: "Projet",
+    descriptionFr:
+      "Création de mon portfolio personnel afin de présenter mes projets, expériences et compétences en développement web et mobile.",
+    descriptionEn:
+      "Built my personal portfolio to showcase my projects, experiences, and web & mobile development skills.",
+    missions: [
+      "Développement frontend avec React et TailwindCSS",
+      "Intégration des projets et expériences professionnelles",
+      "Animations avec Framer Motion",
+      "Optimisation UX et responsive design"
+    ],
+    missionsEn: [
+      "Frontend development with React and TailwindCSS",
+      "Integration of projects and professional experiences",
+      "Animations using Framer Motion",
+      "UX optimization and responsive design"
+    ],
+    stack: ["React", "TailwindCSS", "Framer Motion"]
+  }
+];
+
 
   return (
     <section id="experience" className={`section-padding bg-white text-primary`}>
