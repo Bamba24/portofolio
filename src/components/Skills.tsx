@@ -32,7 +32,7 @@ export default function  Skills () {
     {
       icon: <Database className="text-primary" size={32} />,
       title: 'Base de données',
-      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Prisma', 'Mongoose', 'Firebase']
+      skills: [ 'MySQL', 'PostgreSQL', 'Prisma', 'Firebase']
     },
     {
       icon: <Smartphone className="text-primary" size={32} />,
@@ -42,12 +42,12 @@ export default function  Skills () {
     {
       icon: <Code className="text-primary" size={32} />,
       title: 'Outils & DevOps',
-      skills: ['Git', 'Docker',  'Vercel', 'Netlify', 'CI/CD', ]
+      skills: ['Git',  'Vercel', 'Netlify', 'CI/CD', ]
     },
     {
       icon: <Palette className="text-primary" size={32} />,
       title: 'Design & UX',
-      skills: ['Figma', 'Responsive Design', 'UI/UX', 'Prototyping', 'Design Systems']
+      skills: ['Figma', 'Responsive Design', 'UI/UX', 'Prototyping']
     }
   ];
 

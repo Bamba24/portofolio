@@ -60,8 +60,8 @@ export default function About() {
 
   const technologies = [
     'JavaScript/TypeScript', 'React', 'React Native', 'Next.js', 'Node.js',
-    'NestJS', 'Express.js', 'MySQL', 'MongoDB', 'Prisma', 'TailwindCSS',
-    'Firebase', 'Stripe', 'Framer Motion'
+    'NestJS', 'Express.js', 'MySQL', 'Prisma', 'TailwindCSS',
+    'Firebase', 'Framer Motion'
   ];
 
   return (
