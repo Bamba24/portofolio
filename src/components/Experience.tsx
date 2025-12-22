@@ -182,7 +182,7 @@ export default function Experience() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             {langue === 'fr' ? 'Expériences Professionnelles' : 'Professional Experiences'}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-800 max-w-3xl mx-auto">
             {langue === 'fr' ? "Mes projets réalisés sont considérés comme expériences professionnelles" : "My completed projects are presented as professional experiences"}
           </p>
         </div>
@@ -200,13 +200,13 @@ export default function Experience() {
             >
               <div className="absolute -left-3 top-0 w-6 h-6 bg-primary rounded-full"></div>
               
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
+              <div className="bg-gray-50  rounded-2xl p-8">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900  mb-2">
                       {langue === 'fr' ? exp.titleFr : exp.titleEn}
                     </h3>
-                    <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300 mb-2">
+                    <div className="flex items-center gap-4 text-gray-800  mb-2">
                       <div className="flex items-center gap-1">
                         <Briefcase size={16} />
                         <span>{exp.company}</span>
@@ -226,26 +226,26 @@ export default function Experience() {
                   </div>
                 </div>
                 
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                <p className="text-gray-800 dark:text-gray-300 mb-6">
                   {langue === 'fr' ? exp.descriptionFr : exp.descriptionEn}
                 </p>
                 
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-50 mb-3">
+                  <h4 className="font-semibold text-gray-900  mb-3">
                     {langue === 'fr' ? 'Missions principales :' : 'Main Responsibilities:'}
                   </h4>
                   <ul className="space-y-2">
                     {(langue === "fr" ? exp.missions : exp.missionsEn).map((mission, missionIndex) => (
                       <li key={missionIndex} className="flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
-                        <span className="text-gray-600 dark:text-gray-300">{mission}</span>
+                        <span className="text-gray-800 ">{mission}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-50 mb-3">
+                  <h4 className="font-semibold text-gray-900  mb-3">
                     {langue === 'fr' ? 'Technologies utilisées :' : 'Technologies used:'}
                   </h4>
                   <div className="flex flex-wrap gap-2">

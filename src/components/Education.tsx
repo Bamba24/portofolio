@@ -179,7 +179,7 @@ export default function Education() {
                   {cert.date}
                 </span>
               </div>
-              <p className="text-gray-600">
+              <p className="text-gray-800">
                 {langue === 'fr' ? cert.descriptionFr : cert.descriptionEn}
               </p>
             </motion.div>

@@ -358,7 +358,7 @@ export default function Projects() {
 
                 <div className="mb-4 flex flex-wrap gap-2">
                   {project.technologies.map((tech, idx) => (
-                    <span key={idx} className="text-xs bg-gray-200 dark:bg-gray-700 dark:text-gray-300 text-gray-700 px-2 py-1 rounded">
+                    <span key={idx} className="text-xs bg-gray-200 dark:bg-gray-800  text-gray-700 px-2 py-1 rounded">
                       {tech}
                     </span>
                   ))}

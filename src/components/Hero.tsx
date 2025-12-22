@@ -56,7 +56,7 @@ export default function Hero() {
         transition={{duration: 0.8}}
       >
         <div className="animate-fade-in">
-          <h1 className={`text-2xl  mb-6 text-gray-900" : "text-white"}`}>
+          <h1 className={`text-2xl  mb-6 text-gray-900}`}>
             {langue === 'fr' ? 'Bonjour, je suis ' : 'Hello, I am '}
           </h1>
           <p className='text-5xl font-bold mb-6 '>
