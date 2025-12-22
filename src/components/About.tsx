@@ -97,7 +97,7 @@ export default function About() {
           </div>
           
           <div className="animate-slide-in-right">
-            <div className="bg-gray-800 rounded-2xl p-8 h-96 flex items-center justify-center">
+            <div className="bg-gray-400 rounded-2xl p-8 h-96 flex items-center justify-center">
               <img src="/images/pp.png" alt="Profil Bamba" className="w-full h-full object-cover rounded-2xl" />
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function About() {
                   variants={item}
                   className="text-center"
                 >
-                  <div className="bg-gray-700  rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                  <div className="bg-primary text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     {value.icon}
                   </div>
 
@@ -124,7 +124,7 @@ export default function About() {
                     {langue === 'fr' ? value.titleFr : value.titleEn}
                   </h3>
 
-                  <p className="text-gray-300 dark:text-gray-700">
+                  <p className="text-gray-800 ">
                     {langue === 'fr' ? value.descriptionFr : value.descriptionEn}
                   </p>
                 </motion.div>
