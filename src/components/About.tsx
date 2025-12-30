@@ -29,28 +29,28 @@ export default function About() {
 
   const values = [
     {
-      icon: <Code className="text-primary" size={32} />,
+      icon: <Code className="text-primary" size={32} color='white' />,
       titleFr: 'Code de qualité',
       descriptionFr: 'Je respecte les bonnes pratiques et développe des applications maintenables.',
       titleEn: 'Quality Code',
       descriptionEn: 'I follow best practices and develop maintainable applications.'
     },
     {
-      icon: <Zap className="text-primary" size={32} />,
+      icon: <Zap className="text-primary" size={32} color='white' />,
       titleFr: 'Performance',
       descriptionFr: 'Applications web et mobiles rapides et optimisées pour une expérience fluide.',
       titleEn: 'Performance',
       descriptionEn: 'Fast and optimized web & mobile applications for a smooth experience.'
     },
     {
-      icon: <Heart className="text-primary" size={32} />,
+      icon: <Heart className="text-primary" size={32} color='white' />,
       titleFr: 'Passion',
       descriptionFr: 'Une passion pour le développement, l’innovation et l’apprentissage continu.',
       titleEn: 'Passion',
       descriptionEn: 'Passionate about development, innovation and continuous learning.'
     },
     {
-      icon: <User className="text-primary" size={32} />,
+      icon: <User className="text-primary" size={32}  color='white' />,
       titleFr: 'Collaboration',
       descriptionFr: 'Travail efficace en équipe et communication avec toutes les parties prenantes.',
       titleEn: 'Collaboration',
@@ -114,9 +114,9 @@ export default function About() {
                 <motion.div
                   key={index}
                   variants={item}
-                  className="text-center bg-primary"
+                  className="text-center "
                 >
-                  <div className=" text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                  <div className="bg-primary  rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     {value.icon}
                   </div>
 
