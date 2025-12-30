@@ -114,13 +114,13 @@ export default function About() {
                 <motion.div
                   key={index}
                   variants={item}
-                  className="text-center"
+                  className="text-center bg-primary"
                 >
-                  <div className="bg-primary text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                  <div className=" text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     {value.icon}
                   </div>
 
-                  <h3 className="text-xl font-semibold text-white  mb-2">
+                  <h3 className="text-xl font-semibold text-primary mb-2">
                     {langue === 'fr' ? value.titleFr : value.titleEn}
                   </h3>
 

@@ -217,10 +217,10 @@ export default function Experience() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-white font-medium">
+                  <div className="flex items-center gap-2 text-primary font-medium">
                     <Calendar size={16} />
                     <span>{exp.period}</span>
-                    <span className="bg-primary text-white px-3 py-1 rounded-full text-sm ml-2">
+                    <span className="bg-primary text-primary px-3 py-1 rounded-full text-sm ml-2">
                       {exp.type}
                     </span>
                   </div>
