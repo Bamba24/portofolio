@@ -1,136 +1,135 @@
 import { User, Heart, Code, Zap } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
 export default function About() {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
 
+  // Animation pour les cartes de valeurs
   const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15, // délai entre chaque carte
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
     },
-  },
-};
+  };
 
-    const item = {
-      hidden: { opacity: 0, y: 40 },
-      show: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6 },
-        ease: [0.17, 0.55, 0.55, 1]
-      },
-    };
-
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   const values = [
     {
-      icon: <Code className="text-primary" size={32} color='white' />,
-      titleFr: 'Code de qualité',
-      descriptionFr: 'Je respecte les bonnes pratiques et développe des applications maintenables.',
-      titleEn: 'Quality Code',
-      descriptionEn: 'I follow best practices and develop maintainable applications.'
+      icon: <Code size={28} className="text-blue-900" />,
+      title: langue === 'fr' ? 'Code de qualité' : 'Quality Code',
+      desc: langue === 'fr' ? 'Je respecte les bonnes pratiques et développe des applications maintenables.' : 'I follow best practices and develop maintainable applications.'
     },
     {
-      icon: <Zap className="text-primary" size={32} color='white' />,
-      titleFr: 'Performance',
-      descriptionFr: 'Applications web et mobiles rapides et optimisées pour une expérience fluide.',
-      titleEn: 'Performance',
-      descriptionEn: 'Fast and optimized web & mobile applications for a smooth experience.'
+      icon: <Zap size={28} className="text-blue-900" />,
+      title: langue === 'fr' ? 'Performance' : 'Performance',
+      desc: langue === 'fr' ? 'Applications rapides et optimisées pour une expérience fluide.' : 'Fast and optimized applications for a smooth experience.'
     },
     {
-      icon: <Heart className="text-primary" size={32} color='white' />,
-      titleFr: 'Passion',
-      descriptionFr: 'Une passion pour le développement, l’innovation et l’apprentissage continu.',
-      titleEn: 'Passion',
-      descriptionEn: 'Passionate about development, innovation and continuous learning.'
+      icon: <Heart size={28} className="text-blue-900" />,
+      title: langue === 'fr' ? 'Passion' : 'Passion',
+      desc: langue === 'fr' ? 'Une passion pour le développement et l’apprentissage continu.' : 'Passionate about development and continuous learning.'
     },
     {
-      icon: <User className="text-primary" size={32}  color='white' />,
-      titleFr: 'Collaboration',
-      descriptionFr: 'Travail efficace en équipe et communication avec toutes les parties prenantes.',
-      titleEn: 'Collaboration',
-      descriptionEn: 'Effective teamwork and communication with all stakeholders.'
+      icon: <User size={28} className="text-blue-900" />,
+      title: langue === 'fr' ? 'Collaboration' : 'Collaboration',
+      desc: langue === 'fr' ? 'Travail efficace en équipe et communication transparente.' : 'Effective teamwork and transparent communication.'
     }
   ];
 
   const technologies = [
-    'JavaScript/TypeScript', 'React', 'React Native', 'Next.js', 'Node.js',
-    'NestJS', 'Express.js', 'MySQL', 'Prisma', 'TailwindCSS',
-    'Firebase', 'Framer Motion'
+    'JavaScript', 'TypeScript', 'React', 'React Native', 'Next.js', 'Node.js',
+    'NestJS', 'MySQL', 'Prisma', 'TailwindCSS', 'Firebase'
   ];
 
   return (
-    <section id="about" className="section-padding bg-white ">
-      <motion.div className="container-max"
-       initial={{opacity:0, y:-20}}
-       whileInView={{opacity:1, y:0}}
-       viewport={{once: true}}
-       transition={{duration: 1}}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-slide-in-left">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary ">
+    <section id="about" className="py-24 bg-white text-gray-900 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* Partie Haute : Texte + Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-24">
+          
+          <motion.div 
+            className="lg:col-span-7"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">
               {langue === 'fr' ? 'À propos de moi' : 'About Me'}
             </h2>
-            <p className="text-lg text-gray-800 mb-6">
-              {langue === 'fr'
-                ? "Développeur fullstack et mobile formé chez Xarala Academy (février - août 2025), j'ai travaillé sur plusieurs projets web et mobiles et acquis une maîtrise complète de l'écosystème JavaScript."
-                : "Fullstack and mobile developer trained at Xarala Academy (Feb - Aug 2025), I worked on multiple web and mobile projects and gained complete mastery of the JavaScript ecosystem."
-              }
-            </p>
-            <p className="text-lg text-gray-800 mb-8">
-              {langue === 'fr'
-                ? "J'aime relever des défis techniques et transformer des idées en applications performantes et modernes. Mon approche allie expertise technique, créativité et souci du détail."
-                : "I enjoy tackling technical challenges and turning ideas into high-performing modern applications. My approach combines technical expertise, creativity, and attention to detail."
-              }
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {technologies.map((tech, index) => (
-                <span key={index} className="tech-badge">{tech}</span>
+            
+            <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+              <p>
+                {langue === 'fr'
+                  ? "Développeur fullstack et mobile formé chez Xarala Academy, j'ai acquis une maîtrise complète de l'écosystème JavaScript à travers des projets concrets."
+                  : "Fullstack and mobile developer trained at Xarala Academy, I have gained complete mastery of the JavaScript ecosystem through concrete projects."}
+              </p>
+              <p>
+                {langue === 'fr'
+                  ? "Mon approche allie rigueur technique et créativité pour transformer vos idées en solutions numériques performantes."
+                  : "My approach combines technical rigor and creativity to turn your ideas into high-performing digital solutions."}
+              </p>
+            </div>
+
+            {/* Badges Tech épurés */}
+            <div className="flex flex-wrap gap-2 mt-10">
+              {technologies.map((tech, i) => (
+                <span key={i} className="px-3 py-1 bg-slate-50 border border-slate-200 text-slate-600 text-sm font-medium rounded-sm">
+                  {tech}
+                </span>
               ))}
             </div>
-          </div>
-          
-          <div className="animate-slide-in-right">
-            <div className="bg-gray-400 rounded-2xl p-8 h-96 flex items-center justify-center">
-              <img src="/images/pp.png" alt="Profil Bamba" className="w-full h-full object-cover rounded-2xl" />
-            </div>
-          </div>
-        </div>
-        
-        <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16"
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {values.map((value, index) => (
-                <motion.div
-                  key={index}
-                  variants={item}
-                  className="text-center "
-                >
-                  <div className="bg-primary  rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                    {value.icon}
-                  </div>
-
-                  <h3 className="text-xl font-semibold text-primary mb-2">
-                    {langue === 'fr' ? value.titleFr : value.titleEn}
-                  </h3>
-
-                  <p className="text-gray-800 ">
-                    {langue === 'fr' ? value.descriptionFr : value.descriptionEn}
-                  </p>
-                </motion.div>
-              ))}
           </motion.div>
-      </motion.div>
+
+          <motion.div 
+            className="lg:col-span-5 relative"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            {/* Décoration minimaliste derrière l'image */}
+            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-blue-900 -z-10 rounded-sm"></div>
+            <div className="bg-slate-100 aspect-square overflow-hidden rounded-sm">
+              <img 
+                src="/images/pp.png" 
+                alt="Mouhamadou Bamba Diagne" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Partie Basse : Valeurs */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {values.map((value, index) => (
+            <motion.div key={index} variants={item} className="flex flex-col items-start">
+              <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                {value.icon}
+              </div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">
+                {value.title}
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {value.desc}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
     </section>
   );
 }

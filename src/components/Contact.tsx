@@ -1,18 +1,17 @@
 import React, { useState, useContext, useRef } from 'react';
 import emailjs from "emailjs-com";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, MessageCircle, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Contact() {
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
-
-  const form = useRef<HTMLFormElement | null>(null);
+  const form = useRef(null);
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"success" | "error" | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,18 +20,16 @@ export default function Contact() {
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setStatus(null);
-
     try {
       await emailjs.sendForm(
-        import.meta.env.VITE_service_id as string,
-        import.meta.env.VITE_template_id as string,
-        form.current as HTMLFormElement,
-        import.meta.env.VITE_public_key as string
+        import.meta.env.VITE_service_id,
+        import.meta.env.VITE_template_id,
+        form.current!,
+        import.meta.env.VITE_public_key
       );
-
       setStatus("success");
       setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setStatus(null), 5000);
     } catch (error) {
       setStatus("error");
     } finally {
@@ -40,187 +37,132 @@ export default function Contact() {
     }
   };
 
-  const socialLinks = [
-    { name: 'LinkedIn', icon: <Linkedin size={24} />, url: 'https://linkedin.com/in/alexandre-dev', color: 'hover:text-blue-600' },
-    { name: 'GitHub', icon: <Github size={24} />, url: 'https://github.com/alexandre-dev', color: 'hover:text-gray-800' },
-    { name: 'Email', icon: <Mail size={24} />, url: 'mailto:gameurbamba68@gmail.com', color: 'hover:text-red-600' },
-    { name: 'WhatsApp', icon: <MessageCircle size={24} />, url: 'https://wa.me/221778257162', color: 'hover:text-green-600' }
-  ];
-
   return (
-    <section id="contact" className="section-padding bg-gray-50 text-primary overflow-hidden">
-      <div className="container-max">
+    <section id="contact" className="py-24 bg-slate-50/50">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        <div className="grid lg:grid-cols-12 gap-16 items-start">
+          
+          {/* --- GAUCHE : TEXTE & INFOS --- */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                {langue === 'fr' ? "Discutons de votre projet" : "Let's talk about your project"}
+              </h2>
+              <p className="text-gray-500 mb-12 leading-relaxed">
+                {langue === 'fr'
+                  ? "Vous avez une idée ou un besoin spécifique ? Je suis disponible pour transformer vos concepts en réalité digitale."
+                  : "Have an idea or a specific need? I'm available to turn your concepts into digital reality."}
+              </p>
 
-        {/* --- TITLE --- */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            {langue === 'fr' ? 'Contactez-moi' : 'Contact Me'}
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            {langue === 'fr'
-              ? "Prêt à collaborer sur votre prochain projet ? N'hésitez pas à me contacter !"
-              : "Ready to collaborate on your next project? Feel free to reach out!"}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-          {/* --- LEFT --- */}
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-2xl font-bold mb-8">
-              {langue === 'fr' ? 'Informations de contact' : 'Contact Information'}
-            </h3>
-
-            <div className="space-y-6">
-              {[ 
-                { icon: <Mail size={20} />, title: "Email", text: "gameurbamba68@gmail.com" },
-                { icon: <Phone size={20} />, title: langue === 'fr' ? "Téléphone" : "Phone", text: "+221 77 825 71 62" },
-                { icon: <MapPin size={20} />, title: langue === 'fr' ? "Localisation" : "Location", text: "Sénégal, Saint-Louis" }
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.15 }}
-                  className="flex items-start gap-4"
-                >
-                  <div className="bg-primary text-white rounded-full p-3">{item.icon}</div>
-                  <div>
-                    <h4 className="font-semibold">{item.title}</h4>
-                    <p>{item.text}</p>
+              <div className="space-y-8">
+                {[ 
+                  { icon: <Mail size={18} />, label: "Email", value: "gameurbamba68@gmail.com", href: "mailto:gameurbamba68@gmail.com" },
+                  { icon: <MessageCircle size={18} />, label: "WhatsApp", value: "+221 77 825 71 62", href: "https://wa.me/221778257162" },
+                  { icon: <MapPin size={18} />, label: "Sénégal", value: "Saint-Louis / Remote", href: "#" }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 items-center group">
+                    <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-blue-900 shadow-sm group-hover:bg-blue-900 group-hover:text-white transition-all">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{item.label}</p>
+                      <a href={item.href} className="text-sm font-bold text-slate-700 hover:text-blue-900 transition-colors">
+                        {item.value}
+                      </a>
+                    </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-8">
-              <h4 className="font-semibold mb-4">
-                {langue === 'fr' ? 'Suivez-moi' : 'Follow Me'}
-              </h4>
-              <div className="flex gap-4">
-                {socialLinks.map((link, index) => (
-                  <motion.a
-                    key={index}
-                    href={link.url}
-                    target="_blank"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`transition-colors duration-300 ${link.color}`}
-                  >
-                    {link.icon}
-                  </motion.a>
                 ))}
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* --- RIGHT (FORM) --- */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white text-primary rounded-2xl p-8 shadow-lg">
-              <h3 className=" text-2xl font-bold mb-6 text-primary">
-                {langue === 'fr' ? 'Envoyez-moi un message' : 'Send me a message'}
-              </h3>
-
+          {/* --- DROITE : FORMULAIRE --- */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-white p-8 md:p-10 rounded-sm border border-slate-100 shadow-xl shadow-slate-200/50"
+            >
               <form ref={form} onSubmit={sendEmail} className="space-y-6">
-
-                {["name", "email", "message"].map((field, i) => (
-                  <motion.div
-                    key={field}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.12 }}
-                  >
-                    <label className="block text-sm font-medium mb-2 text-primary">
-                      {field === "name"
-                        ? langue === "fr" ? "Nom complet" : "Full Name"
-                        : field === "email"
-                          ? "Email"
-                          : "Message"}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                      {langue === 'fr' ? 'Nom complet' : 'Full Name'}
                     </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full bg-slate-50 border-none rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/10 transition-all outline-none"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full bg-slate-50 border-none rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/10 transition-all outline-none"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
 
-                    {field !== "message" ? (
-                      <input
-                        type={field === "email" ? "email" : "text"}
-                        name={field}
-                        value={(formData as any)[field]}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300"
-                      />
-                    ) : (
-                      <textarea
-                        name="message"
-                        rows={5}
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300 resize-none"
-                      />
-                    )}
-                  </motion.div>
-                ))}
+                <div className="space-y-2">
+                  <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Message</label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-slate-50 border-none rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/10 transition-all outline-none resize-none"
+                    placeholder={langue === 'fr' ? "Parlez-moi de votre projet..." : "Tell me about your project..."}
+                  />
+                </div>
 
-                {/* --- Button --- */}
-                <motion.button
+                <button
                   type="submit"
                   disabled={loading}
-                  whileHover={!loading ? { scale: 1.04 } : {}}
-                  whileTap={!loading ? { scale: 0.95 } : {}}
-                  className={`w-full btn-primary flex items-center justify-center gap-2 py-3 rounded-lg transition-all ${
-                    loading ? "opacity-60 cursor-not-allowed" : ""
-                  }`}
+                  className="w-full bg-blue-900 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-3 group"
                 >
                   {loading ? (
-                    <Loader2 size={20} className="animate-spin" />
+                    <Loader2 size={16} className="animate-spin" />
                   ) : (
-                    <Send size={20} />
+                    <>
+                      {langue === 'fr' ? "Envoyer" : "Send"}
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </>
                   )}
-                  {loading
-                    ? (langue === "fr" ? "Envoi..." : "Sending...")
-                    : (langue === "fr" ? "Envoyer le message" : "Send Message")}
-                </motion.button>
+                </button>
 
-                {/* --- Success / Error message --- */}
                 <AnimatePresence>
-                  {status && (
+                  {status === "success" && (
                     <motion.div
-                      initial={{ opacity: 0, y: -10 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className={`mt-4 p-3 rounded-lg flex items-center gap-3 ${
-                        status === "success"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center gap-2 text-emerald-600 text-xs font-bold justify-center pt-2"
                     >
-                      {status === "success" ? (
-                        <CheckCircle size={22} />
-                      ) : (
-                        <XCircle size={22} />
-                      )}
-
-                      <p className="text-sm">
-                        {status === "success"
-                          ? (langue === "fr" ? "Message envoyé avec succès !" : "Message sent successfully!")
-                          : (langue === "fr" ? "Erreur lors de l'envoi." : "Error sending message.")}
-                      </p>
+                      <CheckCircle size={14} />
+                      {langue === "fr" ? "Message envoyé !" : "Message sent!"}
                     </motion.div>
                   )}
                 </AnimatePresence>
-
               </form>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
         </div>
       </div>

@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react';
-import { Github, ExternalLink, Smartphone, Globe, Code } from 'lucide-react';
+import { ExternalLink, Smartphone, Globe, Code, ArrowUpRight } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Projects() {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
+  const [selectedCategory, setSelectedCategory] = useState('Tous');
 
-    const projects = [
+  // Tes données de projets restent les mêmes (je les utilise ici)
+   const projects = [
   {
     id: 1,
     titleFr: "Agence de création de sites web",
@@ -82,17 +84,15 @@ export default function Projects() {
     image: "/images/coran.png",
     category: "Web",
     icon: <Code className="text-primary" size={24} />,
-    technologies: ["Next.js", "API Coran", "TailwindCSS"],
+    technologies: ["Next.js", "Nest.js", "API Coran", "TailwindCSS"],
     featuresFr: [
       "Lecture des sourates",
       "Audio des récitations",
-      "Mode sombre",
       "Interface épurée"
     ],
     featuresEn: [
       "Surah reading",
       "Audio recitations",
-      "Dark mode",
       "Clean UI"
     ],
      status: [
@@ -141,7 +141,7 @@ export default function Projects() {
       "Histoire : un portfolio pensé comme une vitrine personnelle pour présenter mes compétences, mes projets et mon identité de développeur.",
     descriptionEn:
       "Story: a personal showcase designed to present my skills, projects, and developer identity.",
-    image: "/images/portfolio1.png",
+    image: "/images/portfolio.png",
     category: "Web",
     icon: <Code className="text-primary" size={24} />,
     technologies: ["React", "TailwindCSS", "Framer Motion"],
@@ -176,7 +176,7 @@ export default function Projects() {
     image: "/images/sass.png",
     category: "Web",
     icon: <Globe className="text-primary" size={24} />,
-    technologies: ["Next.js", "TailwindCSS", "Framer Motion"],
+    technologies: ["Html5", "CSS3"],
     demo: "https://sass-phi-eight.vercel.app/",
     featuresFr: [
       "Hero impactant",
@@ -205,10 +205,10 @@ export default function Projects() {
     "Challenge : concevoir une application mobile performante permettant aux utilisateurs d’acheter des produits facilement depuis leur smartphone, avec une navigation fluide et une expérience optimisée.",
   descriptionEn:
     "Challenge: build a high-performance mobile application allowing users to shop easily from their smartphones with a smooth and optimized experience.",
-  image: "/images/mobile-app.png",
+  image: "/images/mobile.jpeg",
   category: "Mobile",
   icon: <Smartphone className="text-primary" size={24} />,
-  technologies: ["React Native", "Expo", "Firebase"],
+  technologies: ["React Native", "Expo", "MySQL"],
   demo: "https://expo.dev/@tonCompte/ecommerce-mobile",
   featuresFr: [
     "Navigation par onglets",
@@ -230,158 +230,131 @@ export default function Projects() {
     ]
   }
 ];
-
-
-
   const categories = ['Tous', 'Web', 'Mobile'];
-  const [selectedCategory, setSelectedCategory] = useState('Tous');
 
   const filteredProjects = selectedCategory === 'Tous'
     ? projects
-    : projects.filter(project => project.category.toLowerCase() === selectedCategory.toLowerCase());
-
-  // 🔥 Animation du container (stagger)
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.20, // animation entre les cards
-      },
-    },
-  };
-
-  // 🔥 Animation de chaque card
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6},
-    },
-  };
+    : projects.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
 
   return (
-    <section id="projects" className="section-padding bg-white text-primary">
-      <div className="container-max">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            {langue === "fr" ? "Mes Projets" : "My Projects"}
-          </h2>
-          <p className="text-lg mb-8 max-w-3xl mx-auto text-black">
-            {langue === "fr" 
-              ? "Découvrez mes réalisations récentes, des sites web aux applications mobiles." 
-              : "Discover my recent work, from websites to mobile applications."}
-          </p>
+    <section id="projects" className="py-24 bg-white">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* Header & Filtres */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <div className="max-w-xl">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {langue === "fr" ? "Sélection de projets" : "Featured Projects"}
+            </h2>
+            <p className="text-gray-500 text-lg">
+              {langue === "fr" 
+                ? "Une immersion dans mes dernières réalisations web et mobiles." 
+                : "A deep dive into my latest web and mobile creations."}
+            </p>
+          </div>
 
-          {/* Filtres */}
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex gap-2 p-1 bg-slate-50 border border-slate-100 rounded-sm">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                className={`px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-sm ${
                   selectedCategory === cat
-                    ? 'bg-primary text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 dark:text-gray-300 text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    ? 'bg-blue-900 text-white shadow-sm'
+                    : 'text-gray-400 hover:text-gray-600'
                 }`}
               >
-                {langue === "fr" ? cat : cat === "Tous" ? "All" : cat}
+                {langue === "fr" ? cat : (cat === "Tous" ? "All" : cat)}
               </button>
             ))}
           </div>
         </div>
 
-        {/* 🔥 Grille animée */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          viewport={{ once: true, amount: 0.2 }}
-          key={selectedCategory}
+        {/* Grille de projets */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
         >
-          {filteredProjects.map((project) => (
-            <motion.div
-              key={project.titleFr}
-              layout // <--- Permet le mouvement fluide des autres cartes
-              className="rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:-translate-y-1 bg-white text-gray-900"
-              variants={cardVariants}
-            >
-              <div className="relative">
-                <img
-                  src={project.image}
-                  alt={langue === "fr" ? project.titleFr : project.titleEn}
-                  className="w-full h-48 object-cover"
-                />
-
-                <div className="absolute top-4 left-4 bg-white rounded-full p-2">
-                  {project.icon}
-                </div>
-
-                 <div
-                    className={`absolute top-4 right-4 px-4 py-1 rounded-full text-sm font-medium ${
-                      (langue === "fr"
-                        ? project.status?.includes("En cours")
-                        : project.statusEn?.includes("In building"))
-                        ? "bg-yellow-400 text-black"
-                        : "bg-primary text-white"
-                    }`}
-                  >
-                    {langue === "fr" ? project.status : project.statusEn}
-                  </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">
-                  {langue === "fr" ? project.titleFr : project.titleEn}
-                </h3>
-
-                <p className="mb-4 text-primary">
-                  {langue === "fr" ? project.descriptionFr : project.descriptionEn}
-                </p>
-
-                <div className="mb-4">
-                  <h4 className="font-semibold mb-2">
-                    {langue === "fr" ? "Fonctionnalités :" : "Features:"}
-                  </h4>
-
-                  <ul className="space-y-1">
-                    {(langue === "fr" ? project.featuresFr : project.featuresEn).map((feat, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        <span className="text-primary text-sm">{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {project.technologies.map((tech, idx) => (
-                    <span key={idx} className="text-xs bg-gray-200 dark:bg-gray-800  text-gray-700 px-2 py-1 rounded">
-                      {tech}
+          <AnimatePresence mode='popLayout'>
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                className="group relative"
+              >
+                {/* Image avec Overlay au survol */}
+                <div className="relative aspect-video overflow-hidden bg-slate-100 mb-6 rounded-sm">
+                  <img
+                    src={project.image}
+                    alt={project.titleFr}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  />
+                  
+                  {/* Status Indicator */}
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter backdrop-blur-md ${
+                      (langue === "fr" ? project.status[0] === "En cours" : project.statusEn[0] === "In building")
+                      ? "bg-amber-50/80 text-amber-600 border border-amber-200"
+                      : "bg-emerald-50/80 text-emerald-600 border border-emerald-200"
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                        (langue === "fr" ? project.status[0] === "En cours" : project.statusEn[0] === "In building")
+                        ? "bg-amber-500" : "bg-emerald-500"
+                      }`}></span>
+                      {langue === "fr" ? project.status : project.statusEn}
                     </span>
-                  ))}
+                  </div>
+
+                  {/* Hover Link */}
+                  {project.demo && (
+                    <a 
+                      href={project.demo} 
+                      target="_blank" 
+                      className="absolute inset-0 bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10"
+                    >
+                      <span className="bg-white text-blue-900 p-4 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <ArrowUpRight size={24} />
+                      </span>
+                    </a>
+                  )}
                 </div>
 
-                {project.demo && (
-                      <div className="flex gap-4">
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 hover:text-primary transition-colors"
-                        >
-                          <ExternalLink size={20} />
-                          {langue === "fr" ? "Visiter le site" : "Visit website"}
-                        </a>
-                      </div>
-                    )}
-              </div>
-            </motion.div>
-          ))}
+                {/* Contenu Texte */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {langue === "fr" ? project.titleFr : project.titleEn}
+                    </h3>
+                    <div className="text-gray-300 group-hover:text-blue-900 transition-colors">
+                       {project.category === "Mobile" ? <Smartphone size={20}/> : <Globe size={20}/>}
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                    {langue === "fr" ? project.descriptionFr : project.descriptionEn}
+                  </p>
+
+                  {/* Technologies épurées */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {project.technologies.map((tech, idx) => (
+                      <span key={idx} className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
   );
-}
+}  
+  
+  
+ 

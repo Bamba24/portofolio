@@ -1,102 +1,98 @@
 import { Code, Database, Smartphone, Globe, Server, Palette } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
-export default function  Skills () {
-
+export default function Skills() {
   const contextLangue = useContext(LangueContext);
-  const langue = contextLangue?.langue
-
-
- const itemVariants = {
-  hidden: { opacity: 0, y: -20 }, // Commencer plus bas
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6 } // Animation plus simple
-  },
-};
+  const langue = contextLangue?.langue ?? "fr";
 
   const skillCategories = [
     {
-      icon: <Globe className="text-primary" size={32} />,
+      icon: <Globe size={22} />,
       title: 'Frontend',
       skills: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'TailwindCSS']
     },
     {
-      icon: <Server className="text-primary" size={32} />,
+      icon: <Server size={22} />,
       title: 'Backend',
-      skills: ['Node.js', 'Express.js', 'NestJS', 'REST APIs', 'JWT',]
+      skills: ['Node.js', 'Express.js', 'NestJS', 'REST APIs', 'JWT']
     },
     {
-      icon: <Database className="text-primary" size={32} />,
-      title: 'Base de données',
-      skills: [ 'MySQL', 'PostgreSQL', 'Prisma', 'Firebase']
+      icon: <Database size={22} />,
+      title: langue === "fr" ? 'Base de données' : 'Database',
+      skills: ['MySQL', 'PostgreSQL', 'Prisma', 'Firebase', 'Supabase', 'Neon']
     },
     {
-      icon: <Smartphone className="text-primary" size={32} />,
+      icon: <Smartphone size={22} />,
       title: 'Mobile',
       skills: ['React Native', 'Expo', 'React Navigation']
     },
     {
-      icon: <Code className="text-primary" size={32} />,
-      title: 'Outils & DevOps',
-      skills: ['Git',  'Vercel', 'Netlify', 'CI/CD', ]
+      icon: <Code size={22} />,
+      title: 'DevOps & Tools',
+      skills: ['Git', 'Vercel', 'Netlify', 'CI/CD', 'Docker', 'Railway', "n8n", "Bolt.new", "lovable", "claude code"]
     },
     {
-      icon: <Palette className="text-primary" size={32} />,
+      icon: <Palette size={22} />,
       title: 'Design & UX',
       skills: ['Figma', 'Responsive Design', 'UI/UX', 'Prototyping']
     }
   ];
 
   return (
-    <section id="skills" className={`section-padding bg-gray-50  text-gray-900`}>
-      <motion.div className="container-max"
-      initial={{opacity:0, y:20}}
-      whileInView={{opacity:1 , y:0}}
-      viewport={{once: true}}
-      transition={{duration: 0.5}}
-      >
-        <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 text-primary`}>
-            { langue === "fr" ?  "Stack Technique": "My Stack"}
+    <section id="skills" className="py-24 bg-white border-t border-slate-50">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* HEADER : Plus sobre */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            {langue === "fr" ? "Stack Technique" : "Technical Stack"}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-             { langue === "fr" ?  "Technologies et outils que je maitrise pour créer des applications performantes et innovantes": "Technologies and tools that I master to create high-performance and innovative applications"}
+          <p className="text-gray-500 max-w-xl text-lg">
+            {langue === "fr"
+              ? "Un aperçu des outils et technologies que je maîtrise pour donner vie à vos projets."
+              : "An overview of the tools and technologies I master to bring your projects to life."}
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+
+        {/* GRID : Bordures fines et espacement aéré */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 border border-slate-100">
           {skillCategories.map((category, index) => (
-            <motion.div 
-              className="bg-white rounded-2xl p-8 card-hover "
-              key={index} 
-              style={{ animationDelay: `${index * 0.1}s` }}
-              initial="hidden" 
-              whileInView="visible" 
-              variants={itemVariants}
-              viewport={{ once: true, amount: 0.4 }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white p-8 hover:bg-slate-50 transition-colors duration-300"
             >
-              <div className="flex items-center mb-6">
-                <div className="bg-gray-100 rounded-full p-3 mr-4">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="text-blue-900">
                   {category.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">{category.title}</h3>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400">
+                  {category.title}
+                </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+
+              <div className="flex flex-wrap gap-x-4 gap-y-2">
                 {category.skills.map((skill, skillIndex) => (
-                  <span key={skillIndex} className="tech-badge">
+                  <span
+                    key={skillIndex}
+                    className="text-gray-700 text-base font-medium"
+                  >
                     {skill}
+                    {skillIndex < category.skills.length - 1 && (
+                      <span className="ml-4 text-slate-200">|</span>
+                    )}
                   </span>
                 ))}
               </div>
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
-};
+}

@@ -1,22 +1,37 @@
-import { Calendar, MapPin, Briefcase } from 'lucide-react';
+import { MapPin, Briefcase } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
 export default function Experience() {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
 
- const itemVariants = {
-  hidden: { opacity: 0, x: -20 }, // Commencer plus bas
-  visible: { 
-    opacity: 1, 
-    x: 0, 
-    transition: { duration: 0.6 } // Animation plus simple
-  },
-};
-
-
-  const experiences = [
+   const experiences = [
+  {
+  titleFr: "Stagiaire Développeur Fullstack & Mobile",
+  titleEn: "Fullstack & Mobile Developer Intern",
+  company: "Primelec Services",
+  location: "France",
+  period: "Août 2025 – Septembre 2025",
+  type: "Stage",
+  descriptionFr:
+    "Stage en développement fullstack JavaScript et mobile au sein de Primelec Services avec participation à des projets réels.",
+  descriptionEn:
+    "Internship in fullstack JavaScript and mobile development at Primelec Services, contributing to real-world projects.",
+  missions: [
+    "Développement d’interfaces web avec React / Next.js",
+    "Participation au développement mobile avec React Native",
+    "Correction de bugs et amélioration des performances",
+    "Travail en équipe sur des projets réels"
+  ],
+  missionsEn: [
+    "Frontend development using React / Next.js",
+    "Participation in mobile development with React Native",
+    "Bug fixing and performance improvements",
+    "Team collaboration on real projects"
+  ],
+  stack: ["React", "Next.js", "React Native", "TypeScript"]
+}, 
   {
     titleFr: "Développeur Fullstack – Agence Web",
     titleEn: "Fullstack Developer – Web Agency",
@@ -55,15 +70,13 @@ export default function Experience() {
       "Developed a personal blog optimized for SEO with article management, technical content publishing, and dark mode.",
     missions: [
       "Développement frontend avec Next.js",
-      "Gestion du contenu via Markdown / CMS",
+      "Gestion du contenu via Markdown",
       "Optimisation SEO et performances",
-      "Implémentation du mode sombre"
     ],
     missionsEn: [
       "Frontend development with Next.js",
-      "Content management using Markdown / CMS",
+      "Content management using Markdown",
       "SEO and performance optimization",
-      "Dark mode implementation"
     ],
     stack: ["Next.js", "TailwindCSS", "Markdown", "SEO"]
   },
@@ -82,13 +95,11 @@ export default function Experience() {
       "Développement frontend avec Next.js et TailwindCSS",
       "Intégration d’API de récitations du Coran",
       "Gestion de la lecture audio",
-      "Mise en place du mode sombre"
     ],
     missionsEn: [
       "Frontend development with Next.js and TailwindCSS",
       "Integration of Quran recitation APIs",
       "Audio playback management",
-      "Dark mode implementation"
     ],
     stack: ["Next.js", "TailwindCSS", "API Coran"]
   },
@@ -132,13 +143,11 @@ export default function Experience() {
       "Création des écrans produits et panier",
       "Connexion à l’API backend e-commerce",
       "Gestion de l’état global avec Context API",
-      "Tests sur simulateurs iOS et Android"
     ],
     missionsEn: [
       "Building product and cart screens",
       "Connecting to the e-commerce backend API",
       "Global state management with Context API",
-      "Testing on iOS and Android simulators"
     ],
     stack: ["React Native", "Expo", "TypeScript", "Context API"]
   },
@@ -169,98 +178,96 @@ export default function Experience() {
   }
 ];
 
-
   return (
-    <section id="experience" className={`section-padding bg-white text-primary`}>
-      <motion.div className="container-max"
-        initial={{opacity:0, y:20}}
-        whileInView={{opacity:1, y:0}}
-        viewport={{ once: true}}
-        transition={{duration: 0.5 }}
-      >
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            {langue === 'fr' ? 'Expériences Professionnelles' : 'Professional Experiences'}
+    <section id="experience" className="py-24 bg-white">
+      <div className="max-w-5xl mx-auto px-6">
+        
+        {/* Titre de section minimaliste */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            {langue === 'fr' ? 'Parcours & Expériences' : 'Career & Experience'}
           </h2>
-          <p className="text-lg text-gray-800 max-w-3xl mx-auto">
-            {langue === 'fr' ? "Mes projets réalisés sont considérés comme expériences professionnelles" : "My completed projects are presented as professional experiences"}
+          <p className="text-gray-500 text-lg italic">
+            {langue === 'fr' 
+              ? "Une immersion dans mes projets et mon évolution technique." 
+              : "An insight into my projects and technical evolution."}
           </p>
         </div>
-        
-        <div className="space-y-12">
-          {experiences.map((exp, index) => (
-            <motion.div 
-              key={index} 
-              className="relative pl-8 border-l-4 border-primary animate-slide-in-left"
-              style={{ animationDelay: `${index * 0.2}s` }}
-              initial="hidden" 
-              whileInView="visible" 
-              variants={itemVariants}
-              viewport={{ once: true, amount: 0.4 }}
-            >
-              <div className="absolute -left-3 top-0 w-6 h-6 bg-primary rounded-full"></div>
-              
-              <div className="bg-gray-50  rounded-2xl p-8">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900  mb-2">
+
+        <div className="relative">
+          {/* Ligne verticale ultra-fine */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-slate-200 -translate-x-1/2 hidden md:block"></div>
+
+          <div className="space-y-12">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`relative flex flex-col md:flex-row gap-8 ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Point de jonction au centre */}
+                <div className="absolute left-0 md:left-1/2 w-3 h-3 bg-white border-2 border-blue-900 rounded-full -translate-x-1/2 top-1.5 z-10 hidden md:block"></div>
+
+                {/* Contenu de l'expérience */}
+                <div className="md:w-1/2">
+                  <div className={`p-6 border border-slate-100 rounded-sm hover:border-blue-900 transition-colors duration-300 ${
+                    index % 2 === 0 ? "md:text-right" : "md:text-left"
+                  }`}>
+                    <span className="text-xs font-bold uppercase tracking-widest text-blue-900 mb-2 block">
+                      {exp.period}
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">
                       {langue === 'fr' ? exp.titleFr : exp.titleEn}
                     </h3>
-                    <div className="flex items-center gap-4 text-gray-800  mb-2">
-                      <div className="flex items-center gap-1">
-                        <Briefcase size={16} />
-                        <span>{exp.company}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MapPin size={16} />
-                        <span>{exp.location}</span>
-                      </div>
+                    <div className={`flex items-center gap-3 text-sm text-gray-400 mb-4 ${
+                      index % 2 === 0 ? "md:justify-end" : "md:justify-start"
+                    }`}>
+                      <span className="flex items-center gap-1"><Briefcase size={14}/> {exp.company}</span>
+                      <span className="flex items-center gap-1"><MapPin size={14}/> {exp.location}</span>
+                    </div>
+
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                      {langue === 'fr' ? exp.descriptionFr : exp.descriptionEn}
+                    </p>
+
+                    {/* Missions simplifiées */}
+                    <ul className={`text-sm text-gray-500 space-y-1 mb-6 ${
+                      index % 2 === 0 ? "md:items-end" : "md:items-start"
+                    }`}>
+                      {(langue === 'fr' ? exp.missions : exp.missionsEn).slice(0, 5).map((m, i) => (
+                        <li key={i} className="flex gap-2 opacity-80">
+                          {index % 2 !== 0 && <span>•</span>}
+                          {m}
+                          {index % 2 === 0 && <span className="hidden md:inline">•</span>}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Stack technique discrète */}
+                    <div className={`flex flex-wrap gap-2 ${
+                      index % 2 === 0 ? "md:justify-end" : "md:justify-start"
+                    }`}>
+                      {exp.stack.map((tech, i) => (
+                        <span key={i} className="text-[10px] font-bold text-gray-400 border border-gray-200 px-2 py-0.5 rounded-full uppercase">
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-primary font-medium">
-                    <Calendar size={16} />
-                    <span>{exp.period}</span>
-                    <span className="bg-primary text-primary px-3 py-1 rounded-full text-sm ml-2">
-                      {exp.type}
-                    </span>
-                  </div>
                 </div>
-                
-                <p className="text-gray-800 dark:text-gray-300 mb-6">
-                  {langue === 'fr' ? exp.descriptionFr : exp.descriptionEn}
-                </p>
-                
-                <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900  mb-3">
-                    {langue === 'fr' ? 'Missions principales :' : 'Main Responsibilities:'}
-                  </h4>
-                  <ul className="space-y-2">
-                    {(langue === "fr" ? exp.missions : exp.missionsEn).map((mission, missionIndex) => (
-                      <li key={missionIndex} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        <span className="text-gray-800 ">{mission}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold text-gray-900  mb-3">
-                    {langue === 'fr' ? 'Technologies utilisées :' : 'Technologies used:'}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.stack.map((tech, techIndex) => (
-                      <span key={techIndex} className="tech-badge">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Espace vide pour l'autre côté de la timeline (Desktop) */}
+                <div className="md:w-1/2 hidden md:block"></div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
