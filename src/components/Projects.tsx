@@ -334,7 +334,7 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                  <p className="text-sm text-gray-500 line-clamp-4 leading-relaxed">
                     {langue === "fr" ? project.descriptionFr : project.descriptionEn}
                   </p>
 

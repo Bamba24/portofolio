@@ -61,7 +61,6 @@ export default function Experience() {
     titleEn: "Fullstack Developer – Personal Blog",
     company: "Projet Personnel",
     location: "Remote / Sénégal",
-    period: "Mars 2025 – Avril 2025",
     type: "Projet",
     descriptionFr:
       "Développement d’un blog personnel optimisé pour le SEO avec gestion des articles, publication de contenu technique et mode sombre.",

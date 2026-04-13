@@ -13,7 +13,7 @@ export default function Education() {
       degreeEn: 'Fullstack & Mobile Developer Training',
       school: 'Xarala Academy',
       location: 'En ligne / Sénégal',
-      period: 'Février 2025 - Août 2025',
+      period: 'Février 2025 - Juillet 2025',
       descriptionFr: 'Formation intensive pour devenir développeur fullstack JavaScript et mobile avec projets pratiques.',
       descriptionEn: 'Intensive training to become a fullstack JavaScript and mobile developer with practical projects.',
       achievements: [
@@ -39,7 +39,7 @@ export default function Education() {
       titleFr: 'Développeur Certifié Xarala Academy',
       titleEn: 'Xarala Academy Certified Developer',
       issuer: 'Xarala Academy',
-      date: 'Août 2025',
+      date: 'Juillet 2025',
       descriptionFr: 'Certification officielle après la formation fullstack JS et mobile avec projets pratiques.',
       descriptionEn: 'Official certification after fullstack JS & mobile training with practical projects.'
     },

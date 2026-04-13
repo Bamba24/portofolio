@@ -33,11 +33,6 @@ export default function Skills() {
       title: 'DevOps & Tools',
       skills: ['Git', 'Vercel', 'Netlify', 'CI/CD', 'Docker', 'Railway', "n8n", "Bolt.new", "lovable", "claude code"]
     },
-    {
-      icon: <Palette size={22} />,
-      title: 'Design & UX',
-      skills: ['Figma', 'Responsive Design', 'UI/UX', 'Prototyping']
-    }
   ];
 
   return (
