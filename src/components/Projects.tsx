@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { ExternalLink, Smartphone, Globe, Code, ArrowUpRight } from 'lucide-react';
+import { Smartphone, Globe, Code, ArrowUpRight } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
 

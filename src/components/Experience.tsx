@@ -12,7 +12,7 @@ export default function Experience() {
   titleEn: "Fullstack & Mobile Developer Intern",
   company: "Primelec Services",
   location: "France",
-  period: "Août 2025 – Septembre 2025",
+  period: "Janvier 2026 – Mars 2026",
   type: "Stage",
   descriptionFr:
     "Stage en développement fullstack JavaScript et mobile au sein de Primelec Services avec participation à des projets réels.",
@@ -37,7 +37,6 @@ export default function Experience() {
     titleEn: "Fullstack Developer – Web Agency",
     company: "Projet Personnel",
     location: "Remote / Sénégal",
-    period: "Février 2025 – Mars 2025",
     type: "Projet",
     descriptionFr:
       "Création d’un site vitrine d’agence web visant à présenter des services digitaux avec une structure orientée conversion et une identité visuelle moderne.",
@@ -85,7 +84,6 @@ export default function Experience() {
     titleEn: "Fullstack Developer – Quran Application",
     company: "Projet Personnel",
     location: "Remote / Sénégal",
-    period: "Avril 2025 – Mai 2025",
     type: "Projet",
     descriptionFr:
       "Application web de récital du Coran permettant la lecture des sourates et l’écoute audio, avec une interface simple et accessible.",
@@ -108,7 +106,6 @@ export default function Experience() {
     titleEn: "Fullstack Developer – Shoes E-Commerce",
     company: "Projet Personnel",
     location: "Remote / Sénégal",
-    period: "Mai 2025 – Juin 2025",
     type: "Projet",
     descriptionFr:
       "Développement d’une plateforme e-commerce de vente de chaussures avec gestion des produits, panier, commandes et base de données.",
@@ -133,7 +130,6 @@ export default function Experience() {
     titleEn: "Mobile Developer – E-Commerce Mobile App",
     company: "Projet Personnel",
     location: "Remote / Sénégal",
-    period: "Juin 2025 – Juillet 2025",
     type: "Projet",
     descriptionFr:
       "Développement d’une application mobile iOS et Android basée sur la plateforme e-commerce web, avec React Native et Expo.",
@@ -156,7 +152,6 @@ export default function Experience() {
     titleEn: "Fullstack Developer – Personal Portfolio",
     company: "Projet Personnel",
     location: "Remote / Sénégal",
-    period: "Juillet 2025 – Août 2025",
     type: "Projet",
     descriptionFr:
       "Création de mon portfolio personnel afin de présenter mes projets, expériences et compétences en développement web et mobile.",
