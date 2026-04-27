@@ -21,7 +21,7 @@ export default function Skills() {
     {
       icon: <Database size={22} />,
       title: langue === "fr" ? 'Base de données' : 'Database',
-      skills: ['MySQL', 'PostgreSQL', 'Prisma', 'Firebase', 'Supabase', 'Neon']
+      skills: ['MySQL', 'PostgreSQL', 'Prisma', 'Neon']
     },
     {
       icon: <Smartphone size={22} />,
@@ -31,7 +31,7 @@ export default function Skills() {
     {
       icon: <Code size={22} />,
       title: 'DevOps & Tools',
-      skills: ['Git', 'Vercel', 'Netlify', 'CI/CD', 'Docker', 'Railway', "n8n", "Bolt.new", "lovable", "claude code"]
+      skills: ['Git', 'Vercel', 'Netlify', 'CI/CD', 'Railway', "n8n", "Bolt.new", "lovable", "claude code"]
     },
   ];
 
