@@ -13,6 +13,8 @@ export default function Header() {
   const theme = contextTheme?.theme ?? "light";
   const toggleTheme = contextTheme?.toggleTheme;
 
+  const isEn = langue === 'en';
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -25,7 +27,7 @@ export default function Header() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // Pour ne pas coller au bord haut
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -41,134 +43,138 @@ export default function Header() {
 
   const navItems = [
     { en: "About", fr: "À propos", id: "about" },
-    { en: "Skills", fr: "Skills", id: "skills" },
+    { en: "Services", fr: "Services", id: "skills" },
+    { en: "Career", fr: "Parcours", id: "experience" },
     { en: "Projects", fr: "Projets", id: "projects" },
     { en: "Contact", fr: "Contact", id: "contact" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "py-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm" 
-          : "py-6 bg-transparent"
+          ? "py-3 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 shadow-2xs" 
+          : "py-5 bg-white/50 dark:bg-slate-950/50 backdrop-blur-xs"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
         <nav className="flex items-center justify-between">
           
-          {/* LOGO : Plus minimaliste */}
+          {/* BRAND LOGO : Monogramme minimaliste BD */}
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2.5 group cursor-pointer"
           >
-            <div className="w-9 h-9 bg-blue-900 text-white flex items-center justify-center font-bold text-lg rounded-sm group-hover:rotate-6 transition-transform">
+            <div className="w-8 h-8 bg-blue-900 text-white flex items-center justify-center font-extrabold text-xs rounded-sm group-hover:bg-slate-900 transition-colors shadow-2xs">
               BD
             </div>
-            <span className="hidden sm:block text-sm font-bold tracking-tighter uppercase text-slate-900 dark:text-white">
-              Bamba <span className="text-blue-900">Dev</span>
+            <span className="text-sm font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">
+              Bamba <span className="text-blue-900 dark:text-blue-400 font-semibold">Dev</span>
             </span>
           </button>
 
-          {/* DESKTOP MENU */}
-          <div className="hidden md:flex items-center gap-8">
-            <div className="flex items-center gap-6 border-r border-slate-200 dark:border-slate-800 pr-6">
+          {/* DESKTOP NAV LINKS : Style jonathan-boyer.fr */}
+          <div className="hidden md:flex items-center gap-7">
+            <div className="flex items-center gap-5">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-[13px] font-bold uppercase tracking-widest text-slate-500 hover:text-blue-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+                  className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors cursor-pointer"
                 >
-                  {langue === "fr" ? item.fr : item.en}
+                  {isEn ? item.en : item.fr}
                 </button>
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
-              {/* Thème Light / Dark */}
+            {/* CONTROLES & ACTION */}
+            <div className="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
+              
+              {/* Theme Toggle Button */}
               <button
                 onClick={toggleTheme}
                 title={theme === "light" ? "Mode Sombre" : "Mode Clair"}
-                className="p-2 text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors"
+                className="p-1.5 text-slate-500 hover:text-blue-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
               >
-                {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+                {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
               </button>
 
-              {/* Traduction */}
+              {/* Language Toggle Button */}
               <button
                 onClick={toggleLangue}
-                className="p-2 text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors flex items-center gap-1"
+                className="p-1.5 text-slate-500 hover:text-blue-900 dark:text-slate-400 dark:hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
               >
-                <Languages size={18} />
-                <span className="text-[10px] font-bold">{langue.toUpperCase()}</span>
+                <Languages size={17} />
+                <span className="text-[10px] font-extrabold uppercase">{langue}</span>
               </button>
 
-              {/* BOUTON CV */}
+              {/* CTA CV Button */}
               <a
                 href="/cv-bamba.pdf"
                 download
-                className="flex items-center gap-2 px-5 py-2 bg-blue-900 text-white text-[12px] font-bold uppercase tracking-wider rounded-sm hover:bg-slate-800 transition-all shadow-md active:scale-95"
+                className="flex items-center gap-1.5 px-4 py-1.5 bg-blue-900 hover:bg-blue-950 text-white text-[11px] font-bold uppercase tracking-wider rounded-sm transition-all shadow-xs active:scale-95 ml-1"
               >
-                <Download size={14} />
-                {langue === "fr" ? "Mon CV" : "My CV"}
+                <Download size={13} />
+                <span>{isEn ? "CV" : "Mon CV"}</span>
               </a>
+
             </div>
           </div>
 
-          {/* MOBILE TOGGLE */}
+          {/* MOBILE MENU TOGGLE */}
           <button
-            className="md:hidden p-2 text-slate-900 dark:text-white"
+            className="md:hidden p-2 text-slate-900 dark:text-white cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </nav>
       </div>
 
-      {/* MOBILE MENU : Slide Down */}
+      {/* MOBILE DRAWER MENU */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -10 }}
             className="absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 p-6 md:hidden shadow-xl"
           >
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-5 text-left">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-lg font-bold text-slate-900 dark:text-white"
+                  className="text-left text-base font-bold text-slate-900 dark:text-white hover:text-blue-900 dark:hover:text-blue-400"
                 >
-                  {langue === "fr" ? item.fr : item.en}
+                  {isEn ? item.en : item.fr}
                 </button>
               ))}
               
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-4">
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center gap-2 text-slate-500 dark:text-slate-300 font-bold"
+                  className="flex items-center gap-2 text-xs font-bold uppercase text-slate-600 dark:text-slate-300"
                 >
-                  {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-                  {theme === "light" ? (langue === "fr" ? "Mode Sombre" : "Dark Mode") : (langue === "fr" ? "Mode Clair" : "Light Mode")}
+                  {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+                  {theme === "light" ? (isEn ? "Dark Mode" : "Mode Sombre") : (isEn ? "Light Mode" : "Mode Clair")}
                 </button>
 
                 <button
                   onClick={toggleLangue}
-                  className="flex items-center gap-2 text-slate-500 dark:text-slate-300 font-bold"
+                  className="flex items-center gap-2 text-xs font-bold uppercase text-slate-600 dark:text-slate-300"
                 >
-                  <Languages size={20} />
-                  {langue === "fr" ? "Passer à l'Anglais" : "Switch to French"}
+                  <Languages size={18} />
+                  {isEn ? "Switch to French" : "Passer à l'Anglais"}
                 </button>
                 
                 <a
                   href="/cv-bamba.pdf"
                   download
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-blue-900 text-white font-bold rounded-sm"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-blue-900 text-white text-xs font-bold uppercase tracking-wider rounded-sm mt-2"
                 >
-                  <Download size={18} />
-                  {langue === "fr" ? "Télécharger mon CV" : "Download CV"}
+                  <Download size={16} />
+                  {isEn ? "Download CV" : "Télécharger mon CV"}
                 </a>
               </div>
             </div>
