@@ -15,6 +15,7 @@ export interface ExperienceItem {
   type: 'Stage' | 'Projet';
   logoText: string;
   logoBg: string;
+  logoImage?: string;
   descriptionFr: string;
   descriptionEn: string;
   missions: string[];
@@ -41,6 +42,7 @@ export default function Experience() {
       type: "Stage",
       logoText: "PS",
       logoBg: "bg-blue-900 text-white",
+      logoImage: "/images/primelec.png",
       descriptionFr:
         "Stage en développement fullstack JavaScript et mobile au sein de Primelec Services avec participation active à des projets d'entreprises réels.",
       descriptionEn:
@@ -71,6 +73,7 @@ export default function Experience() {
       type: "Stage",
       logoText: "XA",
       logoBg: "bg-emerald-700 text-white",
+      logoImage: "/images/xarala.png",
       descriptionFr:
         "Stage intensif en développement Fullstack et Mobile chez Xarala Academy. Réalisation d'applications web et mobiles d'apprentissage et de gestion.",
       descriptionEn:
@@ -228,8 +231,12 @@ export default function Experience() {
                   
                   {/* Entreprise & Logo */}
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-md font-extrabold text-sm flex items-center justify-center shadow-xs shrink-0 ${exp.logoBg}`}>
-                      {exp.logoText}
+                    <div className={`w-12 h-12 rounded-md font-extrabold text-sm flex items-center justify-center shadow-xs shrink-0 overflow-hidden bg-white p-1 border border-slate-100 dark:border-slate-800 ${exp.logoBg}`}>
+                      {exp.logoImage ? (
+                        <img src={exp.logoImage} alt={exp.company} className="w-full h-full object-contain" />
+                      ) : (
+                        exp.logoText
+                      )}
                     </div>
 
                     <div>
