@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 export default function Contact() {
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
+  const isEn = langue === 'en';
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
@@ -16,9 +17,9 @@ export default function Contact() {
   const sendWhatsAppMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const phoneNumber = "221778257162";
-    const text = langue === 'fr'
-      ? `Bonjour Bamba 👋,\n\nNom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      : `Hello Bamba 👋,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    const text = isEn
+      ? `Hello Bamba 👋,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      : `Bonjour Bamba 👋,\n\nNom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
 
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
@@ -26,40 +27,47 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-50/50">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="py-20 bg-slate-50/50 dark:bg-slate-950/40 text-slate-900 dark:text-white transition-colors duration-300">
+      <div className="max-w-5xl mx-auto px-6">
         
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* --- GAUCHE : TEXTE & INFOS --- */}
-          <div className="lg:col-span-5">
+          {/* GAUCHE : TEXTE & INFOS DE CONTACT (Aligné à gauche) */}
+          <div className="lg:col-span-5 text-left">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              className="space-y-6"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                {langue === 'fr' ? "Discutons de votre projet" : "Let's talk about your project"}
-              </h2>
-              <p className="text-gray-500 mb-12 leading-relaxed">
-                {langue === 'fr'
-                  ? "Vous avez une idée ou un besoin spécifique ? Remplissez ce formulaire pour m'envoyer un message directement sur WhatsApp."
-                  : "Have an idea or a specific need? Fill out this form to send me a message directly on WhatsApp."}
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2">
+                  {isEn ? "Get In Touch" : "Me contacter"}
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  {isEn ? "Let's Talk About Your Project" : "Discutons de votre projet"}
+                </h2>
+              </div>
+
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                {isEn
+                  ? "Have a project idea or a specific need? Fill out this form to message me directly on WhatsApp."
+                  : "Vous avez une idée de projet ou un besoin spécifique ? Remplissez ce formulaire pour m'envoyer un message directement sur WhatsApp."}
               </p>
 
-              <div className="space-y-8">
+              <div className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
                 {[ 
                   { icon: <Mail size={18} />, label: "Email", value: "gameurbamba68@gmail.com", href: "mailto:gameurbamba68@gmail.com" },
                   { icon: <MessageCircle size={18} />, label: "WhatsApp", value: "+221 77 825 71 62", href: "https://wa.me/221778257162" },
-                  { icon: <MapPin size={18} />, label: "Sénégal", value: "Saint-Louis / Remote", href: "#" }
+                  { icon: <MapPin size={18} />, label: "Localisation", value: "Saint-Louis / Remote, Sénégal", href: "#" }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-center group">
-                    <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-blue-900 shadow-sm group-hover:bg-blue-900 group-hover:text-white transition-all">
+                    <div className="w-10 h-10 rounded-md bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex items-center justify-center text-blue-900 dark:text-blue-400 shadow-2xs group-hover:bg-blue-900 group-hover:text-white dark:group-hover:bg-blue-600 transition-all shrink-0">
                       {item.icon}
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{item.label}</p>
-                      <a href={item.href} className="text-sm font-bold text-slate-700 hover:text-blue-900 transition-colors">
+                      <a href={item.href} className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-blue-900 dark:hover:text-blue-400 transition-colors">
                         {item.value}
                       </a>
                     </div>
@@ -69,19 +77,19 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* --- DROITE : FORMULAIRE WHATSAPP --- */}
-          <div className="lg:col-span-7">
+          {/* DROITE : FORMULAIRE WHATSAPP */}
+          <div className="lg:col-span-7 text-left">
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 md:p-10 rounded-sm border border-slate-100 shadow-xl shadow-slate-200/50"
+              className="bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-md border border-slate-200/80 dark:border-slate-800 shadow-xs"
             >
-              <form onSubmit={sendWhatsAppMessage} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+              <form onSubmit={sendWhatsAppMessage} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                      {langue === 'fr' ? 'Nom complet' : 'Full Name'}
+                      {isEn ? 'Full Name' : 'Nom complet'}
                     </label>
                     <input
                       type="text"
@@ -89,7 +97,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-slate-50 border-none rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/10 transition-all outline-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/20 dark:focus:ring-blue-400/20 transition-all outline-none"
                       placeholder="John Doe"
                     />
                   </div>
@@ -101,7 +109,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-slate-50 border-none rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/10 transition-all outline-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/20 dark:focus:ring-blue-400/20 transition-all outline-none"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -115,17 +123,17 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="w-full bg-slate-50 border-none rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/10 transition-all outline-none resize-none"
-                    placeholder={langue === 'fr' ? "Parlez-moi de votre projet..." : "Tell me about your project..."}
+                    className="w-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-sm px-4 py-3 text-sm focus:ring-2 focus:ring-blue-900/20 dark:focus:ring-blue-400/20 transition-all outline-none resize-none"
+                    placeholder={isEn ? "Tell me about your project..." : "Parlez-moi de votre projet..."}
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-sm transition-all flex items-center justify-center gap-3 shadow-md group"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-sm transition-all flex items-center justify-center gap-3 shadow-xs group cursor-pointer active:scale-98"
                 >
                   <MessageCircle size={18} />
-                  <span>{langue === 'fr' ? "Envoyer via WhatsApp" : "Send via WhatsApp"}</span>
+                  <span>{isEn ? "Send via WhatsApp" : "Envoyer via WhatsApp"}</span>
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
