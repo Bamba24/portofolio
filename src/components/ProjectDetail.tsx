@@ -1,7 +1,8 @@
 import { useEffect, useContext } from 'react';
-import { ArrowLeft, ExternalLink, Github, CheckCircle2, Globe, Smartphone, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Sun, Moon, Languages, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { LangueContext } from '../context/langueContext';
+import { ThemeContext } from '../context/ThemeContext';
 import { ProjectType } from './Projects';
 
 interface ProjectDetailProps {
@@ -14,6 +15,12 @@ interface ProjectDetailProps {
 export default function ProjectDetail({ project, allProjects, onBack, onSelectProject }: ProjectDetailProps) {
   const contextLangue = useContext(LangueContext);
   const langue = contextLangue?.langue ?? "fr";
+  const toggleLangue = contextLangue?.toggleLangue;
+
+  const contextTheme = useContext(ThemeContext);
+  const theme = contextTheme?.theme ?? "light";
+  const toggleTheme = contextTheme?.toggleTheme;
+
   const isEn = langue === 'en';
 
   useEffect(() => {
@@ -26,177 +33,242 @@ export default function ProjectDetail({ project, allProjects, onBack, onSelectPr
   const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : allProjects[0];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
       
-      {/* BARRE DE NAVIGATION MINIMALISTE */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 py-4 px-6">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
+      {/* NAVBAR STICKY : Style jonathan-boyer.fr + Thème */}
+      <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 py-4 px-6">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          
           <button
             onClick={onBack}
-            className="group flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-blue-900 transition-colors"
+            className="group flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-blue-900 dark:hover:text-blue-400 transition-colors"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            {isEn ? "Back to projects" : "Retour aux projets"}
+            {isEn ? "Réalisations" : "Réalisations"}
           </button>
 
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-sm flex items-center gap-1">
-              {project.category === "Mobile" ? <Smartphone size={12} /> : <Globe size={12} />}
-              {project.category}
-            </span>
-            <span>•</span>
-            <span className={isEn ? project.statusEn === "In building" ? "text-amber-600" : "text-emerald-600" : project.status === "En cours" ? "text-amber-600" : "text-emerald-600"}>
-              {isEn ? project.statusEn : project.status}
-            </span>
-          </div>
-        </div>
-      </header>
+          <div className="flex items-center gap-3">
+            {/* Bouton changement de Thème */}
+            <button
+              onClick={toggleTheme}
+              title={theme === "light" ? "Mode Sombre" : "Mode Clair"}
+              className="p-2 text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors"
+            >
+              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
 
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-12">
-        
-        {/* ENTÊTE DU PROJET */}
-        <motion.div 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="space-y-6"
-        >
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            {isEn ? project.titleEn : project.titleFr}
-          </h1>
+            {/* Bouton changement de Langue */}
+            {toggleLangue && (
+              <button
+                onClick={toggleLangue}
+                className="p-2 text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors flex items-center gap-1"
+              >
+                <Languages size={18} />
+                <span className="text-[10px] font-bold">{langue.toUpperCase()}</span>
+              </button>
+            )}
 
-          <p className="text-lg text-slate-600 leading-relaxed max-w-3xl">
-            {isEn ? project.descriptionEn : project.descriptionFr}
-          </p>
-
-          {/* BOUTONS D'ACTION CLAIRS */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+            {/* CTA Voir le site */}
             {project.demo && (
               <a
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-blue-900 hover:bg-blue-950 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm active:scale-95"
+                className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 bg-blue-900 hover:bg-blue-950 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-xs"
               >
-                <ExternalLink size={16} />
-                {isEn ? "Live Demo" : "Démo en direct"}
+                <span>{isEn ? "Voir le site" : "Voir le site"}</span>
+                <ArrowRight size={14} />
               </a>
             )}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm active:scale-95"
-              >
-                <Github size={16} />
-                {isEn ? "Source Code" : "Code Source"}
-              </a>
-            )}
-          </div>
-        </motion.div>
-
-        {/* APERÇU VISUEL UNIQUE & PROPRE */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="aspect-video w-full overflow-hidden rounded-md border border-slate-100 bg-slate-50 shadow-sm"
-        >
-          <img
-            src={project.image}
-            alt={isEn ? project.titleEn : project.titleFr}
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-
-        {/* SECTION DÉFI & SOLUTION (SI DISPONIBLE) */}
-        {(project.challengeFr || project.challengeEn) && (
-          <div className="grid md:grid-cols-2 gap-6 pt-4">
-            <div className="p-6 bg-slate-50 border border-slate-100 rounded-sm space-y-2">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">
-                {isEn ? "The Challenge" : "Le Défi"}
-              </h2>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                {isEn ? project.challengeEn : project.challengeFr}
-              </p>
-            </div>
-            {project.solutionFr && (
-              <div className="p-6 bg-blue-50/60 border border-blue-100 rounded-sm space-y-2">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-blue-900">
-                  {isEn ? "The Solution" : "La Solution"}
-                </h2>
-                <p className="text-sm text-slate-700 leading-relaxed">
-                  {isEn ? project.solutionEn : project.solutionFr}
-                </p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* FONCTIONNALITÉS CLÉS */}
-        <div className="space-y-4 pt-4 border-t border-slate-100">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900">
-            {isEn ? "Key Features" : "Fonctionnalités clés"}
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {(isEn ? project.featuresEn : project.featuresFr).map((feature, i) => (
-              <div key={i} className="flex items-start gap-2.5 text-sm text-slate-700">
-                <CheckCircle2 size={16} className="text-blue-900 shrink-0 mt-0.5" />
-                <span>{feature}</span>
-              </div>
-            ))}
           </div>
         </div>
+      </header>
 
-        {/* TECHNOLOGIES UTILISÉES */}
-        <div className="space-y-4 pt-4 border-t border-slate-100">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900">
-            {isEn ? "Technologies Used" : "Technologies utilisées"}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech, idx) => (
-              <span
-                key={idx}
-                className="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-medium rounded-sm"
-              >
-                {tech}
+      <main className="pb-20">
+        
+        {/* PAGE HEADER : Bannière d'en-tête jonathan-boyer.fr */}
+        <section className="relative bg-slate-900 text-white py-16 md:py-24 px-6 overflow-hidden">
+          {/* Image de fond avec overlay sombre */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src={project.image}
+              alt=""
+              className="w-full h-full object-cover opacity-20 blur-sm scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/90 to-slate-900/80" />
+          </div>
+
+          <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-400">
+                {project.category}
               </span>
-            ))}
+              <span className="text-slate-600">•</span>
+              <span className={`text-xs font-bold uppercase tracking-widest ${
+                (isEn ? project.statusEn === "In building" : project.status === "En cours")
+                  ? "text-amber-400"
+                  : "text-emerald-400"
+              }`}>
+                {isEn ? project.statusEn : project.status}
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+                {isEn ? project.titleEn : project.titleFr}
+              </h1>
+
+              <div className="flex items-center gap-3">
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-md active:scale-95 whitespace-nowrap"
+                  >
+                    {isEn ? "Voir le site" : "Voir le site"}
+                    <ArrowRight size={14} />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-md active:scale-95 whitespace-nowrap"
+                  >
+                    <Github size={14} />
+                    {isEn ? "GitHub" : "GitHub"}
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <p className="text-lg sm:text-xl text-slate-300 font-light leading-relaxed max-w-3xl pt-2">
+              {isEn ? project.descriptionEn : project.descriptionFr}
+            </p>
           </div>
-        </div>
+        </section>
 
-        {/* NAVIGATION BAS DE PAGE (PRÉCÉDENT / SUIVANT) */}
-        <nav className="flex items-center justify-between pt-12 border-t border-slate-100">
-          <button
-            onClick={() => onSelectProject(prevProject)}
-            className="group flex items-center gap-3 text-left hover:text-blue-900 transition-colors"
+        {/* BLOCS DE CONTENU : Style .bloc de jonathan-boyer.fr */}
+        <section className="max-w-4xl mx-auto px-6 pt-16 space-y-16">
+          
+          {/* BLOC 1 : IMAGE ET PRESENTATION DU DEFI */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8"
           >
-            <ArrowLeft size={18} className="text-slate-400 group-hover:-translate-x-1 transition-transform" />
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                {isEn ? "Previous" : "Précédent"}
+            <div className="aspect-video w-full overflow-hidden rounded-md border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-100 dark:bg-slate-900">
+              <img
+                src={project.image}
+                alt={isEn ? project.titleEn : project.titleFr}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {(project.challengeFr || project.challengeEn) && (
+              <div className="grid md:grid-cols-2 gap-8 items-start pt-4">
+                <div className="space-y-3">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                    {isEn ? "The Challenge" : "Le Défi"}
+                  </h2>
+                  <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                    {isEn ? project.challengeEn : project.challengeFr}
+                  </p>
+                </div>
+
+                {project.solutionFr && (
+                  <div className="space-y-3">
+                    <h2 className="text-xl font-bold text-blue-900 dark:text-blue-400">
+                      {isEn ? "The Solution" : "La Solution"}
+                    </h2>
+                    <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                      {isEn ? project.solutionEn : project.solutionFr}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </motion.div>
+
+          {/* BLOC 2 : FONCTIONNALITES CLES & STACK TECHNIQUE */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-12 pt-8 border-t border-slate-100 dark:border-slate-800/80"
+          >
+            {/* Liste des fonctionnalités */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                {isEn ? "Key Features" : "Fonctionnalités principales"}
+              </h2>
+              <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                {(isEn ? project.featuresEn : project.featuresFr).map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="text-blue-900 dark:text-blue-400 font-bold">•</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Stack technique */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                {isEn ? "Tech Stack" : "Environnement Technique"}
+              </h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+                {isEn 
+                  ? "Technologies and libraries leveraged to build and deploy this project."
+                  : "Technologies et outils utilisés pour concevoir, développer et déployer ce projet."}
               </p>
-              <p className="text-sm font-bold text-slate-800 group-hover:text-blue-900 transition-colors">
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+        </section>
+
+        {/* PAGINATION EN BAS : Style jonathan-boyer.fr */}
+        <nav className="max-w-4xl mx-auto px-6 mt-20 pt-10 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-between">
+            
+            <button
+              onClick={() => onSelectProject(prevProject)}
+              className="group text-left space-y-1 hover:text-blue-900 dark:hover:text-blue-400 transition-colors"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">
+                {isEn ? "Projet précédent" : "Projet précédent"}
+              </span>
+              <strong className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-900 dark:group-hover:text-blue-400 transition-colors block">
                 {isEn ? prevProject.titleEn : prevProject.titleFr}
-              </p>
-            </div>
-          </button>
+              </strong>
+            </button>
 
-          <button
-            onClick={() => onSelectProject(nextProject)}
-            className="group flex items-center gap-3 text-right hover:text-blue-900 transition-colors"
-          >
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                {isEn ? "Next" : "Suivant"}
-              </p>
-              <p className="text-sm font-bold text-slate-800 group-hover:text-blue-900 transition-colors">
+            <button
+              onClick={() => onSelectProject(nextProject)}
+              className="group text-right space-y-1 hover:text-blue-900 dark:hover:text-blue-400 transition-colors"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">
+                {isEn ? "Projet suivant" : "Projet suivant"}
+              </span>
+              <strong className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-900 dark:group-hover:text-blue-400 transition-colors block">
                 {isEn ? nextProject.titleEn : nextProject.titleFr}
-              </p>
-            </div>
-            <ArrowRight size={18} className="text-slate-400 group-hover:translate-x-1 transition-transform" />
-          </button>
+              </strong>
+            </button>
+
+          </div>
         </nav>
 
       </main>
