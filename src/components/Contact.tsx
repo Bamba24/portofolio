@@ -1,41 +1,28 @@
-import React, { useState, useContext, useRef } from 'react';
-import emailjs from "emailjs-com";
-import { Mail, MapPin, MessageCircle, Loader2, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import React, { useState, useContext } from 'react';
+import { Mail, MapPin, MessageCircle, ArrowRight } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
-  const form = useRef(null);
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+  const sendWhatsAppMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_service_id,
-        import.meta.env.VITE_template_id,
-        form.current!,
-        import.meta.env.VITE_public_key
-      );
-      setStatus("success");
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus(null), 5000);
-    } catch (error) {
-      setStatus("error");
-      setTimeout(() => setStatus(null), 5000);
-    } finally {
-      setLoading(false);
-    }
+    const phoneNumber = "221778257162";
+    const text = langue === 'fr'
+      ? `Bonjour Bamba 👋,\n\nNom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      : `Hello Bamba 👋,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
@@ -56,8 +43,8 @@ export default function Contact() {
               </h2>
               <p className="text-gray-500 mb-12 leading-relaxed">
                 {langue === 'fr'
-                  ? "Vous avez une idée ou un besoin spécifique ? Je suis disponible pour transformer vos concepts en réalité digitale."
-                  : "Have an idea or a specific need? I'm available to turn your concepts into digital reality."}
+                  ? "Vous avez une idée ou un besoin spécifique ? Remplissez ce formulaire pour m'envoyer un message directement sur WhatsApp."
+                  : "Have an idea or a specific need? Fill out this form to send me a message directly on WhatsApp."}
               </p>
 
               <div className="space-y-8">
@@ -82,7 +69,7 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* --- DROITE : FORMULAIRE --- */}
+          {/* --- DROITE : FORMULAIRE WHATSAPP --- */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -90,7 +77,7 @@ export default function Contact() {
               viewport={{ once: true }}
               className="bg-white p-8 md:p-10 rounded-sm border border-slate-100 shadow-xl shadow-slate-200/50"
             >
-              <form ref={form} onSubmit={sendEmail} className="space-y-6">
+              <form onSubmit={sendWhatsAppMessage} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
@@ -135,43 +122,12 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={loading}
-                  className="w-full bg-blue-900 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-3 group"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-sm transition-all flex items-center justify-center gap-3 shadow-md group"
                 >
-                  {loading ? (
-                    <Loader2 size={16} className="animate-spin" />
-                  ) : (
-                    <>
-                      {langue === 'fr' ? "Envoyer" : "Send"}
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
+                  <MessageCircle size={18} />
+                  <span>{langue === 'fr' ? "Envoyer via WhatsApp" : "Send via WhatsApp"}</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </button>
-
-                <AnimatePresence>
-                  {status === "success" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="flex items-center gap-2 text-emerald-600 text-xs font-bold justify-center pt-2"
-                    >
-                      <CheckCircle size={14} />
-                      {langue === "fr" ? "Message envoyé !" : "Message sent!"}
-                    </motion.div>
-                  )}
-                  {status === "error" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="flex items-center gap-2 text-rose-600 text-xs font-bold justify-center pt-2"
-                    >
-                      <AlertCircle size={14} />
-                      {langue === "fr" ? "Erreur lors de l'envoi du message." : "Failed to send message."}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </form>
             </motion.div>
           </div>
