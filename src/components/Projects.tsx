@@ -1,45 +1,46 @@
 import { useContext, useState } from 'react';
-import { Smartphone, Globe, Code, ArrowUpRight } from 'lucide-react';
+import { Smartphone, Globe, Code, ArrowUpRight, Eye } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
+import ProjectModal, { ProjectType } from './ProjectModal';
 
 export default function Projects() {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
   const [selectedCategory, setSelectedCategory] = useState('Tous');
+  const [activeProjectModal, setActiveProjectModal] = useState<ProjectType | null>(null);
 
-  // Tes données de projets restent les mêmes (je les utilise ici)
-   const projects = [
+  const projects: ProjectType[] = [
   {
     id: 1,
     titleFr: "Agence de création de sites web",
     titleEn: "Web Design Agency",
     descriptionFr:
-      "Challenge : créer l’identité digitale d’une agence moderne capable de convertir des visiteurs en clients grâce à un design professionnel et une structure claire.",
+      "Une plateforme vitrine complète conçue pour une agence digitale moderne. Le projet met en avant une expérience utilisateur fluide, un design orienté conversion et une architecture performante.",
     descriptionEn:
-      "Challenge: build a modern web agency identity focused on converting visitors into clients through clean design and clear structure.",
+      "A comprehensive showcase platform designed for a modern digital agency. The project highlights a fluid UX, conversion-oriented layout, and high-performance architecture.",
+    challengeFr: "Créer une identité digitale élégante capable de capter l'attention des prospects et de convertir le trafic en demandes de devis qualifiées.",
+    challengeEn: "Build an elegant digital identity capable of capturing prospect interest and converting traffic into qualified lead inquiries.",
+    solutionFr: "Développement avec Next.js et TailwindCSS avec un découpage modulaire des services, des animations subtiles et un tunnel de contact optimisé.",
+    solutionEn: "Developed with Next.js and TailwindCSS featuring modular service sections, subtle micro-interactions, and an optimized contact flow.",
     image: "/images/agence.png",
     category: "Web",
     icon: <Globe className="text-primary" size={24} />,
-    technologies: ["Next.js", "TailwindCSS", "TypeScript"],
+    technologies: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
     demo: "https://agence-beryl.vercel.app/",
     featuresFr: [
-      "Pages services dynamiques",
-      "Design orienté conversion",
-      "Formulaire de contact",
-      "Responsive design"
+      "Pages services dynamiques et modulaires",
+      "Design ultra-réactif orienté conversion",
+      "Formulaire de contact avec validation",
+      "Optimisation SEO et temps de chargement"
     ],
     featuresEn: [
-      "Dynamic service pages",
-      "Conversion-oriented design",
-      "Contact form",
-      "Responsive layout"
+      "Dynamic and modular service pages",
+      "Ultra-responsive conversion-focused UI",
+      "Validated contact form",
+      "SEO and page speed optimization"
     ],
-    status: [
-      "Terminé"
-    ],
-    statusEn : [
-      "Finished"
-    ]
+    status: "Terminé",
+    statusEn: "Finished"
   },
   {
     id:2,
@@ -66,12 +67,8 @@ export default function Projects() {
       "Dark mode",
       "Smooth navigation"
     ],
-    status: [
-      "En cours"
-    ],
-    statusEn : [
-      "In building"
-    ]
+    status: "En cours",
+    statusEn: "In building"
   },
   {
     id:3,
@@ -95,12 +92,8 @@ export default function Projects() {
       "Audio recitations",
       "Clean UI"
     ],
-     status: [
-      "En cours"
-    ],
-    statusEn : [
-      "In building"
-    ]
+    status: "En cours",
+    statusEn: "In building"
   },
   {
     id:4,
@@ -126,12 +119,8 @@ export default function Projects() {
       "Admin dashboard",
       "Responsive"
     ],
-     status: [
-      "Terminé"
-    ],
-    statusEn : [
-      "Finished"
-    ]
+    status: "Terminé",
+    statusEn: "Finished"
   },
   {
     id:5,
@@ -158,12 +147,8 @@ export default function Projects() {
       "Projects section",
       "Responsive"
     ],
-    status: [
-      "Terminé"
-    ],
-    statusEn : [
-      "Finished"
-    ]
+    status: "Terminé",
+    statusEn: "Finished"
   },
   {
     id:6,
@@ -190,44 +175,35 @@ export default function Projects() {
       "Marketing sections",
       "Conversion optimized"
     ],
-    status: [
-      "Terminé"
-    ],
-    statusEn : [
-      "Finished"
-    ]
+    status: "Terminé",
+    statusEn: "Finished"
   },
   {
     id:7,
-  titleFr: "Application Mobile E-commerce",
-  titleEn: "E-Commerce Mobile App",
-  descriptionFr:
-    "Challenge : concevoir une application mobile performante permettant aux utilisateurs d’acheter des produits facilement depuis leur smartphone, avec une navigation fluide et une expérience optimisée.",
-  descriptionEn:
-    "Challenge: build a high-performance mobile application allowing users to shop easily from their smartphones with a smooth and optimized experience.",
-  image: "/images/mobile.jpeg",
-  category: "Mobile",
-  icon: <Smartphone className="text-primary" size={24} />,
-  technologies: ["React Native", "Expo", "MySQL"],
-  demo: "https://expo.dev/@tonCompte/ecommerce-mobile",
-  featuresFr: [
-    "Navigation par onglets",
-    "Ajout au panier",
-    "Notifications push",
-    "Interface mobile intuitive"
-  ],
-  featuresEn: [
-    "Tab navigation",
-    "Add to cart",
-    "Push notifications",
-    "Intuitive mobile UI"
-  ],
-  status: [
-      "Terminé"
+    titleFr: "Application Mobile E-commerce",
+    titleEn: "E-Commerce Mobile App",
+    descriptionFr:
+      "Challenge : concevoir une application mobile performante permettant aux utilisateurs d’acheter des produits facilement depuis leur smartphone, avec une navigation fluide et une expérience optimisée.",
+    descriptionEn:
+      "Challenge: build a high-performance mobile application allowing users to shop easily from their smartphones with a smooth and optimized experience.",
+    image: "/images/mobile.jpeg",
+    category: "Mobile",
+    icon: <Smartphone className="text-primary" size={24} />,
+    technologies: ["React Native", "Expo", "MySQL"],
+    featuresFr: [
+      "Navigation par onglets",
+      "Ajout au panier",
+      "Notifications push",
+      "Interface mobile intuitive"
     ],
-    statusEn : [
-      "Finished"
-    ]
+    featuresEn: [
+      "Tab navigation",
+      "Add to cart",
+      "Push notifications",
+      "Intuitive mobile UI"
+    ],
+    status: "Terminé",
+    statusEn: "Finished"
   }
 ];
   const categories = ['Tous', 'Web', 'Mobile'];
@@ -297,36 +273,56 @@ export default function Projects() {
                   {/* Status Indicator */}
                   <div className="absolute top-4 right-4 z-20">
                     <span className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter backdrop-blur-md ${
-                      (langue === "fr" ? project.status[0] === "En cours" : project.statusEn[0] === "In building")
+                      (langue === "fr" ? project.status === "En cours" : project.statusEn === "In building")
                       ? "bg-amber-50/80 text-amber-600 border border-amber-200"
                       : "bg-emerald-50/80 text-emerald-600 border border-emerald-200"
                     }`}>
                       <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-                        (langue === "fr" ? project.status[0] === "En cours" : project.statusEn[0] === "In building")
+                        (langue === "fr" ? project.status === "En cours" : project.statusEn === "In building")
                         ? "bg-amber-500" : "bg-emerald-500"
                       }`}></span>
                       {langue === "fr" ? project.status : project.statusEn}
                     </span>
                   </div>
 
-                  {/* Hover Link */}
-                  {project.demo && (
-                    <a 
-                      href={project.demo} 
-                      target="_blank" 
-                      className="absolute inset-0 bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10"
+                  {/* Overlay avec boutons d'action au survol */}
+                  <div 
+                    onClick={() => setActiveProjectModal(project)}
+                    className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 z-10 cursor-pointer backdrop-blur-[2px]"
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveProjectModal(project);
+                      }}
+                      className="flex items-center gap-2 bg-white text-slate-900 px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider shadow-lg transform translate-y-3 group-hover:translate-y-0 transition-transform hover:bg-blue-900 hover:text-white"
                     >
-                      <span className="bg-white text-blue-900 p-4 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                        <ArrowUpRight size={24} />
-                      </span>
-                    </a>
-                  )}
+                      <Eye size={16} />
+                      {langue === "fr" ? "Détails" : "Details"}
+                    </button>
+
+                    {project.demo && (
+                      <a 
+                        href={project.demo} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="bg-blue-900 text-white p-2.5 rounded-sm shadow-lg transform translate-y-3 group-hover:translate-y-0 transition-transform hover:bg-slate-800"
+                        title={langue === "fr" ? "Voir le site en direct" : "View live site"}
+                      >
+                        <ArrowUpRight size={18} />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
                 {/* Contenu Texte */}
                 <div className="space-y-3">
                   <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold text-gray-900">
+                    <h3 
+                      onClick={() => setActiveProjectModal(project)}
+                      className="text-xl font-bold text-gray-900 hover:text-blue-900 transition-colors cursor-pointer"
+                    >
                       {langue === "fr" ? project.titleFr : project.titleEn}
                     </h3>
                     <div className="text-gray-300 group-hover:text-blue-900 transition-colors">
@@ -334,12 +330,21 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-500 line-clamp-4 leading-relaxed">
+                  <p className="text-sm text-gray-500 line-clamp-3 leading-relaxed">
                     {langue === "fr" ? project.descriptionFr : project.descriptionEn}
                   </p>
 
+                  {/* Bouton ouvrir étude de cas */}
+                  <button
+                    onClick={() => setActiveProjectModal(project)}
+                    className="text-xs font-bold text-blue-900 hover:text-blue-950 uppercase tracking-wider flex items-center gap-1 pt-1"
+                  >
+                    {langue === "fr" ? "Voir l'étude de cas" : "View case study"}
+                    <ArrowUpRight size={14} />
+                  </button>
+
                   {/* Technologies épurées */}
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="flex flex-wrap gap-2 pt-1">
                     {project.technologies.map((tech, idx) => (
                       <span key={idx} className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                         {tech}
@@ -352,9 +357,12 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* MODAL ETUDE DE CAS DU PROJET */}
+      <ProjectModal
+        project={activeProjectModal}
+        onClose={() => setActiveProjectModal(null)}
+      />
     </section>
   );
-}  
-  
-  
- 
+}

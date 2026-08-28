@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 import emailjs from "emailjs-com";
-import { Mail, MapPin, MessageCircle, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Loader2, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -32,6 +32,7 @@ export default function Contact() {
       setTimeout(() => setStatus(null), 5000);
     } catch (error) {
       setStatus("error");
+      setTimeout(() => setStatus(null), 5000);
     } finally {
       setLoading(false);
     }
@@ -157,6 +158,17 @@ export default function Contact() {
                     >
                       <CheckCircle size={14} />
                       {langue === "fr" ? "Message envoyé !" : "Message sent!"}
+                    </motion.div>
+                  )}
+                  {status === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center gap-2 text-rose-600 text-xs font-bold justify-center pt-2"
+                    >
+                      <AlertCircle size={14} />
+                      {langue === "fr" ? "Erreur lors de l'envoi du message." : "Failed to send message."}
                     </motion.div>
                   )}
                 </AnimatePresence>
