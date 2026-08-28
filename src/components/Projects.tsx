@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export interface ProjectType {
   id: number;
-  initials: string;
   titleFr: string;
   titleEn: string;
   descriptionFr: string;
@@ -37,7 +36,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
   const projects: ProjectType[] = [
     {
       id: 1,
-      initials: "AG",
       titleFr: "Agence de création de sites web",
       titleEn: "Web Design Agency",
       descriptionFr:
@@ -69,7 +67,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     },
     {
       id: 2,
-      initials: "BP",
       titleFr: "Blog Personnel",
       titleEn: "Personal Blog",
       descriptionFr:
@@ -101,7 +98,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     },
     {
       id: 3,
-      initials: "AC",
       titleFr: "Application Coran",
       titleEn: "Quran Application",
       descriptionFr:
@@ -110,7 +106,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Challenge: design a simple, fast, and accessible spiritual app for reading and listening to the Quran on any device.",
       challengeFr: "Proposer une interface fluide pour la lecture des sourates et l'écoute audio en continu sans interruption.",
       challengeEn: "Provide a fluid UI for surah reading and continuous audio streaming.",
-      solutionFr: "Consommation d'APIs REST dédiées avec gestion du lecteur audio HTML5 et mise en cache des récitation.",
+      solutionFr: "Consommation d'APIs REST dédiées avec gestion du lecteur audio HTML5 et mise en cache des récitations.",
       solutionEn: "Integration of dedicated Quran REST APIs with HTML5 audio player and caching.",
       image: "/images/coran.png",
       category: "Web",
@@ -130,7 +126,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     },
     {
       id: 4,
-      initials: "EC",
       titleFr: "E-commerce Chaussures",
       titleEn: "Shoes E-Commerce",
       descriptionFr:
@@ -161,7 +156,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     },
     {
       id: 5,
-      initials: "PF",
       titleFr: "Portfolio Développeur",
       titleEn: "Developer Portfolio",
       descriptionFr:
@@ -189,7 +183,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     },
     {
       id: 6,
-      initials: "LS",
       titleFr: "Landing Page SaaS",
       titleEn: "SaaS Landing Page",
       descriptionFr:
@@ -214,10 +207,34 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
       ],
       status: "Terminé",
       statusEn: "Finished"
+    },
+    {
+      id: 7,
+      titleFr: "Application Mobile E-Commerce",
+      titleEn: "E-Commerce Mobile App",
+      descriptionFr:
+        "Challenge : concevoir une application mobile performante permettant aux utilisateurs d’acheter des produits facilement depuis leur smartphone, avec une navigation fluide.",
+      descriptionEn:
+        "Challenge: build a high-performance mobile application allowing users to shop easily from their smartphones with a smooth experience.",
+      image: "/images/mobile.jpeg",
+      category: "Mobile",
+      technologies: ["React Native", "Expo", "MySQL"],
+      featuresFr: [
+        "Navigation par onglets",
+        "Ajout au panier mobile",
+        "Interface tactile fluide"
+      ],
+      featuresEn: [
+        "Tab navigation",
+        "Mobile cart management",
+        "Smooth touch UI"
+      ],
+      status: "Terminé",
+      statusEn: "Finished"
     }
   ];
 
-  const categories = ['Tous', 'Web'];
+  const categories = ['Tous', 'Web', 'Mobile'];
 
   const filteredProjects = selectedCategory === 'Tous'
     ? projects
@@ -255,7 +272,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
           </div>
         </div>
 
-        {/* Grille de projets avec Initiales au lieu des images */}
+        {/* Grille de projets avec Image preview */}
         <motion.div 
           layout
           className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10"
@@ -271,14 +288,16 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
                 transition={{ duration: 0.4 }}
                 className="group flex flex-col bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-md overflow-hidden hover:border-blue-900/30 dark:hover:border-blue-500/30 transition-all duration-300 shadow-xs text-left"
               >
-                {/* Cadre avec Initiales au lieu de l'image */}
+                {/* Image du projet */}
                 <div 
                   onClick={() => onSelectProject?.(project, projects)}
-                  className="relative h-40 bg-gradient-to-br from-slate-900 to-slate-950 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center cursor-pointer border-b border-slate-100 dark:border-slate-800"
+                  className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 cursor-pointer border-b border-slate-100 dark:border-slate-800"
                 >
-                  <div className="w-16 h-16 rounded-md bg-blue-900 text-white font-extrabold text-2xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
-                    {project.initials}
-                  </div>
+                  <img
+                    src={project.image}
+                    alt={isEn ? project.titleEn : project.titleFr}
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                  />
                   
                   {/* Status Indicator */}
                   <div className="absolute top-3 right-3 z-10">

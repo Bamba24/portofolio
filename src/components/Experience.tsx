@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { MapPin, Briefcase, ExternalLink, Calendar, Building2 } from 'lucide-react';
+import { MapPin, ExternalLink, Calendar, Building2 } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -98,7 +98,7 @@ export default function Experience() {
       id: 3,
       titleFr: "Développeur Fullstack – Agence Web Digitale",
       titleEn: "Fullstack Developer – Digital Web Agency",
-      company: "Projet Personnel",
+      company: "Projet Application",
       location: "Remote / Sénégal",
       type: "Projet",
       logoText: "AW",
@@ -123,7 +123,7 @@ export default function Experience() {
       id: 4,
       titleFr: "Développeur Fullstack – E-Commerce Chaussures",
       titleEn: "Fullstack Developer – Shoes E-Commerce",
-      company: "Projet Personnel",
+      company: "Projet Application",
       location: "Remote / Sénégal",
       type: "Projet",
       logoText: "EC",
@@ -143,31 +143,6 @@ export default function Experience() {
         "Shopping cart and checkout flow management"
       ],
       stack: ["Next.js", "TypeScript", "MySQL", "Prisma", "TailwindCSS"]
-    },
-    {
-      id: 5,
-      titleFr: "Développeur Mobile – Application E-Commerce",
-      titleEn: "Mobile Developer – E-Commerce App",
-      company: "Projet Personnel",
-      location: "Remote / Sénégal",
-      type: "Projet",
-      logoText: "MB",
-      logoBg: "bg-violet-800 text-white",
-      descriptionFr:
-        "Application mobile iOS et Android synchronisée avec la plateforme e-commerce web, développée avec React Native et Expo.",
-      descriptionEn:
-        "iOS and Android mobile app synchronized with the web e-commerce platform, built with React Native and Expo.",
-      missions: [
-        "Création des vues produits, filtres et panier mobile",
-        "Connexion aux APIs REST backend",
-        "Gestion d'état global avec Context API"
-      ],
-      missionsEn: [
-        "Building product views, filters, and mobile cart",
-        "Connecting to REST backend APIs",
-        "Global state management with Context API"
-      ],
-      stack: ["React Native", "Expo", "TypeScript", "Context API"]
     }
   ];
 
@@ -183,7 +158,7 @@ export default function Experience() {
         
         {/* Header Section : Style jonathan-boyer.fr */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div>
+          <div className="text-left">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2">
               {isEn ? "Career & Internships" : "Parcours professionnel"}
             </span>
@@ -197,7 +172,7 @@ export default function Experience() {
             {[
               { id: 'Tous', labelFr: 'Tous', labelEn: 'All' },
               { id: 'Stages', labelFr: 'Stages Professionnels', labelEn: 'Internships' },
-              { id: 'Projets', labelFr: 'Projets', labelEn: 'Projects' }
+              { id: 'Projets', labelFr: 'Projets d\'Application', labelEn: 'Projects' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -214,7 +189,7 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* Liste des cartes d'expérience épurées */}
+        {/* Liste des cartes d'expérience */}
         <div className="space-y-6">
           <AnimatePresence mode="popLayout">
             {filteredExperiences.map((exp) => (
@@ -225,11 +200,11 @@ export default function Experience() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-md p-6 sm:p-8 hover:border-blue-900/30 dark:hover:border-blue-500/30 transition-all shadow-xs"
+                className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-md p-6 sm:p-8 hover:border-blue-900/30 dark:hover:border-blue-500/30 transition-all shadow-xs text-left"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
                   
-                  {/* Entreprise & Logo */}
+                  {/* Entreprise & Logo (Image logo pour les Stages, Initiales pour les Projets) */}
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-md font-extrabold text-sm flex items-center justify-center shadow-xs shrink-0 overflow-hidden bg-white p-1 border border-slate-100 dark:border-slate-800 ${exp.logoBg}`}>
                       {exp.logoImage ? (
@@ -263,7 +238,7 @@ export default function Experience() {
                     </div>
                   </div>
 
-                  {/* Période & Lien externe */}
+                  {/* Période & Lien externe s'il existe */}
                   <div className="flex sm:flex-col items-start sm:items-end justify-between gap-2 shrink-0">
                     <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 dark:text-slate-400">
                       <Calendar size={14} />
