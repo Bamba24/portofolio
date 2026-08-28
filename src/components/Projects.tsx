@@ -2,12 +2,35 @@ import { useContext, useState } from 'react';
 import { Smartphone, Globe, Code, ArrowUpRight, Eye } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
-import ProjectModal, { ProjectType } from './ProjectModal';
 
-export default function Projects() {
+export interface ProjectType {
+  id: number;
+  titleFr: string;
+  titleEn: string;
+  descriptionFr: string;
+  descriptionEn: string;
+  challengeFr?: string;
+  challengeEn?: string;
+  solutionFr?: string;
+  solutionEn?: string;
+  image: string;
+  category: string;
+  technologies: string[];
+  demo?: string;
+  github?: string;
+  featuresFr: string[];
+  featuresEn: string[];
+  status: string;
+  statusEn: string;
+}
+
+interface ProjectsProps {
+  onSelectProject?: (project: ProjectType, allProjects: ProjectType[]) => void;
+}
+
+export default function Projects({ onSelectProject }: ProjectsProps) {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
   const [selectedCategory, setSelectedCategory] = useState('Tous');
-  const [activeProjectModal, setActiveProjectModal] = useState<ProjectType | null>(null);
 
   const projects: ProjectType[] = [
   {
@@ -287,18 +310,18 @@ export default function Projects() {
 
                   {/* Overlay avec boutons d'action au survol */}
                   <div 
-                    onClick={() => setActiveProjectModal(project)}
+                    onClick={() => onSelectProject?.(project, projects)}
                     className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 z-10 cursor-pointer backdrop-blur-[2px]"
                   >
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        setActiveProjectModal(project);
+                        onSelectProject?.(project, projects);
                       }}
                       className="flex items-center gap-2 bg-white text-slate-900 px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider shadow-lg transform translate-y-3 group-hover:translate-y-0 transition-transform hover:bg-blue-900 hover:text-white"
                     >
                       <Eye size={16} />
-                      {langue === "fr" ? "Détails" : "Details"}
+                      {langue === "fr" ? "Voir le projet" : "View project"}
                     </button>
 
                     {project.demo && (
@@ -320,7 +343,7 @@ export default function Projects() {
                 <div className="space-y-3">
                   <div className="flex justify-between items-start">
                     <h3 
-                      onClick={() => setActiveProjectModal(project)}
+                      onClick={() => onSelectProject?.(project, projects)}
                       className="text-xl font-bold text-gray-900 hover:text-blue-900 transition-colors cursor-pointer"
                     >
                       {langue === "fr" ? project.titleFr : project.titleEn}
@@ -336,7 +359,7 @@ export default function Projects() {
 
                   {/* Bouton ouvrir étude de cas */}
                   <button
-                    onClick={() => setActiveProjectModal(project)}
+                    onClick={() => onSelectProject?.(project, projects)}
                     className="text-xs font-bold text-blue-900 hover:text-blue-950 uppercase tracking-wider flex items-center gap-1 pt-1"
                   >
                     {langue === "fr" ? "Voir l'étude de cas" : "View case study"}
@@ -357,12 +380,6 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
       </div>
-
-      {/* MODAL ETUDE DE CAS DU PROJET */}
-      <ProjectModal
-        project={activeProjectModal}
-        onClose={() => setActiveProjectModal(null)}
-      />
     </section>
   );
 }
