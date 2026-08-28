@@ -1,93 +1,64 @@
-import { ChevronDown, ArrowRight } from 'lucide-react';
-import { useContext, useState, useEffect } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
-  const [index, setIndex] = useState(0);
-
-  const titles = langue === 'fr'
-    ? ['Développeur Front-end', 'Développeur Back-end', 'Développeur Fullstack', 'Développeur Mobile']
-    : ['Front-end Developer', 'Back-end Developer', 'Fullstack Developer', 'Mobile Developer'];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % titles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [titles.length]);
+  const isEn = langue === 'en';
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col justify-center bg-white text-black px-6">
-      <div className="max-w-5xl mx-auto w-full">
+    <section id="hero" className="min-h-[85vh] flex flex-col justify-center bg-white dark:bg-slate-950 text-slate-900 dark:text-white px-6 pt-24 pb-16">
+      <div className="max-w-4xl mx-auto w-full">
         
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-6"
         >
-          {/* Petite introduction discrète */}
-          <p className="text-blue-900 font-medium mb-4 tracking-wide uppercase text-sm">
-            {langue === 'fr' ? 'Portfolio Personnel' : 'Personal Portfolio'}
+          {/* Subtitle discret */}
+          <p className="text-slate-400 dark:text-slate-400 font-medium tracking-wide uppercase text-xs">
+            {isEn ? 'Hello, I am' : 'Bonjour, je suis'}
           </p>
 
-          {/* Nom avec une taille de police plus équilibrée */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900 tracking-tight">
-            Mouhamadou bamba <span className="text-blue-900">Diagne</span>
+          {/* Nom du développeur */}
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Mouhamadou Bamba <span className="text-blue-900 dark:text-blue-400">Diagne</span>
           </h1>
 
-          {/* Titre animé fluide et simple */}
-          <div className="h-10 mb-8">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                className="text-2xl md:text-3xl text-gray-500 font-light"
-              >
-                {titles[index]}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-
-          {/* Description courte et aérée */}
-          <p className="text-lg text-gray-600 max-w-2xl mb-10 leading-relaxed">
-            {langue === 'fr'
-              ? 'Je conçois des applications web et mobiles performantes, avec une attention particulière portée au design et à l’expérience utilisateur.'
-              : 'I design high-performance web and mobile applications, with a focus on design and user experience.'}
+          {/* Rôle principal */}
+          <p className="text-xl sm:text-2xl text-slate-500 dark:text-slate-400 font-light">
+            {isEn ? 'Fullstack Web & Mobile Developer' : 'Développeur Web & Mobile Fullstack'}
           </p>
 
-          {/* Boutons épurés */}
-          <div className="flex flex-wrap gap-6 items-center">
+          {/* Court résumé de présentation */}
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2">
+            {isEn
+              ? 'I craft elegant, scalable web and mobile applications with high performance and smooth user experiences.'
+              : 'Je conçois des applications web et mobiles performantes, élégantes et sur-mesure, avec un soin particulier apporté à l’expérience utilisateur.'}
+          </p>
+
+          {/* Actions épurées */}
+          <div className="flex flex-wrap gap-5 items-center pt-4">
             <button 
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group flex items-center gap-2 bg-blue-900 text-white px-6 py-3 rounded-sm hover:bg-blue-950 transition-colors"
+              className="group flex items-center gap-2 bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-95"
             >
-              {langue === 'fr' ? 'Mes travaux' : 'My works'}
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              {isEn ? 'View My Projects' : 'Voir mes réalisations'}
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-gray-900 font-semibold border-b-2 border-gray-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all"
+              className="text-slate-800 dark:text-slate-200 text-xs font-bold uppercase tracking-wider border-b-2 border-slate-800 dark:border-slate-200 pb-1 hover:text-blue-900 dark:hover:text-blue-400 hover:border-blue-900 dark:hover:border-blue-400 transition-all"
             >
-              {langue === 'fr' ? 'Me contacter' : 'Contact me'}
+              {isEn ? 'Get in Touch' : 'Me contacter'}
             </button>
           </div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator très fin en bas */}
-      <motion.div 
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-300"
-      >
-        <ChevronDown size={24} />
-      </motion.div>
     </section>
   );
 }

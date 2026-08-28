@@ -236,31 +236,29 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     : projects.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
 
   return (
-    <section id="projects" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="projects" className="py-20 bg-slate-50/50 dark:bg-slate-950/40">
+      <div className="max-w-5xl mx-auto px-6">
         
-        {/* Header & Filtres */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <div className="max-w-xl">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {langue === "fr" ? "Sélection de projets" : "Featured Projects"}
+        {/* Header Section : Style jonathan-boyer.fr */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2">
+              {langue === "fr" ? "Mes réalisations" : "My Work"}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              {langue === "fr" ? "Projets" : "Projects"}
             </h2>
-            <p className="text-gray-500 text-lg">
-              {langue === "fr" 
-                ? "Une immersion dans mes dernières réalisations web et mobiles." 
-                : "A deep dive into my latest web and mobile creations."}
-            </p>
           </div>
 
-          <div className="flex gap-2 p-1 bg-slate-50 border border-slate-100 rounded-sm">
+          <div className="flex gap-1.5 p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-sm">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-sm ${
+                className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-all rounded-sm ${
                   selectedCategory === cat
-                    ? 'bg-blue-900 text-white shadow-sm'
-                    : 'text-gray-400 hover:text-gray-600'
+                    ? 'bg-blue-900 text-white shadow-xs'
+                    : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 {langue === "fr" ? cat : (cat === "Tous" ? "All" : cat)}
@@ -269,59 +267,73 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
           </div>
         </div>
 
-        {/* Grille de projets */}
+        {/* Grille de projets épurée */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10"
         >
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="group relative"
+                className="group flex flex-col bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-md overflow-hidden hover:shadow-md transition-all duration-300"
               >
-                {/* Image avec Overlay au survol */}
-                <div className="relative aspect-video overflow-hidden bg-slate-100 mb-6 rounded-sm">
+                {/* Image du projet */}
+                <div 
+                  onClick={() => onSelectProject?.(project, projects)}
+                  className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 cursor-pointer"
+                >
                   <img
                     src={project.image}
-                    alt={project.titleFr}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    alt={langue === "fr" ? project.titleFr : project.titleEn}
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   />
                   
                   {/* Status Indicator */}
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter backdrop-blur-md ${
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md ${
                       (langue === "fr" ? project.status === "En cours" : project.statusEn === "In building")
-                      ? "bg-amber-50/80 text-amber-600 border border-amber-200"
-                      : "bg-emerald-50/80 text-emerald-600 border border-emerald-200"
+                      ? "bg-amber-500/90 text-white"
+                      : "bg-emerald-600/90 text-white"
                     }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-                        (langue === "fr" ? project.status === "En cours" : project.statusEn === "In building")
-                        ? "bg-amber-500" : "bg-emerald-500"
-                      }`}></span>
                       {langue === "fr" ? project.status : project.statusEn}
                     </span>
                   </div>
+                </div>
 
-                  {/* Overlay avec boutons d'action au survol */}
-                  <div 
-                    onClick={() => onSelectProject?.(project, projects)}
-                    className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 z-10 cursor-pointer backdrop-blur-[2px]"
-                  >
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectProject?.(project, projects);
-                      }}
-                      className="flex items-center gap-2 bg-white text-slate-900 px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider shadow-lg transform translate-y-3 group-hover:translate-y-0 transition-transform hover:bg-blue-900 hover:text-white"
+                {/* Body du projet */}
+                <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
+                  <div className="space-y-2">
+                    {/* Tags technologies style jonathan-boyer.fr */}
+                    <p className="text-xs font-semibold text-slate-400 tracking-wider">
+                      {project.technologies.slice(0, 4).join(', ')}
+                    </p>
+
+                    <h3 
+                      onClick={() => onSelectProject?.(project, projects)}
+                      className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-900 dark:group-hover:text-blue-400 transition-colors cursor-pointer"
                     >
-                      <Eye size={16} />
-                      {langue === "fr" ? "Voir le projet" : "View project"}
+                      {langue === "fr" ? project.titleFr : project.titleEn}
+                    </h3>
+
+                    <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                      {langue === "fr" ? project.descriptionFr : project.descriptionEn}
+                    </p>
+                  </div>
+
+                  {/* Bouton d'action En savoir plus */}
+                  <div className="pt-2 flex items-center justify-between">
+                    <button
+                      onClick={() => onSelectProject?.(project, projects)}
+                      className="text-xs font-bold text-blue-900 dark:text-blue-400 group-hover:underline uppercase tracking-wider flex items-center gap-1.5"
+                    >
+                      <span>{langue === "fr" ? "En savoir plus" : "Read more"}</span>
+                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </button>
 
                     {project.demo && (
@@ -330,49 +342,12 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
                         target="_blank" 
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="bg-blue-900 text-white p-2.5 rounded-sm shadow-lg transform translate-y-3 group-hover:translate-y-0 transition-transform hover:bg-slate-800"
-                        title={langue === "fr" ? "Voir le site en direct" : "View live site"}
+                        className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+                        title={langue === "fr" ? "Voir la démo" : "View demo"}
                       >
                         <ArrowUpRight size={18} />
                       </a>
                     )}
-                  </div>
-                </div>
-
-                {/* Contenu Texte */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-start">
-                    <h3 
-                      onClick={() => onSelectProject?.(project, projects)}
-                      className="text-xl font-bold text-gray-900 hover:text-blue-900 transition-colors cursor-pointer"
-                    >
-                      {langue === "fr" ? project.titleFr : project.titleEn}
-                    </h3>
-                    <div className="text-gray-300 group-hover:text-blue-900 transition-colors">
-                       {project.category === "Mobile" ? <Smartphone size={20}/> : <Globe size={20}/>}
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-gray-500 line-clamp-3 leading-relaxed">
-                    {langue === "fr" ? project.descriptionFr : project.descriptionEn}
-                  </p>
-
-                  {/* Bouton ouvrir étude de cas */}
-                  <button
-                    onClick={() => onSelectProject?.(project, projects)}
-                    className="text-xs font-bold text-blue-900 hover:text-blue-950 uppercase tracking-wider flex items-center gap-1 pt-1"
-                  >
-                    {langue === "fr" ? "Voir l'étude de cas" : "View case study"}
-                    <ArrowUpRight size={14} />
-                  </button>
-
-                  {/* Technologies épurées */}
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {project.technologies.map((tech, idx) => (
-                      <span key={idx} className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                        {tech}
-                      </span>
-                    ))}
                   </div>
                 </div>
               </motion.div>
