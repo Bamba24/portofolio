@@ -46,24 +46,28 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "A stock and point-of-sale management platform that lets merchants track inventory and sales and manage their agents in real time. I built the entire frontend.",
       challengeFr: "Concevoir une interface de gestion claire et fiable pour des commerçants, avec un suivi précis des stocks et des ventes, et un déploiement reproductible.",
       challengeEn: "Design a clear and reliable management interface for merchants, with accurate stock and sales tracking and a reproducible deployment.",
-      solutionFr: "Implémentation complète du frontend avec Next.js (App Router), interface responsive en TailwindCSS, parcours d'authentification complet et conteneurisation avec Docker pour le déploiement.",
-      solutionEn: "Full frontend implementation with Next.js (App Router), responsive TailwindCSS UI, complete authentication flow, and Docker containerization for deployment.",
+      solutionFr: "Implémentation complète du frontend avec Next.js (App Router) consommant une API GraphQL via TanStack Query, tableaux de données avec TanStack Table, validation des formulaires avec Zod, état client avec Zustand, filtres synchronisés dans l'URL avec nuqs, et conteneurisation avec Docker pour le déploiement.",
+      solutionEn: "Full frontend implementation with Next.js (App Router) consuming a GraphQL API through TanStack Query, data tables with TanStack Table, form validation with Zod, client state with Zustand, URL-synced filters with nuqs, and Docker containerization for deployment.",
       image: "/images/Gestion de stock-image-crm.png",
       category: "Web",
-      technologies: ["Next.js", "TailwindCSS", "Docker"],
+      technologies: ["Next.js", "GraphQL", "TanStack Query", "TanStack Table", "Zod", "Zustand", "nuqs", "TailwindCSS", "Docker"],
       demo: "https://crm2.noflai.com/",
       featuresFr: [
         "Authentification : connexion, inscription, mot de passe oublié",
         "Suivi des stocks et des ventes",
         "Pilotage des agents en temps réel",
-        "SEO et métadonnées Open Graph",
+        "Tableaux de données interactifs (TanStack Table)",
+        "Filtres et recherche synchronisés dans l'URL (nuqs)",
+        "Validation des formulaires avec Zod",
         "Conteneurisation et déploiement avec Docker"
       ],
       featuresEn: [
         "Authentication: login, sign-up, password reset",
         "Stock and sales tracking",
         "Real-time agent management",
-        "SEO and Open Graph metadata",
+        "Interactive data tables (TanStack Table)",
+        "URL-synced filters and search (nuqs)",
+        "Form validation with Zod",
         "Docker containerization and deployment"
       ],
       status: "Terminé",
@@ -100,35 +104,48 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
       statusEn: "In building"
     },
     {
-      id: 1,
-      titleFr: "Agence de création de sites web",
-      titleEn: "Web Design Agency",
+      id: 10,
+      titleFr: "Application Java Spring Boot & Next.js",
+      titleEn: "Java Spring Boot & Next.js Application",
       descriptionFr:
-        "Une plateforme vitrine complète conçue pour une agence digitale moderne. Le projet met en avant une expérience utilisateur fluide, un design orienté conversion et une architecture performante.",
+        "Application fullstack en cours de développement, avec une API backend en Java Spring Boot et un frontend Next.js.",
       descriptionEn:
-        "A comprehensive showcase platform designed for a modern digital agency. The project highlights a fluid UX, conversion-oriented layout, and high-performance architecture.",
-      challengeFr: "Créer une identité digitale élégante capable de capter l'attention des prospects et de convertir le trafic en demandes de devis qualifiées.",
-      challengeEn: "Build an elegant digital identity capable of capturing prospect interest and converting traffic into qualified lead inquiries.",
-      solutionFr: "Développement avec Next.js et TailwindCSS avec un découpage modulaire des services, des animations subtiles et un tunnel de contact optimisé.",
-      solutionEn: "Developed with Next.js and TailwindCSS featuring modular service sections, subtle micro-interactions, and an optimized contact flow.",
-      image: "/images/agence.png",
+        "Fullstack application under development, with a Java Spring Boot backend API and a Next.js frontend.",
+      image: "/images/default-project.svg",
       category: "Web",
-      technologies: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
-      demo: "https://agence-beryl.vercel.app/",
+      technologies: ["Java", "Spring Boot", "Next.js"],
       featuresFr: [
-        "Pages services dynamiques et modulaires",
-        "Design ultra-réactif orienté conversion",
-        "Formulaire de contact avec validation",
-        "Optimisation SEO et temps de chargement"
+        "API backend avec Java Spring Boot",
+        "Frontend avec Next.js"
       ],
       featuresEn: [
-        "Dynamic and modular service pages",
-        "Ultra-responsive conversion-focused UI",
-        "Validated contact form",
-        "SEO and page speed optimization"
+        "Backend API with Java Spring Boot",
+        "Next.js frontend"
       ],
-      status: "Terminé",
-      statusEn: "Finished"
+      status: "En cours",
+      statusEn: "In building"
+    },
+    {
+      id: 11,
+      titleFr: "Application Python Django & Angular",
+      titleEn: "Python Django & Angular Application",
+      descriptionFr:
+        "Application fullstack en cours de développement, avec un backend Python Django et un frontend Angular.",
+      descriptionEn:
+        "Fullstack application under development, with a Python Django backend and an Angular frontend.",
+      image: "/images/default-project.svg",
+      category: "Web",
+      technologies: ["Python", "Django", "Angular"],
+      featuresFr: [
+        "Backend avec Python Django",
+        "Frontend avec Angular"
+      ],
+      featuresEn: [
+        "Python Django backend",
+        "Angular frontend"
+      ],
+      status: "En cours",
+      statusEn: "In building"
     },
     {
       id: 2,
@@ -276,34 +293,10 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
       ],
       status: "Terminé",
       statusEn: "Finished"
-    },
-    {
-      id: 7,
-      titleFr: "Application Mobile E-Commerce",
-      titleEn: "E-Commerce Mobile App",
-      descriptionFr:
-        "Challenge : concevoir une application mobile performante permettant aux utilisateurs d’acheter des produits facilement depuis leur smartphone, avec une navigation fluide.",
-      descriptionEn:
-        "Challenge: build a high-performance mobile application allowing users to shop easily from their smartphones with a smooth experience.",
-      image: "/images/mobile.jpeg",
-      category: "Mobile",
-      technologies: ["React Native", "Expo", "MySQL"],
-      featuresFr: [
-        "Navigation par onglets",
-        "Ajout au panier mobile",
-        "Interface tactile fluide"
-      ],
-      featuresEn: [
-        "Tab navigation",
-        "Mobile cart management",
-        "Smooth touch UI"
-      ],
-      status: "Terminé",
-      statusEn: "Finished"
     }
   ];
 
-  const categories = ['Tous', 'Web', 'Mobile'];
+  const categories = ['Tous', 'Web'];
 
   const filteredProjects = selectedCategory === 'Tous'
     ? projects
