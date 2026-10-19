@@ -25,7 +25,14 @@ export default function ProjectDetail({ project, allProjects, onBack, onSelectPr
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [project]);
+    const originalTitle = document.title;
+    const projectTitle = isEn ? project.titleEn : project.titleFr;
+    document.title = `${projectTitle} — Mouhamadou Bamba Diagne`;
+
+    return () => {
+      document.title = originalTitle;
+    };
+  }, [project, isEn]);
 
   // Navigation projets précédent / suivant
   const currentIndex = allProjects.findIndex(p => p.id === project.id);
