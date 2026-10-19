@@ -164,7 +164,7 @@ export default function ProjectDetail({ project, allProjects, onBack, onSelectPr
               <img
                 src={project.image}
                 alt={isEn ? project.titleEn : project.titleFr}
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover ${project.imagePosition === 'top' ? 'object-top' : ''}`}
               />
             </div>
 

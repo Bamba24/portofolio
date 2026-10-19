@@ -14,6 +14,8 @@ export interface ProjectType {
   solutionFr?: string;
   solutionEn?: string;
   image: string;
+  /** Cadrage de l'image : 'top' pour les captures pleine page (hautes) */
+  imagePosition?: 'top' | 'center';
   category: string;
   technologies: string[];
   demo?: string;
@@ -34,6 +36,69 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
   const isEn = langue === 'en';
 
   const projects: ProjectType[] = [
+    {
+      id: 8,
+      titleFr: "Gestion de stock & ventes (POS)",
+      titleEn: "Stock & Sales Management (POS)",
+      descriptionFr:
+        "Plateforme de gestion de stock et de point de vente permettant aux commerçants de suivre leurs stocks, leurs ventes et de piloter leurs agents en temps réel. J'ai réalisé l'implémentation complète du frontend.",
+      descriptionEn:
+        "A stock and point-of-sale management platform that lets merchants track inventory and sales and manage their agents in real time. I built the entire frontend.",
+      challengeFr: "Concevoir une interface de gestion claire et fiable pour des commerçants, avec un suivi précis des stocks et des ventes, et un déploiement reproductible.",
+      challengeEn: "Design a clear and reliable management interface for merchants, with accurate stock and sales tracking and a reproducible deployment.",
+      solutionFr: "Implémentation complète du frontend avec Next.js (App Router), interface responsive en TailwindCSS, parcours d'authentification complet et conteneurisation avec Docker pour le déploiement.",
+      solutionEn: "Full frontend implementation with Next.js (App Router), responsive TailwindCSS UI, complete authentication flow, and Docker containerization for deployment.",
+      image: "/images/Gestion de stock-image-crm.png",
+      category: "Web",
+      technologies: ["Next.js", "TailwindCSS", "Docker"],
+      demo: "https://crm2.noflai.com/",
+      featuresFr: [
+        "Authentification : connexion, inscription, mot de passe oublié",
+        "Suivi des stocks et des ventes",
+        "Pilotage des agents en temps réel",
+        "SEO et métadonnées Open Graph",
+        "Conteneurisation et déploiement avec Docker"
+      ],
+      featuresEn: [
+        "Authentication: login, sign-up, password reset",
+        "Stock and sales tracking",
+        "Real-time agent management",
+        "SEO and Open Graph metadata",
+        "Docker containerization and deployment"
+      ],
+      status: "Terminé",
+      statusEn: "Finished"
+    },
+    {
+      id: 9,
+      titleFr: "Xarala Academy — Plateforme e-learning",
+      titleEn: "Xarala Academy — E-learning Platform",
+      descriptionFr:
+        "Contribution au développement de la plateforme Xarala, acteur de la formation tech en Afrique francophone (40 000+ apprenants). J'implémente de nouvelles fonctionnalités sur la plateforme en production.",
+      descriptionEn:
+        "Contributing to the Xarala platform, a leading tech training provider in French-speaking Africa (40,000+ learners). I implement new features on the production platform.",
+      challengeFr: "Faire évoluer une plateforme en production utilisée par des milliers d'apprenants, en livrant de nouvelles fonctionnalités sans dégrader l'expérience ni les performances.",
+      challengeEn: "Evolve a production platform used by thousands of learners, shipping new features without degrading user experience or performance.",
+      solutionFr: "Implémentation de fonctionnalités au sein de la base de code Next.js existante, dans le respect de l'architecture et des conventions de l'équipe.",
+      solutionEn: "Implementing features within the existing Next.js codebase while following the team's architecture and conventions.",
+      image: "/images/xarala-image-site.png",
+      imagePosition: "top",
+      category: "Web",
+      technologies: ["Next.js", "TailwindCSS"],
+      demo: "https://www.xarala.co/",
+      featuresFr: [
+        "Implémentation de nouvelles fonctionnalités",
+        "Travail sur une application en production",
+        "Collaboration avec l'équipe technique"
+      ],
+      featuresEn: [
+        "Implementing new features",
+        "Working on a production application",
+        "Collaborating with the engineering team"
+      ],
+      status: "En cours",
+      statusEn: "In building"
+    },
     {
       id: 1,
       titleFr: "Agence de création de sites web",
@@ -67,34 +132,38 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     },
     {
       id: 2,
-      titleFr: "Blog Personnel",
-      titleEn: "Personal Blog",
+      titleFr: "bamba.dev — Blog technique",
+      titleEn: "bamba.dev — Tech Blog",
       descriptionFr:
-        "Histoire : un espace pour partager des idées, documenter mon parcours de développeur et publier du contenu technique optimisé pour le SEO.",
+        "Mon blog technique bilingue (FR/EN) dédié à l'ingénierie logicielle : tutoriels, analyses et retours d'expérience sur Python, les bases de données, le DevOps, le Cloud, l'IA, NestJS, JavaScript et React.",
       descriptionEn:
-        "Story: a space to share ideas, document my developer journey, and publish SEO-optimized technical content.",
-      challengeFr: "Offrir un temps de chargement instantané et un confort de lecture optimal pour des articles techniques en Markdown.",
-      challengeEn: "Deliver instant page loads and optimal reading comfort for technical Markdown articles.",
-      solutionFr: "Intégration d'Astro / Next.js avec rendu statique et gestion du mode sombre natif.",
-      solutionEn: "Static generation with Next.js and native dark mode support.",
-      image: "/images/blog.png",
+        "My bilingual (FR/EN) tech blog about software engineering: tutorials, analyses, and hands-on insights on Python, databases, DevOps, Cloud, AI, NestJS, JavaScript, and React.",
+      challengeFr: "Construire un blog rapide, bien référencé et partageable : chaque article doit être correctement indexé par les moteurs de recherche et s'afficher proprement lors d'un partage sur les réseaux sociaux, dans deux langues.",
+      challengeEn: "Build a fast, well-indexed, and shareable blog: every article must be properly indexed by search engines and render nicely when shared on social media, in two languages.",
+      solutionFr: "Next.js App Router avec pré-rendu statique des articles via generateStaticParams, métadonnées dynamiques et balises Open Graph / Twitter Cards par article et par langue, routes internationalisées (/fr, /en) et mode sombre.",
+      solutionEn: "Next.js App Router with static pre-rendering of articles via generateStaticParams, dynamic metadata and per-article, per-locale Open Graph / Twitter Cards, localized routes (/fr, /en), and dark mode.",
+      image: "/images/bambadev-image.png",
       category: "Web",
-      technologies: ["Next.js", "Markdown", "TailwindCSS"],
-      demo: "https://blog-app-lx4p.vercel.app/",
+      technologies: ["Next.js", "TailwindCSS", "next-international", "Vercel"],
+      demo: "https://bamba-dev.vercel.app/en/posts",
       featuresFr: [
-        "Articles en Markdown",
-        "SEO optimisé",
-        "Mode sombre",
-        "Navigation fluide"
+        "Articles pré-rendus statiquement (generateStaticParams)",
+        "SEO : métadonnées dynamiques, Open Graph et Twitter Cards",
+        "Bilingue FR / EN avec routes localisées",
+        "Recherche et filtrage des articles par tag",
+        "Mode clair / sombre",
+        "Accessibilité (lien d'évitement, attributs ARIA)"
       ],
       featuresEn: [
-        "Markdown articles",
-        "SEO optimized",
-        "Dark mode",
-        "Smooth navigation"
+        "Statically pre-rendered articles (generateStaticParams)",
+        "SEO: dynamic metadata, Open Graph and Twitter Cards",
+        "Bilingual FR / EN with localized routes",
+        "Article search and tag filtering",
+        "Light / dark mode",
+        "Accessibility (skip link, ARIA attributes)"
       ],
-      status: "En cours",
-      statusEn: "In building"
+      status: "Terminé",
+      statusEn: "Finished"
     },
     {
       id: 3,
@@ -296,7 +365,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
                   <img
                     src={project.image}
                     alt={isEn ? project.titleEn : project.titleFr}
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                    className={`w-full h-full object-cover ${project.imagePosition === 'top' ? 'object-top' : ''} group-hover:scale-103 transition-transform duration-500`}
                   />
                   
                   {/* Status Indicator */}
