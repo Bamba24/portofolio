@@ -13,9 +13,9 @@ export default function Skills() {
       icon: <Globe size={24} className="text-blue-900 dark:text-blue-400" />,
       title: isEn ? "Frontend Development" : "Développement Frontend",
       description: isEn 
-        ? "Building fast, interactive, and SEO-optimized web interfaces with React, Next.js, and TailwindCSS."
-        : "Création d'interfaces web ultra-rapides, interactives et optimisées SEO avec React, Next.js et TailwindCSS.",
-      skills: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'HTML5/CSS3']
+        ? "Building fast, interactive, and SEO-optimized web interfaces with React, Next.js, and modern state management."
+        : "Création d'interfaces web ultra-rapides, interactives et optimisées avec React, Next.js et gestion d'état moderne.",
+      skills: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'GraphQL', 'TanStack Query', 'Zustand', 'Zod']
     },
     {
       icon: <Server size={24} className="text-blue-900 dark:text-blue-400" />,
@@ -37,9 +37,9 @@ export default function Skills() {
       icon: <Wrench size={24} className="text-blue-900 dark:text-blue-400" />,
       title: isEn ? "DevOps & AI Tools" : "DevOps & Outils IA",
       description: isEn
-        ? "Deploying applications, setting up CI/CD workflows, and automating tasks with modern tools."
-        : "Déploiement continu, automatisation et intégration des outils modernes de développement.",
-      skills: ['Git', 'Vercel', 'Netlify', 'Railway', 'n8n', 'Claude Code']
+        ? "Deploying applications, setting up CI/CD workflows, containerization with Docker, and automation."
+        : "Déploiement continu, conteneurisation avec Docker, automatisation et intégration des outils modernes.",
+      skills: ['Docker', 'Git', 'Vercel', 'Netlify', 'Railway', 'n8n', 'Claude Code']
     }
   ];
 

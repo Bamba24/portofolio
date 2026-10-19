@@ -1,4 +1,4 @@
-import { Calendar, Award, CheckCircle2, GraduationCap } from 'lucide-react';
+import { Award, CheckCircle2, GraduationCap } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from 'framer-motion';
@@ -8,6 +8,44 @@ export default function Education() {
   const isEn = langue === 'en';
 
   const education = [
+    {
+      degreeFr: 'Formation Concepteur Développeur Java Spring Boot & Next.js',
+      degreeEn: 'Fullstack Java Spring Boot & Next.js Developer Training',
+      school: 'Force-N',
+      location: 'Sénégal / En ligne',
+      period: isEn ? 'In progress (2026)' : 'En cours (2026)',
+      descriptionFr: 'Formation intensive et professionnalisante axée sur le développement d\'applications d\'entreprise robustes avec Java Spring Boot pour le backend et Next.js pour le frontend.',
+      descriptionEn: 'Intensive professional training focused on developing robust enterprise applications with Java Spring Boot for backend and Next.js for frontend.',
+      achievements: [
+        'Conception d\'architectures backend d\'entreprise et APIs REST avec Java Spring Boot',
+        'Développement d\'interfaces frontend réactives et modernes avec Next.js & TypeScript',
+        'Persistance des données, sécurité et bonnes pratiques de clean architecture'
+      ],
+      achievementsEn: [
+        'Designing enterprise backend architectures and REST APIs with Java Spring Boot',
+        'Building modern and reactive frontend interfaces with Next.js & TypeScript',
+        'Data persistence, application security, and clean architecture best practices'
+      ]
+    },
+    {
+      degreeFr: 'Formation Développeur Python',
+      degreeEn: 'Python Developer Training',
+      school: 'Force-N',
+      location: 'Sénégal / En ligne',
+      period: isEn ? 'In progress (2026)' : 'En cours (2026)',
+      descriptionFr: 'Formation spécialisée sur le langage Python, la programmation orientée objet, l\'algorithmie, les frameworks web et le traitement de données.',
+      descriptionEn: 'Specialized training covering Python programming, object-oriented design, algorithms, web frameworks, and data processing.',
+      achievements: [
+        'Maîtrise approfondie des structures de données et de la programmation orientée objet',
+        'Conception d\'APIs et de scripts backend en Python',
+        'Résolution de problèmes algorithmiques et développement backend'
+      ],
+      achievementsEn: [
+        'In-depth mastery of Python data structures and object-oriented programming',
+        'Designing Python backend APIs and automation scripts',
+        'Algorithmic problem-solving and backend development'
+      ]
+    },
     {
       degreeFr: 'Formation Développeur Fullstack & Mobile',
       degreeEn: 'Fullstack & Mobile Developer Certification',

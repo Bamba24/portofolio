@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { ArrowLeft, ExternalLink, Github, Sun, Moon, Languages, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Github, Sun, Moon, Languages, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { LangueContext } from '../context/langueContext';
 import { ThemeContext } from '../context/ThemeContext';
