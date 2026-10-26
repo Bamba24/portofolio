@@ -3,9 +3,10 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import Projects, { ProjectType } from './components/Projects';
 import Experience from './components/Experience';
 import Education from './components/Education';
-import Projects, { ProjectType } from './components/Projects';
+import Social from './components/Social';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectDetail from './components/ProjectDetail';
@@ -19,7 +20,7 @@ function App() {
   return (
     <LangueProvider>
       <ThemeProvider>
-        <div className="App">
+        <div className="App min-h-screen bg-[#f8fafc] dark:bg-[#1f2235] text-slate-900 dark:text-white transition-colors duration-300">
           {selectedProject ? (
             <ProjectDetail
               project={selectedProject}
@@ -39,12 +40,13 @@ function App() {
                 <Hero />
                 <About />
                 <Skills />
-                <Experience />
-                <Education />
                 <Projects onSelectProject={(proj, list) => {
                   setSelectedProject(proj);
                   setAllProjects(list);
                 }} />
+                <Experience />
+                <Education />
+                <Social />
                 <Contact />
               </main>
               <Footer />

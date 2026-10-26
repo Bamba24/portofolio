@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,8 +14,7 @@ export interface ProjectType {
   solutionFr?: string;
   solutionEn?: string;
   image: string;
-  /** Cadrage de l'image : 'top' pour les captures pleine page (hautes) */
-  imagePosition?: 'top' | 'center';
+  imagePosition?: 'top' | 'center' | 'contain';
   category: string;
   technologies: string[];
   demo?: string;
@@ -48,27 +47,28 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
       challengeEn: "Design a clear and reliable management interface for merchants, with accurate stock and sales tracking and a reproducible deployment.",
       solutionFr: "Implémentation complète du frontend avec Next.js (App Router) consommant une API GraphQL via TanStack Query, tableaux de données avec TanStack Table, validation des formulaires avec Zod, état client avec Zustand, filtres synchronisés dans l'URL avec nuqs, et conteneurisation avec Docker pour le déploiement.",
       solutionEn: "Full frontend implementation with Next.js (App Router) consuming a GraphQL API through TanStack Query, data tables with TanStack Table, form validation with Zod, client state with Zustand, URL-synced filters with nuqs, and Docker containerization for deployment.",
-      image: "/images/Gestion de stock-image-crm.png",
+      image: "/images/gestion-stock-crm.png",
+      imagePosition: "top",
       category: "Web",
       technologies: ["Next.js", "GraphQL", "TanStack Query", "TanStack Table", "Zod", "Zustand", "nuqs", "TailwindCSS", "Docker"],
       demo: "https://crm2.noflai.com/",
       featuresFr: [
-        "Authentification : connexion, inscription, mot de passe oublié",
-        "Suivi des stocks et des ventes",
-        "Pilotage des agents en temps réel",
-        "Tableaux de données interactifs (TanStack Table)",
-        "Filtres et recherche synchronisés dans l'URL (nuqs)",
-        "Validation des formulaires avec Zod",
-        "Conteneurisation et déploiement avec Docker"
+        "Authentification sécurisée : connexion, inscription, réinitialisation de mot de passe",
+        "Suivi précis des inventaires et alertes de stock faible",
+        "Enregistrement des ventes et pilotage des caisses / agents en direct",
+        "Tableaux de données interactifs avec TanStack Table (tris, paginations, exports)",
+        "Recherche et filtres multicritères persistés dans l'URL (nuqs)",
+        "Validation stricte des formulaires côté client avec Zod & React Hook Form",
+        "Conteneurisation complète avec Docker et Dockerfile multi-stage"
       ],
       featuresEn: [
-        "Authentication: login, sign-up, password reset",
-        "Stock and sales tracking",
-        "Real-time agent management",
-        "Interactive data tables (TanStack Table)",
-        "URL-synced filters and search (nuqs)",
-        "Form validation with Zod",
-        "Docker containerization and deployment"
+        "Secure authentication: sign in, sign up, password recovery",
+        "Precise inventory tracking and low-stock alerts",
+        "Real-time sales logging and agent / cashier supervision",
+        "Interactive tables with TanStack Table (sort, pagination, export)",
+        "URL-persisted multicriteria search and filtering (nuqs)",
+        "Strict client validation with Zod and React Hook Form",
+        "Full containerization with Docker multi-stage build"
       ],
       status: "Terminé",
       statusEn: "Finished"
@@ -78,49 +78,166 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
       titleFr: "Xarala Academy — Plateforme e-learning",
       titleEn: "Xarala Academy — E-learning Platform",
       descriptionFr:
-        "Contribution au développement de la plateforme Xarala, acteur de la formation tech en Afrique francophone (40 000+ apprenants). J'implémente de nouvelles fonctionnalités sur la plateforme en production.",
+        "Contribution au développement de la plateforme Xarala, acteur majeur de la formation tech en Afrique francophone (+40 000 apprenants). Implémentation continue de nouvelles fonctionnalités sur la plateforme en production.",
       descriptionEn:
-        "Contributing to the Xarala platform, a leading tech training provider in French-speaking Africa (40,000+ learners). I implement new features on the production platform.",
-      challengeFr: "Faire évoluer une plateforme en production utilisée par des milliers d'apprenants, en livrant de nouvelles fonctionnalités sans dégrader l'expérience ni les performances.",
-      challengeEn: "Evolve a production platform used by thousands of learners, shipping new features without degrading user experience or performance.",
-      solutionFr: "Implémentation de fonctionnalités au sein de la base de code Next.js existante, dans le respect de l'architecture et des conventions de l'équipe.",
-      solutionEn: "Implementing features within the existing Next.js codebase while following the team's architecture and conventions.",
+        "Contributing to Xarala, a major edtech training platform in French-speaking Africa (+40,000 learners). Ongoing implementation of production features and UI improvements.",
+      challengeFr: "Faire évoluer une plateforme en production utilisée par des dizaines de milliers d'apprenants, en garantissant zéro régression et des performances optimales.",
+      challengeEn: "Evolve an active production platform used by tens of thousands of learners, shipping features with zero regressions and high performance.",
+      solutionFr: "Implémentation de modules complets dans la base de code Next.js existante, respect des conventions d'équipe, tests et optimisation continue de l'expérience utilisateur.",
+      solutionEn: "Implementing features within the existing Next.js codebase, maintaining team standards, and continuously optimizing learner UX.",
       image: "/images/xarala-image-site.png",
       imagePosition: "top",
       category: "Web",
-      technologies: ["Next.js", "TailwindCSS"],
+      technologies: ["Next.js", "React", "TypeScript", "TailwindCSS"],
       demo: "https://www.xarala.co/",
       featuresFr: [
-        "Implémentation de nouvelles fonctionnalités",
-        "Travail sur une application en production",
-        "Collaboration avec l'équipe technique"
+        "Implémentation de nouvelles fonctionnalités sur l'espace apprenant",
+        "Travail direct sur une base de code en production à fort trafic",
+        "Collaboration continue en équipe selon la méthodologie agile",
+        "Optimisation de la réactivité et des temps de chargement"
       ],
       featuresEn: [
-        "Implementing new features",
-        "Working on a production application",
-        "Collaborating with the engineering team"
+        "Implementation of new features in the student workspace",
+        "Direct contributions to a high-traffic production codebase",
+        "Agile team collaboration and peer reviews",
+        "Performance and load-time optimizations"
+      ],
+      status: "En cours",
+      statusEn: "In production"
+    },
+    {
+      id: 3,
+      titleFr: "Application Coran (Fullstack Next.js & NestJS)",
+      titleEn: "Quran Application (Fullstack Next.js & NestJS)",
+      descriptionFr:
+        "Application fullstack moderne dédiée à la lecture et l'écoute du Saint Coran. Le frontend est conçu avec Next.js et TypeScript pour une navigation ultra-réactive, tandis que le backend est propulsé par une API robuste sous NestJS assurant la gestion des données, des sourates et de la distribution audio.",
+      descriptionEn:
+        "Modern fullstack application for reading and listening to the Holy Quran. Built with a reactive Next.js / TypeScript frontend and a robust NestJS backend API powering data management, audio streaming, and reciters.",
+      challengeFr: "Développer une architecture fullstack découplée avec un frontend réactif et une API backend NestJS performante gérant les flux audio continus et la structuration des sourates.",
+      challengeEn: "Build a decoupled fullstack architecture with a responsive Next.js frontend and a performant NestJS backend API handling continuous audio streaming and surah datasets.",
+      solutionFr: "Architecture découplée : frontend réactif développé en Next.js (SSR / SSG) avec TailwindCSS et lecteur audio persistant, connecté à une API backend structurée et modulaire sous NestJS avec TypeScript.",
+      solutionEn: "Decoupled architecture: Next.js frontend (SSR / SSG) styled with TailwindCSS and persistent audio player, connected to a modular NestJS TypeScript backend API.",
+      image: "/images/coran.png",
+      imagePosition: "top",
+      category: "Fullstack",
+      technologies: ["Next.js", "NestJS", "TypeScript", "Node.js", "TailwindCSS", "REST API"],
+      featuresFr: [
+        "Architecture Fullstack : Frontend Next.js & Backend NestJS",
+        "API REST structurée et modulaire sous NestJS",
+        "Lecture complète du texte des sourates en arabe et traductions",
+        "Écoute audio en continu avec lecteur persistant",
+        "Recherche rapide et mise en favoris",
+        "Interface responsive adaptée aux mobiles et tablettes"
+      ],
+      featuresEn: [
+        "Fullstack Architecture: Next.js Frontend & NestJS Backend",
+        "Modular and structured REST API built with NestJS",
+        "Complete surah text reading with translations",
+        "Continuous audio streaming with persistent player",
+        "Fast search and bookmarking",
+        "Responsive interface optimized for mobile and tablets"
       ],
       status: "En cours",
       statusEn: "In building"
     },
     {
-      id: 10,
-      titleFr: "Application Java Spring Boot & Next.js",
-      titleEn: "Java Spring Boot & Next.js Application",
+      id: 4,
+      titleFr: "Plateforme E-commerce Fullstack Next.js, Prisma & MySQL",
+      titleEn: "E-Commerce Platform — Fullstack Next.js, Prisma & MySQL",
       descriptionFr:
-        "Application fullstack en cours de développement, avec une API backend en Java Spring Boot et un frontend Next.js.",
+        "Plateforme e-commerce complète développée intégralement en architecture fullstack avec Next.js (App Router, Server Components & Server Actions), connectée à une base de données relationnelle MySQL via l'ORM Prisma.",
       descriptionEn:
-        "Fullstack application under development, with a Java Spring Boot backend API and a Next.js frontend.",
-      image: "/images/default-project.svg",
-      category: "Web",
-      technologies: ["Java", "Spring Boot", "Next.js"],
+        "Full-fledged e-commerce platform built end-to-end with fullstack Next.js (App Router, Server Components & Server Actions), powered by Prisma ORM and a relational MySQL database.",
+      challengeFr: "Concevoir une solution e-commerce 100% fullstack Next.js avec gestion synchronisée des flux d'achats, panier en temps réel et modélisation relationnelle robuste sous MySQL.",
+      challengeEn: "Engineer a 100% fullstack Next.js e-commerce solution with synchronized checkout flows, real-time cart state, and robust MySQL relational modeling.",
+      solutionFr: "Stack full Next.js avec Server Actions pour les mutations de données, validation typée de bout en bout avec TypeScript, modélisation relationnelle avec Prisma ORM et persistance des catalogues, commandes et utilisateurs sous MySQL.",
+      solutionEn: "Full Next.js stack utilizing Server Actions for data mutations, end-to-end TypeScript validation, Prisma ORM schema modeling, and MySQL persistence for catalog, orders, and users.",
+      image: "/images/e-commerce.png",
+      imagePosition: "top",
+      category: "Fullstack",
+      technologies: ["Next.js", "Prisma", "MySQL", "TypeScript", "TailwindCSS", "Server Actions"],
       featuresFr: [
-        "API backend avec Java Spring Boot",
-        "Frontend avec Next.js"
+        "Architecture Fullstack 100% Next.js (App Router & Server Actions)",
+        "Modélisation de base de données relationnelle MySQL avec Prisma ORM",
+        "Catalogue interactif avec filtres par catégorie et prix",
+        "Gestion d'état du panier d'achat et tunnel de commande optimisé",
+        "Dashboard d'administration pour la gestion des produits et commandes",
+        "Interface responsive et performante optimisée pour la conversion"
       ],
       featuresEn: [
-        "Backend API with Java Spring Boot",
-        "Next.js frontend"
+        "100% Next.js Fullstack Architecture (App Router & Server Actions)",
+        "Relational MySQL database modeling with Prisma ORM",
+        "Interactive catalog with category and price filters",
+        "Real-time shopping cart state management and optimized checkout flow",
+        "Admin dashboard for product and order management",
+        "High-performance responsive interface optimized for conversion"
+      ],
+      status: "Terminé",
+      statusEn: "Finished"
+    },
+    {
+      id: 2,
+      titleFr: "bamba.dev — Blog Technique Ingénierie",
+      titleEn: "bamba.dev — Software Engineering Blog",
+      descriptionFr:
+        "Mon blog technique bilingue (FR/EN) dédié à l'ingénierie logicielle : tutoriels approfondis, retours d'expérience sur Python, Next.js, bases de données, DevOps, Cloud et IA.",
+      descriptionEn:
+        "My bilingual (FR/EN) software engineering blog: in-depth tutorials, hands-on insights on Python, Next.js, databases, DevOps, Cloud, and AI.",
+      challengeFr: "Construire un blog ultra-rapide, parfaitement indexé par Google (SEO) et partageable proprement avec des aperçus riches sur les réseaux sociaux.",
+      challengeEn: "Build an ultra-fast blog with optimal Google SEO indexing and rich Open Graph / Twitter Card social share previews.",
+      solutionFr: "Next.js App Router avec pré-rendu statique des articles (SSG via generateStaticParams), métadonnées dynamiques, routes internationalisées (/fr, /en) et accessibilité soignée.",
+      solutionEn: "Next.js App Router with static generation (SSG), dynamic metadata generation, localized routes (/fr, /en), and accessibility compliance.",
+      image: "/images/bambadev-image.png",
+      imagePosition: "top",
+      category: "Web",
+      technologies: ["Next.js", "TypeScript", "TailwindCSS", "next-international", "Vercel"],
+      demo: "https://bamba-dev.vercel.app/en/posts",
+      featuresFr: [
+        "Articles pré-rendus statiquement avec generateStaticParams",
+        "Génération automatique des balises Open Graph et Twitter Cards par article",
+        "Support bilingue complet FR / EN avec routes localisées",
+        "Moteur de recherche et filtrage par tags",
+        "Mode sombre natif et typographie éditoriale",
+        "Conformité accessibilité (skip links, ARIA)"
+      ],
+      featuresEn: [
+        "Statically pre-rendered articles with generateStaticParams",
+        "Dynamic Open Graph and Twitter Cards per post and locale",
+        "Complete bilingual FR / EN support with localized paths",
+        "Fast search and tag-based filtering",
+        "Native dark mode and refined typography",
+        "Accessibility compliance (skip links, ARIA)"
+      ],
+      status: "Terminé",
+      statusEn: "Finished"
+    },
+    {
+      id: 10,
+      titleFr: "Application Entreprise Java Spring Boot & Next.js",
+      titleEn: "Enterprise App Java Spring Boot & Next.js",
+      descriptionFr:
+        "Application d'entreprise fullstack avec architecture découplée : API backend robuste sous Java Spring Boot et interface réactive sous Next.js.",
+      descriptionEn:
+        "Enterprise fullstack application with decoupled architecture: robust Java Spring Boot backend API paired with a Next.js frontend.",
+      challengeFr: "Structurer une API REST d'entreprise respectant les standards de clean architecture avec persistance JPA / Hibernate.",
+      challengeEn: "Structure an enterprise REST API following clean architecture principles with JPA / Hibernate persistence.",
+      solutionFr: "Backend Java Spring Boot avec Spring Security, Spring Data JPA et frontend Next.js en TypeScript pour l'interaction utilisateur.",
+      solutionEn: "Java Spring Boot backend with Spring Security and Spring Data JPA, connected to a Next.js TypeScript frontend.",
+      image: "/images/default-project.svg",
+      imagePosition: "center",
+      category: "Fullstack",
+      technologies: ["Java", "Spring Boot", "Next.js", "PostgreSQL", "Docker"],
+      featuresFr: [
+        "API RESTful architecturée selon les principes SOLID",
+        "Authentification sécurisée par JWT",
+        "Gestion des entités relationnelles avec Spring Data JPA",
+        "Frontend réactif Next.js avec validation typée"
+      ],
+      featuresEn: [
+        "RESTful API following SOLID principles",
+        "JWT-based secure authentication",
+        "Relational entity management with Spring Data JPA",
+        "Reactive Next.js frontend with typed validation"
       ],
       status: "En cours",
       statusEn: "In building"
@@ -130,297 +247,181 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
       titleFr: "Application Python Django & Angular",
       titleEn: "Python Django & Angular Application",
       descriptionFr:
-        "Application fullstack en cours de développement, avec un backend Python Django et un frontend Angular.",
+        "Application web fullstack combinant la robustesse du framework Python Django pour la logique métier et l'écosystème modulaire d'Angular pour l'UI.",
       descriptionEn:
-        "Fullstack application under development, with a Python Django backend and an Angular frontend.",
+        "Fullstack web app combining Python Django's robust business logic and ORM with Angular's structured component ecosystem.",
       image: "/images/default-project.svg",
-      category: "Web",
-      technologies: ["Python", "Django", "Angular"],
+      imagePosition: "center",
+      category: "Fullstack",
+      technologies: ["Python", "Django", "Angular", "TypeScript", "PostgreSQL"],
       featuresFr: [
-        "Backend avec Python Django",
-        "Frontend avec Angular"
+        "Backend développé avec Django REST Framework (DRF)",
+        "Administration native et ORM Django",
+        "Frontend développé sous Angular avec TypeScript",
+        "Sécurisation des requêtes et tokens d'authentification"
       ],
       featuresEn: [
-        "Python Django backend",
-        "Angular frontend"
+        "Backend built with Django REST Framework (DRF)",
+        "Native Django admin and ORM integration",
+        "Angular frontend with TypeScript modules",
+        "Secured requests and token authentication"
       ],
       status: "En cours",
       statusEn: "In building"
-    },
-    {
-      id: 2,
-      titleFr: "bamba.dev — Blog technique",
-      titleEn: "bamba.dev — Tech Blog",
-      descriptionFr:
-        "Mon blog technique bilingue (FR/EN) dédié à l'ingénierie logicielle : tutoriels, analyses et retours d'expérience sur Python, les bases de données, le DevOps, le Cloud, l'IA, NestJS, JavaScript et React.",
-      descriptionEn:
-        "My bilingual (FR/EN) tech blog about software engineering: tutorials, analyses, and hands-on insights on Python, databases, DevOps, Cloud, AI, NestJS, JavaScript, and React.",
-      challengeFr: "Construire un blog rapide, bien référencé et partageable : chaque article doit être correctement indexé par les moteurs de recherche et s'afficher proprement lors d'un partage sur les réseaux sociaux, dans deux langues.",
-      challengeEn: "Build a fast, well-indexed, and shareable blog: every article must be properly indexed by search engines and render nicely when shared on social media, in two languages.",
-      solutionFr: "Next.js App Router avec pré-rendu statique des articles via generateStaticParams, métadonnées dynamiques et balises Open Graph / Twitter Cards par article et par langue, routes internationalisées (/fr, /en) et mode sombre.",
-      solutionEn: "Next.js App Router with static pre-rendering of articles via generateStaticParams, dynamic metadata and per-article, per-locale Open Graph / Twitter Cards, localized routes (/fr, /en), and dark mode.",
-      image: "/images/bambadev-image.png",
-      category: "Web",
-      technologies: ["Next.js", "TailwindCSS", "next-international", "Vercel"],
-      demo: "https://bamba-dev.vercel.app/en/posts",
-      featuresFr: [
-        "Articles pré-rendus statiquement (generateStaticParams)",
-        "SEO : métadonnées dynamiques, Open Graph et Twitter Cards",
-        "Bilingue FR / EN avec routes localisées",
-        "Recherche et filtrage des articles par tag",
-        "Mode clair / sombre",
-        "Accessibilité (lien d'évitement, attributs ARIA)"
-      ],
-      featuresEn: [
-        "Statically pre-rendered articles (generateStaticParams)",
-        "SEO: dynamic metadata, Open Graph and Twitter Cards",
-        "Bilingual FR / EN with localized routes",
-        "Article search and tag filtering",
-        "Light / dark mode",
-        "Accessibility (skip link, ARIA attributes)"
-      ],
-      status: "Terminé",
-      statusEn: "Finished"
-    },
-    {
-      id: 3,
-      titleFr: "Application Coran",
-      titleEn: "Quran Application",
-      descriptionFr:
-        "Challenge : concevoir une application spirituelle simple, rapide et accessible permettant la lecture et l’écoute du Coran sur tous les supports.",
-      descriptionEn:
-        "Challenge: design a simple, fast, and accessible spiritual app for reading and listening to the Quran on any device.",
-      challengeFr: "Proposer une interface fluide pour la lecture des sourates et l'écoute audio en continu sans interruption.",
-      challengeEn: "Provide a fluid UI for surah reading and continuous audio streaming.",
-      solutionFr: "Consommation d'APIs REST dédiées avec gestion du lecteur audio HTML5 et mise en cache des récitations.",
-      solutionEn: "Integration of dedicated Quran REST APIs with HTML5 audio player and caching.",
-      image: "/images/coran.png",
-      category: "Web",
-      technologies: ["Next.js", "Nest.js", "API Coran", "TailwindCSS"],
-      featuresFr: [
-        "Lecture des sourates",
-        "Audio des récitations",
-        "Interface épurée"
-      ],
-      featuresEn: [
-        "Surah reading",
-        "Audio recitations",
-        "Clean UI"
-      ],
-      status: "En cours",
-      statusEn: "In building"
-    },
-    {
-      id: 4,
-      titleFr: "E-commerce Chaussures",
-      titleEn: "Shoes E-Commerce",
-      descriptionFr:
-        "Challenge : développer une plateforme e-commerce complète avec gestion des produits, panier, paiement et expérience utilisateur fluide.",
-      descriptionEn:
-        "Challenge: build a complete e-commerce platform with product management, cart, payment, and smooth user experience.",
-      challengeFr: "Gérer l'état du panier dynamiquement et modéliser la base de données relationnelle des commandes.",
-      challengeEn: "Dynamically manage shopping cart state and model relational database for orders.",
-      solutionFr: "Architecture Next.js App Router combinée à Prisma ORM et MySQL pour la gestion du catalogue et du panier.",
-      solutionEn: "Next.js App Router architecture paired with Prisma ORM and MySQL.",
-      image: "/images/e-commerce.png",
-      category: "Web",
-      technologies: ["Next.js", "TypeScript", "Prisma", "MySQL"],
-      featuresFr: [
-        "Catalogue produits",
-        "Panier & paiement",
-        "Dashboard admin",
-        "Responsive"
-      ],
-      featuresEn: [
-        "Product catalog",
-        "Cart & payment",
-        "Admin dashboard",
-        "Responsive"
-      ],
-      status: "Terminé",
-      statusEn: "Finished"
-    },
-    {
-      id: 5,
-      titleFr: "Portfolio Développeur",
-      titleEn: "Developer Portfolio",
-      descriptionFr:
-        "Histoire : un portfolio pensé comme une vitrine personnelle pour présenter mes compétences, mes projets et mon identité de développeur.",
-      descriptionEn:
-        "Story: a personal showcase designed to present my skills, projects, and developer identity.",
-      image: "/images/portfolio.png",
-      category: "Web",
-      technologies: ["React", "TailwindCSS", "Framer Motion"],
-      demo: "https://portofolio-one-lake.vercel.app/",
-      featuresFr: [
-        "Présentation personnelle",
-        "Animations modernes",
-        "Section projets",
-        "Responsive"
-      ],
-      featuresEn: [
-        "Personal presentation",
-        "Modern animations",
-        "Projects section",
-        "Responsive"
-      ],
-      status: "Terminé",
-      statusEn: "Finished"
-    },
-    {
-      id: 6,
-      titleFr: "Landing Page SaaS",
-      titleEn: "SaaS Landing Page",
-      descriptionFr:
-        "Challenge : créer une landing page performante pour un produit SaaS, pensée pour capter l’attention et maximiser les conversions.",
-      descriptionEn:
-        "Challenge: build a high-converting landing page for a SaaS product focused on clarity and performance.",
-      image: "/images/sass.png",
-      category: "Web",
-      technologies: ["Html5", "CSS3"],
-      demo: "https://sass-phi-eight.vercel.app/",
-      featuresFr: [
-        "Hero impactant",
-        "Call-to-action clair",
-        "Sections marketing",
-        "Optimisée conversion"
-      ],
-      featuresEn: [
-        "Impactful hero section",
-        "Clear call-to-action",
-        "Marketing sections",
-        "Conversion optimized"
-      ],
-      status: "Terminé",
-      statusEn: "Finished"
     }
   ];
 
-  const categories = ['Tous', 'Web'];
+  const categories = ['Tous', 'Web', 'Fullstack'];
 
   const filteredProjects = selectedCategory === 'Tous'
     ? projects
-    : projects.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
+    : projects.filter(p => p.category === selectedCategory);
 
   return (
-    <section id="projects" className="py-20 bg-slate-50/50 dark:bg-slate-950/40 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-6">
+    <section 
+      id="projects" 
+      className="py-24 bg-[#f8fafc] dark:bg-[#1f2235] text-slate-900 dark:text-white border-t border-slate-200 dark:border-[#ffc576]/15 relative transition-colors duration-300"
+    >
+      <div className="boyer-container">
         
-        {/* Header Section : Style jonathan-boyer.fr */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2">
-              {isEn ? "My Work" : "Mes réalisations"}
+        {/* EN-TÊTE EXACT JONATHAN BOYER : MES CLIENTS & RÉALISATIONS -> PROJETS */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 text-left">
+          <div>
+            <span className="section__top-title">
+              {isEn ? "My Work & Clients" : "Mes réalisations"}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {isEn ? "Projects" : "Projets"}
+            <h2 className="section__title !mb-2">
+              {isEn ? "Featured Projects" : "Projets"}
             </h2>
+            <p className="text-slate-600 dark:text-[#9899a8] text-base max-w-xl">
+              {isEn 
+                ? "A curated selection of real-world applications, client platforms, and technical projects." 
+                : "Une sélection d'applications réelles en production, plateformes clients et projets d'ingénierie logicielle."}
+            </p>
           </div>
 
-          <div className="flex gap-1.5 p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-sm">
-            {categories.map(cat => (
+          {/* FILTRES DE CATÉGORIE STYLE BOYER */}
+          <div className="flex flex-wrap items-center gap-2 self-start md:self-end">
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-all rounded-sm ${
+                className={`px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-xs transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-blue-900 text-white shadow-xs'
-                    : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                    ? "bg-[#d97706] text-white dark:bg-[#ffc576] dark:text-[#1f2235] font-bold shadow-xs"
+                    : "bg-white dark:bg-[#313552] text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/20"
                 }`}
               >
-                {isEn ? (cat === "Tous" ? "All" : cat) : cat}
+                {cat}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Grille de projets avec Image preview */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10"
-        >
-          <AnimatePresence mode='popLayout'>
+        {/* GRILLE DE PROJETS IDENTIQUE AU DESIGN DE JONATHAN BOYER */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
+              <motion.article
                 layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                key={project.id}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.4 }}
-                className="group flex flex-col bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-md overflow-hidden hover:border-blue-900/30 dark:hover:border-blue-500/30 transition-all duration-300 shadow-xs text-left"
+                className="boyer-card flex flex-col justify-between overflow-hidden group text-left h-full"
               >
-                {/* Image du projet */}
+                {/* Image avec cadrage haut pour capture nette */}
                 <div 
                   onClick={() => onSelectProject?.(project, projects)}
-                  className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 cursor-pointer border-b border-slate-100 dark:border-slate-800"
+                  className="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-[#181a29] cursor-pointer"
                 >
                   <img
                     src={project.image}
                     alt={isEn ? project.titleEn : project.titleFr}
-                    className={`w-full h-full object-cover ${project.imagePosition === 'top' ? 'object-top' : ''} group-hover:scale-103 transition-transform duration-500`}
+                    className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
+                      project.imagePosition === 'top'
+                        ? 'object-cover object-top'
+                        : project.imagePosition === 'contain'
+                        ? 'object-contain p-2'
+                        : 'object-cover object-center'
+                    }`}
+                    loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-slate-900/5 dark:bg-[#1f2235]/30 group-hover:bg-transparent transition-colors duration-300" />
                   
-                  {/* Status Indicator */}
-                  <div className="absolute top-3 right-3 z-10">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md ${
-                      (isEn ? project.statusEn === "In building" : project.status === "En cours")
-                      ? "bg-amber-500/90 text-white"
-                      : "bg-emerald-600/90 text-white"
-                    }`}>
-                      {isEn ? project.statusEn : project.status}
-                    </span>
+                  {/* Badge Statut */}
+                  <div className="absolute top-3 right-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/95 dark:bg-[#1f2235]/90 text-[#b45309] dark:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/40 backdrop-blur-xs rounded-xs shadow-xs">
+                    {isEn ? project.statusEn : project.status}
                   </div>
                 </div>
 
-                {/* Body du projet */}
-                <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
-                  <div className="space-y-2">
-                    {/* Tags technologies */}
-                    <p className="text-xs font-semibold text-slate-400 tracking-wider">
+                {/* Corps de la carte */}
+                <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
+                  <div>
+                    {/* Tags technologiques */}
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#b45309] dark:text-[#ffc576] mb-2 line-clamp-1">
                       {project.technologies.slice(0, 4).join(', ')}
                     </p>
 
+                    {/* Titre en Playfair Display */}
                     <h3 
                       onClick={() => onSelectProject?.(project, projects)}
-                      className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-900 dark:group-hover:text-blue-400 transition-colors cursor-pointer"
+                      className="font-serif text-2xl font-bold text-slate-900 dark:text-white group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors mb-3 cursor-pointer leading-snug"
                     >
                       {isEn ? project.titleEn : project.titleFr}
                     </h3>
 
-                    <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                    {/* Description concise */}
+                    <p className="text-sm text-slate-600 dark:text-[#9899a8] leading-relaxed line-clamp-3 mb-6">
                       {isEn ? project.descriptionEn : project.descriptionFr}
                     </p>
                   </div>
 
-                  {/* Bouton d'action En savoir plus */}
-                  <div className="pt-2 flex items-center justify-between">
+                  {/* Actions au bas de la carte */}
+                  <div className="pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between mt-auto">
+                    {/* Action "En savoir plus" style Jonathan Boyer */}
                     <button
                       onClick={() => onSelectProject?.(project, projects)}
-                      className="text-xs font-bold text-blue-900 dark:text-blue-400 group-hover:underline uppercase tracking-wider flex items-center gap-1.5"
+                      className="btn-boyer !py-1.5 !px-4 text-[11px]"
                     >
-                      <span>{isEn ? "Read more" : "En savoir plus"}</span>
-                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <span>{isEn ? "Learn More" : "En savoir plus"}</span>
+                      <ArrowRight size={13} className="icon-arrow" />
                     </button>
 
-                    {project.demo && (
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-                        title={isEn ? "View demo" : "Voir la démo"}
-                      >
-                        <ArrowUpRight size={18} />
-                      </a>
-                    )}
+                    {/* Liens externes directs */}
+                    <div className="flex items-center gap-2">
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noreferrer"
+                          title="Visiter le site en ligne"
+                          className="p-2 text-slate-500 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          title="Code source GitHub"
+                          className="p-2 text-slate-500 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+                        >
+                          <Github size={16} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+
+              </motion.article>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
+
       </div>
     </section>
   );

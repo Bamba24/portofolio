@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Menu, X, Languages, Download, Sun, Moon } from "lucide-react";
+import { Menu, X, Languages, Sun, Moon, ArrowRight } from "lucide-react";
 import { LangueContext } from "../context/langueContext";
 import { ThemeContext } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,10 +10,10 @@ export default function Header() {
   const toggleLangue = contextLangue?.toggleLangue;
 
   const contextTheme = useContext(ThemeContext);
-  const theme = contextTheme?.theme ?? "light";
+  const theme = contextTheme?.theme ?? "dark";
   const toggleTheme = contextTheme?.toggleTheme;
 
-  const isEn = langue === 'en';
+  const isEn = langue === "en";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,141 +43,152 @@ export default function Header() {
 
   const navItems = [
     { en: "About", fr: "À propos", id: "about" },
-    { en: "Services", fr: "Services", id: "skills" },
+    { en: "Services", fr: "Services", id: "services" },
+    { en: "Projects", fr: "Réalisations", id: "projects" },
     { en: "Career", fr: "Parcours", id: "experience" },
-    { en: "Projects", fr: "Projets", id: "projects" },
-    { en: "Contact", fr: "Contact", id: "contact" },
+    { en: "Social", fr: "Me retrouver", id: "social" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "py-3 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 shadow-2xs" 
-          : "py-5 bg-white/50 dark:bg-slate-950/50 backdrop-blur-xs"
+        isScrolled
+          ? "py-3 bg-white/90 dark:bg-[#1f2235]/95 backdrop-blur-md border-b border-slate-200/80 dark:border-[#ffc576]/15 shadow-sm dark:shadow-lg"
+          : "py-5 bg-transparent"
       }`}
     >
-      <div className="max-w-5xl mx-auto px-6">
-        <nav className="flex items-center justify-between">
-          
-          {/* BRAND LOGO : Monogramme minimaliste BD */}
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2.5 group cursor-pointer"
-          >
-            <div className="w-8 h-8 bg-blue-900 text-white flex items-center justify-center font-extrabold text-xs rounded-sm group-hover:bg-slate-900 transition-colors shadow-2xs">
-              BD
-            </div>
-            <span className="text-sm font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">
-              Bamba <span className="text-blue-900 dark:text-blue-400 font-semibold">Dev</span>
+      <div className="boyer-container flex items-center justify-between">
+        
+        {/* LOGO STYLE JONATHAN BOYER */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex items-center gap-3 group cursor-pointer text-left"
+          aria-label="Accueil"
+        >
+          <div className="w-9 h-9 border border-[#d97706] dark:border-[#ffc576] flex items-center justify-center font-serif text-[#b45309] dark:text-[#ffc576] text-base font-bold transition-all duration-300 group-hover:bg-[#d97706] dark:group-hover:bg-[#ffc576] group-hover:text-white dark:group-hover:text-[#1f2235]">
+            BD
+          </div>
+          <div className="flex flex-col">
+            <span className="font-serif text-lg font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-[#d97706] dark:group-hover:text-[#ffc576] transition-colors leading-tight">
+              Bamba Diagne
             </span>
-          </button>
+            <span className="text-[10px] uppercase tracking-widest text-slate-500 dark:text-[#9899a8] font-medium">
+              Portfolio
+            </span>
+          </div>
+        </button>
 
-          {/* DESKTOP NAV LINKS : Style jonathan-boyer.fr */}
-          <div className="hidden md:flex items-center gap-7">
-            <div className="flex items-center gap-5">
-              {navItems.map((item) => (
+        {/* NAVIGATION DESKTOP */}
+        <nav className="hidden md:flex items-center gap-8">
+          <ul className="flex items-center gap-7">
+            {navItems.map((item) => (
+              <li key={item.id}>
                 <button
-                  key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors cursor-pointer"
+                  className="boyer-nav-link text-slate-700 dark:text-white/80 hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors cursor-pointer py-1"
                 >
                   {isEn ? item.en : item.fr}
                 </button>
-              ))}
-            </div>
+              </li>
+            ))}
+          </ul>
 
-            {/* CONTROLES & ACTION */}
-            <div className="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
-              
-              {/* Theme Toggle Button */}
-              <button
-                onClick={toggleTheme}
-                title={theme === "light" ? "Mode Sombre" : "Mode Clair"}
-                className="p-1.5 text-slate-500 hover:text-blue-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
-              >
-                {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
-              </button>
-
-              {/* Language Toggle Button */}
+          <div className="flex items-center gap-4 pl-6 border-l border-slate-200 dark:border-white/10">
+            {/* BOUTON LANGUE */}
+            {toggleLangue && (
               <button
                 onClick={toggleLangue}
-                className="p-1.5 text-slate-500 hover:text-blue-900 dark:text-slate-400 dark:hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+                className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-white/70 hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors p-1"
+                title={isEn ? "Passer en Français" : "Switch to English"}
               >
-                <Languages size={17} />
-                <span className="text-[10px] font-extrabold uppercase">{langue}</span>
+                <Languages size={15} />
+                <span className="uppercase text-[11px] tracking-wider">{langue}</span>
               </button>
+            )}
 
-              {/* CTA CV Button */}
-              <a
-                href="/cv-bamba.pdf"
-                download
-                className="flex items-center gap-1.5 px-4 py-1.5 bg-blue-900 hover:bg-blue-950 text-white text-[11px] font-bold uppercase tracking-wider rounded-sm transition-all shadow-xs active:scale-95 ml-1"
+            {/* BOUTON THÈME LIGHT / DARK */}
+            {toggleTheme && (
+              <button
+                onClick={toggleTheme}
+                title={theme === "light" ? "Mode sombre" : "Mode clair"}
+                className="p-1.5 text-slate-600 dark:text-white/70 hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors cursor-pointer"
+                aria-label="Toggle theme"
               >
-                <Download size={13} />
-                <span>{isEn ? "CV" : "Mon CV"}</span>
-              </a>
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+              </button>
+            )}
 
-            </div>
+            {/* ACTION ME CONTACTER */}
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="btn-boyer"
+            >
+              <span>{isEn ? "Get In Touch" : "Me contacter"}</span>
+              <ArrowRight size={13} className="icon-arrow" />
+            </button>
           </div>
-
-          {/* MOBILE MENU TOGGLE */}
-          <button
-            className="md:hidden p-2 text-slate-900 dark:text-white cursor-pointer"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
         </nav>
+
+        {/* BOUTON MENU MOBILE */}
+        <div className="flex items-center gap-3 md:hidden">
+          {toggleTheme && (
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 text-slate-600 dark:text-white/70 hover:text-[#d97706] dark:hover:text-[#ffc576]"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+          )}
+
+          {toggleLangue && (
+            <button
+              onClick={toggleLangue}
+              className="p-1.5 text-slate-600 dark:text-white/70 hover:text-[#d97706] dark:hover:text-[#ffc576]"
+            >
+              <span className="uppercase text-xs font-bold">{langue}</span>
+            </button>
+          )}
+
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 text-slate-900 dark:text-white hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
-      {/* MOBILE DRAWER MENU */}
+      {/* TIROIR MOBILE */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 p-6 md:hidden shadow-xl"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white dark:bg-[#1f2235] border-b border-slate-200 dark:border-[#ffc576]/20 px-6 py-6 shadow-xl"
           >
-            <div className="flex flex-col gap-5 text-left">
+            <ul className="flex flex-col gap-4 mb-6">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-left text-base font-bold text-slate-900 dark:text-white hover:text-blue-900 dark:hover:text-blue-400"
-                >
-                  {isEn ? item.en : item.fr}
-                </button>
+                <li key={item.id}>
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-left w-full text-sm uppercase font-semibold text-slate-700 dark:text-white/80 hover:text-[#d97706] dark:hover:text-[#ffc576] py-2 border-b border-slate-100 dark:border-white/5"
+                  >
+                    {isEn ? item.en : item.fr}
+                  </button>
+                </li>
               ))}
-              
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center gap-2 text-xs font-bold uppercase text-slate-600 dark:text-slate-300"
-                >
-                  {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-                  {theme === "light" ? (isEn ? "Dark Mode" : "Mode Sombre") : (isEn ? "Light Mode" : "Mode Clair")}
-                </button>
+            </ul>
 
-                <button
-                  onClick={toggleLangue}
-                  className="flex items-center gap-2 text-xs font-bold uppercase text-slate-600 dark:text-slate-300"
-                >
-                  <Languages size={18} />
-                  {isEn ? "Switch to French" : "Passer à l'Anglais"}
-                </button>
-                
-                <a
-                  href="/cv-bamba.pdf"
-                  download
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-blue-900 text-white text-xs font-bold uppercase tracking-wider rounded-sm mt-2"
-                >
-                  <Download size={16} />
-                  {isEn ? "Download CV" : "Télécharger mon CV"}
-                </a>
-              </div>
-            </div>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="btn-boyer w-full justify-center"
+            >
+              <span>{isEn ? "Get In Touch" : "Me contacter"}</span>
+              <ArrowRight size={14} className="icon-arrow" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { ArrowLeft, Github, Sun, Moon, Languages, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Sun, Moon, Languages, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { LangueContext } from '../context/langueContext';
 import { ThemeContext } from '../context/ThemeContext';
@@ -18,7 +18,7 @@ export default function ProjectDetail({ project, allProjects, onBack, onSelectPr
   const toggleLangue = contextLangue?.toggleLangue;
 
   const contextTheme = useContext(ThemeContext);
-  const theme = contextTheme?.theme ?? "light";
+  const theme = contextTheme?.theme ?? "dark";
   const toggleTheme = contextTheme?.toggleTheme;
 
   const isEn = langue === 'en';
@@ -34,251 +34,276 @@ export default function ProjectDetail({ project, allProjects, onBack, onSelectPr
     };
   }, [project, isEn]);
 
-  // Navigation projets précédent / suivant
+  // Indexation pour la pagination précédent / suivant style Jonathan Boyer
   const currentIndex = allProjects.findIndex(p => p.id === project.id);
   const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : allProjects[allProjects.length - 1];
   const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : allProjects[0];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#1f2235] text-slate-900 dark:text-white font-sans transition-colors duration-300">
       
-      {/* NAVBAR STICKY : Style jonathan-boyer.fr + Thème */}
-      <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 py-4 px-6">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
+      {/* HEADER DE NAVIGATION DU PROJET */}
+      <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#1f2235]/95 backdrop-blur-md border-b border-slate-200 dark:border-[#ffc576]/15 py-4">
+        <div className="boyer-container flex items-center justify-between">
           
           <button
             onClick={onBack}
-            className="group flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-blue-900 dark:hover:text-blue-400 transition-colors"
+            className="group flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors cursor-pointer"
           >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            {isEn ? "Réalisations" : "Réalisations"}
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform text-[#d97706] dark:text-[#ffc576]" />
+            <span>{isEn ? "Back to Projects" : "Retour aux réalisations"}</span>
           </button>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             {/* Bouton changement de Thème */}
-            <button
-              onClick={toggleTheme}
-              title={theme === "light" ? "Mode Sombre" : "Mode Clair"}
-              className="p-2 text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors"
-            >
-              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
+            {toggleTheme && (
+              <button
+                onClick={toggleTheme}
+                title={theme === "light" ? "Mode Sombre" : "Mode Clair"}
+                className="p-1.5 text-slate-600 dark:text-white/70 hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors cursor-pointer"
+              >
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+              </button>
+            )}
 
             {/* Bouton changement de Langue */}
             {toggleLangue && (
               <button
                 onClick={toggleLangue}
-                className="p-2 text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors flex items-center gap-1"
+                className="p-1.5 text-slate-600 dark:text-white/70 hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors flex items-center gap-1 text-xs font-semibold"
               >
-                <Languages size={18} />
-                <span className="text-[10px] font-bold">{langue.toUpperCase()}</span>
+                <Languages size={15} />
+                <span className="uppercase text-[11px]">{langue}</span>
               </button>
             )}
 
-            {/* CTA Voir le site */}
+            {/* CTA Voir le site en direct */}
             {project.demo && (
               <a
                 href={project.demo}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 bg-blue-900 hover:bg-blue-950 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-xs"
+                rel="noreferrer"
+                className="btn-boyer !py-1.5 !px-3.5 text-xs hidden sm:inline-flex"
               >
-                <span>{isEn ? "Voir le site" : "Voir le site"}</span>
-                <ArrowRight size={14} />
+                <span>{isEn ? "Visit Site" : "Voir le site"}</span>
+                <ExternalLink size={13} className="ml-1.5" />
               </a>
             )}
           </div>
+
         </div>
       </header>
 
-      <main className="pb-20">
-        
-        {/* PAGE HEADER : Bannière d'en-tête jonathan-boyer.fr */}
-        <section className="relative bg-slate-900 text-white py-16 md:py-24 px-6 overflow-hidden">
-          {/* Image de fond avec overlay sombre */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src={project.image}
-              alt=""
-              className="w-full h-full object-cover opacity-20 blur-sm scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/90 to-slate-900/80" />
-          </div>
+      {/* PAGE HEADER STYLE JONATHAN BOYER */}
+      <section className="relative pt-20 pb-16 border-b border-slate-200 dark:border-[#ffc576]/15 overflow-hidden">
+        {/* Arrière-plan avec dégradé et preview */}
+        <div 
+          className="absolute inset-0 opacity-10 bg-cover bg-center filter blur-xs pointer-events-none"
+          style={{ backgroundImage: `url('${project.image}')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc]/90 via-[#f8fafc] to-[#f8fafc] dark:from-[#1f2235]/80 dark:via-[#1f2235] dark:to-[#1f2235] pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto relative z-10 space-y-6">
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-400">
-                {project.category}
+        <div className="boyer-container relative z-10 text-left">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+            <div>
+              <span className="section__top-title">
+                {project.category} • {isEn ? project.statusEn : project.status}
               </span>
-              <span className="text-slate-600">•</span>
-              <span className={`text-xs font-bold uppercase tracking-widest ${
-                (isEn ? project.statusEn === "In building" : project.status === "En cours")
-                  ? "text-amber-400"
-                  : "text-emerald-400"
-              }`}>
-                {isEn ? project.statusEn : project.status}
-              </span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight mt-1">
                 {isEn ? project.titleEn : project.titleFr}
               </h1>
-
-              <div className="flex items-center gap-3">
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-md active:scale-95 whitespace-nowrap"
-                  >
-                    {isEn ? "Voir le site" : "Voir le site"}
-                    <ArrowRight size={14} />
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-md active:scale-95 whitespace-nowrap"
-                  >
-                    <Github size={14} />
-                    {isEn ? "GitHub" : "GitHub"}
-                  </a>
-                )}
-              </div>
             </div>
 
-            <p className="text-lg sm:text-xl text-slate-300 font-light leading-relaxed max-w-3xl pt-2">
-              {isEn ? project.descriptionEn : project.descriptionFr}
-            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {project.demo && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-boyer"
+                >
+                  <span>{isEn ? "Visit Live Site" : "Voir le site"}</span>
+                  <ArrowRight size={13} className="icon-arrow" />
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-boyer !border-slate-300 dark:!border-white/30 !text-slate-700 dark:!text-white/80 hover:!border-[#d97706] dark:hover:!border-[#ffc576] hover:!text-white dark:hover:!text-[#1f2235]"
+                >
+                  <Github size={14} className="mr-2" />
+                  <span>GitHub</span>
+                </a>
+              )}
+            </div>
           </div>
-        </section>
 
-        {/* BLOCS DE CONTENU : Style .bloc de jonathan-boyer.fr */}
-        <section className="max-w-4xl mx-auto px-6 pt-16 space-y-16">
+          <p className="text-xl sm:text-2xl text-slate-600 dark:text-[#cbd5e1] font-light max-w-3xl leading-relaxed">
+            {isEn ? project.descriptionEn : project.descriptionFr}
+          </p>
+        </div>
+      </section>
+
+      {/* CONTENU PRINCIPAL ÉDITORIAL (BLOCS STYLE BOYER) */}
+      <main className="py-20">
+        <div className="boyer-container space-y-16 text-left">
           
-          {/* BLOC 1 : IMAGE ET PRESENTATION DU DEFI */}
+          {/* BLOC 1 : CAPTURE PLEINE LARGEUR SANS ROGNAGE */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="boyer-card overflow-hidden border border-slate-200 dark:border-[#ffc576]/30 bg-white dark:bg-[#181a29] shadow-xl p-2 sm:p-4"
           >
-            <div className="aspect-video w-full overflow-hidden rounded-md border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-100 dark:bg-slate-900">
+            <div className="w-full overflow-hidden bg-slate-50 dark:bg-[#141622] rounded-xs flex items-center justify-center">
               <img
                 src={project.image}
                 alt={isEn ? project.titleEn : project.titleFr}
-                className={`w-full h-full object-cover ${project.imagePosition === 'top' ? 'object-top' : ''}`}
+                className="w-full h-auto max-h-[640px] object-contain rounded-xs"
               />
             </div>
-
-            {(project.challengeFr || project.challengeEn) && (
-              <div className="grid md:grid-cols-2 gap-8 items-start pt-4">
-                <div className="space-y-3">
-                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-                    {isEn ? "The Challenge" : "Le Défi"}
-                  </h2>
-                  <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                    {isEn ? project.challengeEn : project.challengeFr}
-                  </p>
-                </div>
-
-                {project.solutionFr && (
-                  <div className="space-y-3">
-                    <h2 className="text-xl font-bold text-blue-900 dark:text-blue-400">
-                      {isEn ? "The Solution" : "La Solution"}
-                    </h2>
-                    <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                      {isEn ? project.solutionEn : project.solutionFr}
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
           </motion.div>
 
-          {/* BLOC 2 : FONCTIONNALITES CLES & STACK TECHNIQUE */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-12 pt-8 border-t border-slate-100 dark:border-slate-800/80"
-          >
-            {/* Liste des fonctionnalités */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-                {isEn ? "Key Features" : "Fonctionnalités principales"}
-              </h2>
-              <ul className="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
-                {(isEn ? project.featuresEn : project.featuresFr).map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="text-blue-900 dark:text-blue-400 font-bold">•</span>
-                    <span>{feature}</span>
-                  </li>
+          {/* BLOC 2 : COLONNES DÉFI & SOLUTION TECHNIQUE */}
+          {(project.challengeFr || project.solutionFr) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              {/* Le Défi */}
+              <div className="bg-white dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/25 p-8 rounded-sm shadow-xs">
+                <span className="section__top-title">
+                  {isEn ? "The Challenge" : "La problématique"}
+                </span>
+                <h2 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                  {isEn ? "Goals & Technical Context" : "Contexte & Objectifs"}
+                </h2>
+                <p className="text-base text-slate-600 dark:text-[#9899a8] leading-relaxed">
+                  {isEn ? project.challengeEn : project.challengeFr}
+                </p>
+              </div>
+
+              {/* La Solution */}
+              <div className="bg-white dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/25 p-8 rounded-sm shadow-xs">
+                <span className="section__top-title">
+                  {isEn ? "The Solution" : "L'Approche Technique"}
+                </span>
+                <h2 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                  {isEn ? "Architecture & Stack" : "Architecture & Choix"}
+                </h2>
+                <p className="text-base text-slate-600 dark:text-[#9899a8] leading-relaxed">
+                  {isEn ? project.solutionEn : project.solutionFr}
+                </p>
+              </div>
+
+            </div>
+          )}
+
+          {/* BLOC 3 : FONCTIONNALITÉS CLÉS & TECHNOLOGIES */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Colonne Fonctionnalités */}
+            <div className="lg:col-span-8 bg-white dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/25 p-8 sm:p-10 rounded-sm space-y-6 shadow-xs">
+              <div>
+                <span className="section__top-title">
+                  {isEn ? "Capabilities" : "Fonctionnalités"}
+                </span>
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+                  {isEn ? "Key Features Implemented" : "Points Clés Réalisés"}
+                </h2>
+              </div>
+
+              <div className="space-y-4 pt-2">
+                {(isEn ? project.featuresEn : project.featuresFr).map((feature, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 size={18} className="text-[#d97706] dark:text-[#ffc576] shrink-0 mt-1" />
+                    <span className="text-base text-slate-700 dark:text-[#cbd5e1] leading-relaxed font-normal">
+                      {feature}
+                    </span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            {/* Stack technique */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-                {isEn ? "Tech Stack" : "Environnement Technique"}
-              </h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-                {isEn 
-                  ? "Technologies and libraries leveraged to build and deploy this project."
-                  : "Technologies et outils utilisés pour concevoir, développer et déployer ce projet."}
-              </p>
-              <div className="flex flex-wrap gap-2">
+            {/* Colonne Stack Technique */}
+            <div className="lg:col-span-4 bg-white dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/25 p-8 rounded-sm space-y-6 shadow-xs">
+              <div>
+                <span className="section__top-title">
+                  {isEn ? "Stack" : "Technologies"}
+                </span>
+                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">
+                  {isEn ? "Tech Stack" : "Environnement"}
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-2 pt-2">
                 {project.technologies.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded-sm"
+                    className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 bg-slate-100 dark:bg-[#1f2235] text-[#b45309] dark:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/30 rounded-xs"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
+
+              <div className="pt-6 border-t border-slate-100 dark:border-white/10 space-y-3">
+                <div className="text-xs text-slate-500 dark:text-[#9899a8]">
+                  <span className="text-slate-900 dark:text-white font-bold block mb-1">
+                    {isEn ? "Category:" : "Catégorie :"}
+                  </span>
+                  <span>{project.category}</span>
+                </div>
+                <div className="text-xs text-slate-500 dark:text-[#9899a8]">
+                  <span className="text-slate-900 dark:text-white font-bold block mb-1">
+                    {isEn ? "Status:" : "Statut :"}
+                  </span>
+                  <span className="text-[#b45309] dark:text-[#ffc576] font-semibold">
+                    {isEn ? project.statusEn : project.status}
+                  </span>
+                </div>
+              </div>
             </div>
-          </motion.div>
-
-        </section>
-
-        {/* PAGINATION EN BAS : Style jonathan-boyer.fr */}
-        <nav className="max-w-4xl mx-auto px-6 mt-20 pt-10 border-t border-slate-100 dark:border-slate-800">
-          <div className="flex items-center justify-between">
-            
-            <button
-              onClick={() => onSelectProject(prevProject)}
-              className="group text-left space-y-1 hover:text-blue-900 dark:hover:text-blue-400 transition-colors"
-            >
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">
-                {isEn ? "Projet précédent" : "Projet précédent"}
-              </span>
-              <strong className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-900 dark:group-hover:text-blue-400 transition-colors block">
-                {isEn ? prevProject.titleEn : prevProject.titleFr}
-              </strong>
-            </button>
-
-            <button
-              onClick={() => onSelectProject(nextProject)}
-              className="group text-right space-y-1 hover:text-blue-900 dark:hover:text-blue-400 transition-colors"
-            >
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">
-                {isEn ? "Projet suivant" : "Projet suivant"}
-              </span>
-              <strong className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-900 dark:group-hover:text-blue-400 transition-colors block">
-                {isEn ? nextProject.titleEn : nextProject.titleFr}
-              </strong>
-            </button>
 
           </div>
-        </nav>
 
+          {/* BARRE DE PAGINATION EXACTE STYLE JONATHAN BOYER */}
+          <div className="pt-10 border-t border-slate-200 dark:border-[#ffc576]/20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+              {/* Projet précédent */}
+              <button
+                onClick={() => onSelectProject(prevProject)}
+                className="boyer-card p-6 text-left group cursor-pointer border border-slate-200 dark:border-[#ffc576]/30 hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all"
+              >
+                <span className="section__top-title !text-xs !mb-1 flex items-center gap-1.5">
+                  <ArrowLeft size={13} className="text-[#d97706] dark:text-[#ffc576] group-hover:-translate-x-1 transition-transform" />
+                  {isEn ? "Previous Project" : "Projet précédent"}
+                </span>
+                <strong className="font-serif text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors block mt-1">
+                  {isEn ? prevProject.titleEn : prevProject.titleFr}
+                </strong>
+              </button>
+
+              {/* Projet suivant */}
+              <button
+                onClick={() => onSelectProject(nextProject)}
+                className="boyer-card p-6 text-right group cursor-pointer border border-slate-200 dark:border-[#ffc576]/30 hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all"
+              >
+                <span className="section__top-title !text-xs !mb-1 flex items-center justify-end gap-1.5">
+                  {isEn ? "Next Project" : "Projet suivant"}
+                  <ArrowRight size={13} className="text-[#d97706] dark:text-[#ffc576] group-hover:translate-x-1 transition-transform" />
+                </span>
+                <strong className="font-serif text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors block mt-1">
+                  {isEn ? nextProject.titleEn : nextProject.titleFr}
+                </strong>
+              </button>
+
+            </div>
+          </div>
+
+        </div>
       </main>
+
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { User, Heart, Code, Zap, CheckCircle2 } from 'lucide-react';
+import { Code, Zap, CheckCircle2, ShieldCheck, Layers } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from "framer-motion";
@@ -9,116 +9,148 @@ export default function About() {
 
   const values = [
     {
-      icon: <Code size={22} className="text-blue-900 dark:text-blue-400" />,
-      title: isEn ? 'Quality Code' : 'Code de qualité',
-      desc: isEn ? 'I follow industry best practices and write maintainable, scalable applications.' : 'Je respecte les meilleures pratiques et développe des applications propres et maintenables.'
+      icon: <Code size={22} className="text-[#d97706] dark:text-[#ffc576]" />,
+      title: isEn ? 'Clean Code & Architecture' : 'Code propre & Architecture',
+      desc: isEn 
+        ? 'I write modular, maintainable, and typed code following SOLID principles and design patterns.' 
+        : 'Je conçois des architectures modulaires, typées et maintenables dans le respect des bonnes pratiques de clean code.'
     },
     {
-      icon: <Zap size={22} className="text-blue-900 dark:text-blue-400" />,
-      title: isEn ? 'Performance & SEO' : 'Performance & SEO',
-      desc: isEn ? 'Fast loading speeds, smooth UX, and search engine optimization by default.' : 'Applications ultra-rapides, UX fluide et optimisation SEO intégrée dès la conception.'
+      icon: <Zap size={22} className="text-[#d97706] dark:text-[#ffc576]" />,
+      title: isEn ? 'Performance & Core Web Vitals' : 'Performance & Vitesse',
+      desc: isEn 
+        ? 'Instant rendering, bundle optimization, SSR/SSG caching, and ultra-smooth fluid navigation.' 
+        : 'Temps de chargement minimaux, optimisation des bundles, SSR/SSG et fluidité totale des interactions.'
     },
     {
-      icon: <Heart size={22} className="text-blue-900 dark:text-blue-400" />,
-      title: isEn ? 'Continuous Learning' : 'Passion & Apprentissage',
-      desc: isEn ? 'Passionate about web & mobile tech, constantly expanding my technical stack.' : 'Passionné par l’écosystème web et mobile, constamment en veille technologique.'
+      icon: <Layers size={22} className="text-[#d97706] dark:text-[#ffc576]" />,
+      title: isEn ? 'Fullstack & Mobile Versatility' : 'Polyvalence Web & Mobile',
+      desc: isEn 
+        ? 'From relational schemas and REST APIs to mobile apps and modern reactive interfaces.' 
+        : 'De la modélisation de base de données aux APIs REST jusqu’aux interfaces web Next.js et applications mobiles React Native.'
     },
     {
-      icon: <User size={22} className="text-blue-900 dark:text-blue-400" />,
-      title: isEn ? 'Teamwork & Agility' : 'Collaboration Agile',
-      desc: isEn ? 'Effective communication, version control discipline, and agile project flow.' : 'Communication fluide, rigueur sur Git et travail d’équipe efficace en méthode agile.'
+      icon: <ShieldCheck size={22} className="text-[#d97706] dark:text-[#ffc576]" />,
+      title: isEn ? 'Production Rigor & Delivery' : 'Rigueur & Déploiement',
+      desc: isEn 
+        ? 'Git discipline, Docker containerization, automated testing, and CI/CD pipelines.' 
+        : 'Discipline Git, conteneurisation Docker, vérifications strictes et déploiement reproductible en production.'
     }
   ];
 
   const highlights = [
-    isEn ? "Xarala Academy Certified Developer" : "Développeur certifié Xarala Academy",
-    isEn ? "Fullstack JavaScript Mastery (React / Next.js / Node.js)" : "Maîtrise complète de l'écosystème JavaScript (React / Next.js / Node.js)",
-    isEn ? "Cross-platform Mobile Development (React Native & Expo)" : "Développement mobile multiplateforme (React Native & Expo)",
-    isEn ? "Relational Databases & ORMs (MySQL, PostgreSQL, Prisma)" : "Bases de données relationnelles & ORMs (MySQL, PostgreSQL, Prisma)"
+    isEn ? "Fullstack JavaScript / TypeScript (Next.js 14/15, React 18/19, Node.js)" : "Fullstack JavaScript / TypeScript (Next.js, React, Node.js, NestJS)",
+    isEn ? "Cross-platform mobile apps with React Native & Expo" : "Développement mobile multiplateforme avec React Native & Expo",
+    isEn ? "Enterprise Backend with Java Spring Boot & Python Django" : "Développement d'APIs robustes en Java Spring Boot & Python Django",
+    isEn ? "Relational databases & ORMs (PostgreSQL, MySQL, Prisma)" : "Bases de données relationnelles & ORMs (PostgreSQL, MySQL, Prisma)",
+    isEn ? "Docker, Linux & Cloud deployment (Vercel, Railway, Docker Compose)" : "Conteneurisation Docker & déploiement Cloud (Vercel, Railway, Docker)"
   ];
 
   return (
-    <section id="about" className="py-20 bg-slate-50/50 dark:bg-slate-950/40 text-slate-900 dark:text-white transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="about" className="py-24 bg-white dark:bg-[#1f2235] text-slate-900 dark:text-white border-t border-slate-200 dark:border-[#ffc576]/10 transition-colors duration-300">
+      <div className="boyer-container">
         
-        {/* Header Section : Style jonathan-boyer.fr */}
-        <div className="mb-12 text-left">
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2">
+        {/* EN-TÊTE DE SECTION STYLE JONATHAN BOYER */}
+        <div className="mb-14 text-left">
+          <span className="section__top-title">
             {isEn ? "About Me" : "À propos"}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="section__title">
             {isEn ? "My Journey & Philosophy" : "Mon Parcours & Philosophie"}
           </h2>
         </div>
 
-        {/* Grille Asymétrique : Texte de présentation et points forts */}
+        {/* PRÉSENTATION & STATS */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start mb-16">
-          
           <motion.div 
-            className="lg:col-span-7 space-y-4 text-left"
+            className="lg:col-span-7 space-y-5 text-left text-slate-600 dark:text-[#9899a8] leading-relaxed text-base sm:text-lg"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
           >
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              {isEn
-                ? "Fullstack and Mobile developer trained at Xarala Academy, I have built solid expertise across the modern JavaScript & TypeScript ecosystem through concrete projects and real-world company internships."
-                : "Développeur fullstack et mobile formé chez Xarala Academy, j'ai acquis une solide expertise de l'écosystème JavaScript & TypeScript à travers des projets d'application concrets et des stages en entreprise."}
+            <p>
+              {isEn ? (
+                <>
+                  Passionate about software engineering and developer tooling, I have worked on real-world production projects ranging from high-traffic e-learning platforms (<strong className="text-slate-900 dark:text-white">Xarala Academy</strong>) to inventory & POS management systems and enterprise applications.
+                </>
+              ) : (
+                <>
+                  Passionné par l’ingénierie logicielle et le développement d'interfaces modernes, j'interviens sur des applications concrètes en production, allant de plateformes e-learning à fort trafic (<strong className="text-slate-900 dark:text-white">Xarala Academy</strong>, 40 000+ apprenants) à des systèmes de gestion commerciale (POS, stocks) et des applications mobiles complètes.
+                </>
+              )}
             </p>
-            
-            <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              {isEn
-                ? "My philosophy centers on technical rigor, clean architecture, and intuitive design to solve complex business problems."
-                : "Ma philosophie repose sur la rigueur technique, la propreté de l'architecture et la simplicité du design pour transformer vos besoins complexes en produits numériques simples et performants."}
+            <p>
+              {isEn ? (
+                <>
+                  My approach focuses on creating <strong className="text-slate-900 dark:text-white">maintainable architectures</strong>, writing clean readable code, and ensuring every interface provides exceptional user experiences with optimal performance.
+                </>
+              ) : (
+                <>
+                  Ma démarche repose sur deux exigences clés : une <strong className="text-slate-900 dark:text-white">architecture technique robuste</strong> (Next.js, TypeScript, APIs REST / GraphQL) et une <strong className="text-slate-900 dark:text-white">expérience utilisateur irréprochable</strong>, ergonomique et réactive.
+                </>
+              )}
             </p>
-          </motion.div>
 
-          <motion.div 
-            className="lg:col-span-5 bg-white dark:bg-slate-900 p-6 rounded-md border border-slate-200/80 dark:border-slate-800 shadow-xs"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
-              {isEn ? "Key Highlights" : "Points forts"}
-            </h3>
-
-            <ul className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-              {highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-2.5">
-                  <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span className="font-medium">{h}</span>
-                </li>
+            {/* Checklist des atouts clés */}
+            <div className="pt-4 space-y-2.5">
+              {highlights.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <CheckCircle2 size={18} className="text-[#d97706] dark:text-[#ffc576] shrink-0 mt-1" />
+                  <span className="text-sm font-medium text-slate-700 dark:text-[#cbd5e1]">{item}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </motion.div>
 
+          {/* COLONNE STATS & CHIFFRES CLÉS */}
+          <motion.div 
+            className="lg:col-span-5 grid grid-cols-2 gap-4"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+          >
+            {[
+              { num: "3+", label: isEn ? "Years of active coding" : "Années de pratique active" },
+              { num: "10+", label: isEn ? "Shipped projects" : "Projets complets livrés" },
+              { num: "100%", label: isEn ? "Client satisfaction" : "Engagement & rigueur" },
+              { num: "40k+", label: isEn ? "Platform learners impacted" : "Utilisateurs sur plateformes" }
+            ].map((stat, i) => (
+              <div 
+                key={i} 
+                className="bg-slate-50 dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/25 p-6 rounded-sm text-left hover:border-[#d97706] dark:hover:border-[#ffc576] transition-colors group shadow-xs"
+              >
+                <div className="font-serif text-3xl sm:text-4xl font-bold text-[#b45309] dark:text-[#ffc576] group-hover:scale-105 transition-transform duration-300">
+                  {stat.num}
+                </div>
+                <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-[#9899a8] mt-2 font-medium">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* Grille 4 Valeurs (Alignée à gauche) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-          {values.map((value, index) => (
-            <motion.div 
-              key={index}
+        {/* GRILLE DES 4 VALEURS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {values.map((val, idx) => (
+            <motion.div
+              key={idx}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="p-6 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-md flex flex-col justify-between space-y-4 hover:border-blue-900/30 transition-all shadow-xs"
+              transition={{ delay: idx * 0.1 }}
+              className="bg-slate-50 dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/20 p-6 rounded-sm hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all duration-300 text-left group shadow-xs"
             >
-              <div className="space-y-3">
-                <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-sm w-fit border border-slate-100 dark:border-slate-700">
-                  {value.icon}
-                </div>
-                <h4 className="text-base font-bold text-slate-900 dark:text-white">
-                  {value.title}
-                </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {value.desc}
-                </p>
+              <div className="w-12 h-12 rounded-xs border border-[#d97706]/30 dark:border-[#ffc576]/40 flex items-center justify-center mb-5 bg-white dark:bg-[#1f2235] group-hover:border-[#d97706] dark:group-hover:border-[#ffc576] group-hover:bg-[#d97706]/10 dark:group-hover:bg-[#ffc576]/10 transition-colors">
+                {val.icon}
               </div>
+              <h3 className="font-serif text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors">
+                {val.title}
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-[#9899a8] leading-relaxed">
+                {val.desc}
+              </p>
             </motion.div>
           ))}
         </div>

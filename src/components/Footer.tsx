@@ -1,69 +1,66 @@
-import { Heart, Code, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 
 export default function Footer() {
   const langueContext = useContext(LangueContext);
   const langue = langueContext?.langue ?? "fr";
-  
+  const isEn = langue === 'en';
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="bg-blue-900 text-white pt-20 pb-10">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col items-center">
-          
-          {/* Logo / Nom */}
-          <div className="flex items-center gap-3 mb-6 group cursor-default">
-            <div className="w-10 h-10 border border-blue-700 flex items-center justify-center rotate-45 group-hover:rotate-0 transition-transform duration-500">
-              <Code size={20} className="-rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-            </div>
-            <span className="text-xl font-bold tracking-tighter uppercase">
-              Bamba <span className="text-blue-400">Diagne</span>
-            </span>
-          </div>
-
-          {/* Description courte */}
-          <p className="text-blue-200/60 max-w-md text-center text-sm leading-relaxed mb-10">
-            {langue === 'fr'
-              ? "Architecte de solutions digitales, spécialisé dans le développement d'interfaces modernes et performantes au Sénégal."
-              : "Digital solutions architect, specialized in developing modern and high-performance interfaces in Senegal."}
+    <footer className="bg-white dark:bg-[#1f2235] border-t border-slate-200 dark:border-[#ffc576]/20 text-slate-500 dark:text-[#9899a8] py-12 transition-colors duration-300">
+      <div className="boyer-container flex flex-col sm:flex-row items-center justify-between gap-6">
+        
+        {/* CRÉDITS STYLE JONATHAN BOYER */}
+        <div className="text-center sm:text-left text-xs font-medium space-y-1">
+          <p className="text-slate-700 dark:text-[#cbd5e1]">
+            {isEn 
+              ? "Design inspired by Jonathan Boyer — Integration & Development by" 
+              : "Design inspiré par Jonathan Boyer — Intégration & développement par"}{" "}
+            <span className="text-[#b45309] dark:text-[#ffc576] font-semibold">Mouhamadou Bamba Diagne</span>
           </p>
-
-          {/* Liens Sociaux Discrets */}
-          <div className="flex gap-8 mb-12">
-            {[
-              { icon: <Github size={20} />, href: "https://github.com/Bamba24/" },
-              { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/mouhamadou-bamba-diagne-59063a247/" },
-              { icon: <Mail size={20} />, href: "mailto:gameurbamba68@gmail.com" }
-            ].map((social, i) => (
-              <a 
-                key={i} 
-                href={social.href} 
-                target="_blank" 
-                className="text-blue-200/50 hover:text-white hover:-translate-y-1 transition-all duration-300"
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
-
-          {/* Copyright & Crédits */}
-          <div className="w-full pt-8 border-t border-blue-800/50 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-blue-200/40">
-            <p>
-              © {currentYear} — {langue === 'fr' ? 'Tous droits réservés' : 'All rights reserved'}
-            </p>
-            
-            <div className="flex items-center gap-2">
-              <span>{langue === 'fr' ? 'Propulsé par' : 'Powered by'}</span>
-              <div className="flex items-center gap-1.5 bg-blue-800/30 px-3 py-1 rounded-full">
-                <Heart size={10} className="text-red-500 fill-red-500" />
-                <span className="text-blue-200/60">React & Next.js</span>
-              </div>
-            </div>
-          </div>
-          
+          <p className="text-slate-500 dark:text-[#9899a8] text-[11px]">
+            © {currentYear} • {isEn ? "All rights reserved" : "Tous droits réservés"}
+          </p>
         </div>
+
+        {/* LIENS SOCIAUX RAPIDES & RETOUR EN HAUT */}
+        <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 text-xs font-semibold uppercase tracking-wider">
+            <a 
+              href="https://github.com/Bamba24" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+            >
+              GitHub
+            </a>
+            <span className="text-slate-300 dark:text-white/10">•</span>
+            <a 
+              href="https://www.linkedin.com/in/mouhamadou-bamba-diagne-59063a247/" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            title={isEn ? "Back to top" : "Retour en haut"}
+            className="w-9 h-9 border border-slate-300 dark:border-[#ffc576]/40 flex items-center justify-center text-[#b45309] dark:text-[#ffc576] hover:bg-[#d97706] dark:hover:bg-[#ffc576] hover:text-white dark:hover:text-[#1f2235] transition-all rounded-xs ml-2 cursor-pointer shadow-2xs"
+            aria-label="Back to top"
+          >
+            <ArrowUp size={16} />
+          </button>
+        </div>
+
       </div>
     </footer>
   );

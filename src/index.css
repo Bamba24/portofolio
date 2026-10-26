@@ -1,12 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-yellow: #ffc576;
+  --color-yellow-hover: #fdbb60;
+  --color-background: #1f2235;
+  --color-background-light: #313552;
+  --color-social: #2c304a;
+  --container-width: 1140px;
+}
+
+html:not(.dark) {
+  --color-yellow: #d97706;
+  --color-yellow-hover: #b45309;
+  --color-background: #f8fafc;
+  --color-background-light: #ffffff;
+  --color-social: #f1f5f9;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-interpolation-filters: sRGB;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -14,29 +30,212 @@
   
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html.dark body {
+    background-color: #1f2235;
+    color: #ffffff;
+  }
+
+  html:not(.dark) body {
+    background-color: #f8fafc;
     color: #0f172a;
   }
 
-  .font-serif-title {
-    font-family: 'Playfair Display', Georgia, serif;
+  ::selection {
+    color: #1f2235;
+    background: #ffc576;
+  }
+
+  html:not(.dark) ::selection {
+    color: #ffffff;
+    background: #d97706;
+  }
+
+  /* Scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  html.dark ::-webkit-scrollbar-track {
+    background: #1f2235;
+  }
+
+  html.dark ::-webkit-scrollbar-thumb {
+    background: #313552;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 197, 118, 0.2);
+  }
+
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #ffc576;
+  }
+
+  html:not(.dark) ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  html:not(.dark) ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+    border: 1px solid rgba(217, 119, 6, 0.2);
+  }
+
+  html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
   }
 }
 
 @layer components {
-  .section-padding {
-    @apply py-20 px-6 sm:px-8 lg:px-12;
-  }
-  
-  .container-max {
-    @apply max-w-5xl mx-auto;
+  /* Bouton signature Jonathan Boyer (Compatible Dark & Light) */
+  .btn-boyer {
+    cursor: pointer;
+    color: #ffc576;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 197, 118, 0.75);
+    border-radius: 2px;
+    align-items: center;
+    padding: 8px 26px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    text-decoration: none !important;
+    background: transparent;
   }
 
-  .section-subtitle {
-    @apply text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block;
+  .btn-boyer:hover {
+    background-color: #ffc576;
+    color: #1f2235 !important;
+    box-shadow: 0 4px 15px rgba(255, 197, 118, 0.25);
   }
 
-  .section-title {
-    @apply text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-10;
+  html:not(.dark) .btn-boyer {
+    color: #b45309;
+    border: 1px solid #d97706;
   }
+
+  html:not(.dark) .btn-boyer:hover {
+    background-color: #d97706;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.25);
+  }
+
+  .btn-boyer .icon-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    margin-left: 6px;
+  }
+
+  .btn-boyer:hover .icon-arrow {
+    transform: translateX(5px);
+  }
+
+  /* Titres de section */
+  .section__top-title {
+    text-transform: uppercase;
+    color: #ffc576;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+    display: inline-block;
+  }
+
+  html:not(.dark) .section__top-title {
+    color: #b45309;
+  }
+
+  .section__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #ffffff;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  html:not(.dark) .section__title {
+    color: #0f172a;
+  }
+
+  /* Cartes Boyer */
+  .boyer-card {
+    background-color: #313552;
+    border-radius: 6px 6px 0 0;
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 1px rgba(255, 197, 118, 0.75);
+  }
+
+  .boyer-card:hover {
+    box-shadow: 0 5px rgba(255, 197, 118, 0.95);
+    transform: translateY(-2px);
+  }
+
+  html:not(.dark) .boyer-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05), 0 1px #d97706;
+  }
+
+  html:not(.dark) .boyer-card:hover {
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15), 0 5px #d97706;
+    border-color: #d97706;
+  }
+
+  /* Liens de navigation avec soulignement animé */
+  .boyer-nav-link {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: color 0.3s ease;
+  }
+
+  .boyer-nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffc576;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html:not(.dark) .boyer-nav-link::before {
+    background-color: #d97706;
+  }
+
+  .boyer-nav-link:hover::before,
+  .boyer-nav-link.active::before {
+    width: 100%;
+  }
+
+  .boyer-container {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 25s linear infinite;
 }

@@ -1,4 +1,4 @@
-import { Award, CheckCircle2, GraduationCap } from 'lucide-react';
+import { CheckCircle2, GraduationCap, Calendar, MapPin } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from 'framer-motion';
@@ -38,16 +38,16 @@ export default function Education() {
       achievements: [
         'Maîtrise approfondie des structures de données et de la programmation orientée objet',
         'Conception d\'APIs et de scripts backend en Python',
-        'Résolution de problèmes algorithmiques et développement backend'
+        'Résolution de problèmes algorithmiques et automatisation'
       ],
       achievementsEn: [
         'In-depth mastery of Python data structures and object-oriented programming',
         'Designing Python backend APIs and automation scripts',
-        'Algorithmic problem-solving and backend development'
+        'Algorithmic problem-solving and automation'
       ]
     },
     {
-      degreeFr: 'Formation Développeur Fullstack & Mobile',
+      degreeFr: 'Certification Développeur Fullstack & Mobile',
       degreeEn: 'Fullstack & Mobile Developer Certification',
       school: 'Xarala Academy',
       location: 'Dakar / En ligne, Sénégal',
@@ -55,15 +55,15 @@ export default function Education() {
       descriptionFr: 'Formation d\'excellence intensive axée sur la maîtrise de l\'écosystème JavaScript, TypeScript, React, Next.js, Node.js, NestJS et React Native.',
       descriptionEn: 'Intensive excellence training focused on mastering JavaScript, TypeScript, React, Next.js, Node.js, NestJS, and React Native.',
       achievements: [
-        'Réalisation complète de projets Web et Mobile',
-        'Maîtrise de JavaScript, TypeScript et des fondamentaux web',
+        'Réalisation complète de projets Web et Mobile d\'envergure',
+        'Maîtrise de JavaScript, TypeScript et des fondamentaux web modernes',
         'Développement Frontend avec React, Next.js & TailwindCSS',
         'Développement Backend avec Node.js, NestJS, Prisma & MySQL',
         'Développement Mobile multiplateforme avec React Native & Expo'
       ],
       achievementsEn: [
-        'Full implementation of Web and Mobile projects',
-        'Mastery of JavaScript, TypeScript, and web core fundamentals',
+        'Full implementation of production-grade Web and Mobile projects',
+        'Mastery of JavaScript, TypeScript, and modern web foundations',
         'Frontend Development with React, Next.js & TailwindCSS',
         'Backend Development with Node.js, NestJS, Prisma & MySQL',
         'Cross-platform Mobile Development with React Native & Expo'
@@ -71,147 +71,88 @@ export default function Education() {
     }
   ];
 
-  const certifications = [
-    {
-      titleFr: 'Développeur Certifié Xarala Academy',
-      titleEn: 'Xarala Academy Certified Developer',
-      issuer: 'Xarala Academy',
-      date: 'Juillet 2025',
-      descriptionFr: 'Certification officielle validant les compétences en développement Fullstack JS et Mobile.',
-      descriptionEn: 'Official certification validating Fullstack JS & Mobile development skills.'
-    },
-    {
-      titleFr: 'Comprendre le Web',
-      titleEn: 'Understanding the Web',
-      issuer: 'OpenClassrooms',
-      date: '2023',
-      descriptionFr: 'Certification sur les serveurs, protocoles HTTP, clients et architecture web.',
-      descriptionEn: 'Certification covering servers, HTTP protocols, clients, and web architecture.'
-    },
-    {
-      titleFr: 'Apprenez à programmer avec JavaScript',
-      titleEn: 'Learn to Program with JavaScript',
-      issuer: 'OpenClassrooms',
-      date: '2023',
-      descriptionFr: 'Certification sur les algorithmes, la logique de programmation et les bases de JavaScript.',
-      descriptionEn: 'Certification covering algorithms, programming logic, and JavaScript fundamentals.'
-    },
-    {
-      titleFr: 'Créez des pages web dynamiques avec JavaScript',
-      titleEn: 'Create Dynamic Web Pages with JavaScript',
-      issuer: 'OpenClassrooms',
-      date: '2023',
-      descriptionFr: 'Certification sur la manipulation du DOM, les événements et l\'interactivité web.',
-      descriptionEn: 'Certification covering DOM manipulation, event handling, and web interactivity.'
-    },
-    {
-      titleFr: 'Créez votre site web avec HTML5 et CSS3',
-      titleEn: 'Build Your Website with HTML5 and CSS3',
-      issuer: 'OpenClassrooms',
-      date: '2022',
-      descriptionFr: 'Certification sur la sémantique HTML5, le CSS3 et le responsive design.',
-      descriptionEn: 'Certification covering HTML5 semantics, CSS3, and responsive design.'
-    }
-  ];
-
   return (
-    <section id="education" className="py-20 bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-6">
+    <section 
+      id="education" 
+      className="py-24 bg-slate-100/70 dark:bg-[#313552] text-slate-900 dark:text-white border-t border-slate-200 dark:border-[#ffc576]/15 relative transition-colors duration-300"
+    >
+      <div className="boyer-container">
         
-        {/* Header Section : Style jonathan-boyer.fr */}
-        <div className="mb-12 text-left">
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2">
-            {isEn ? "Diplomas & Credentials" : "Diplômes & Certifications"}
+        {/* EN-TÊTE DE SECTION */}
+        <div className="mb-16 text-left">
+          <span className="section__top-title">
+            {isEn ? "Academics & Certifications" : "Formations & Certifications"}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            {isEn ? "Education & Certifications" : "Formation & Diplômes"}
+          <h2 className="section__title !mb-3">
+            {isEn ? "Education & Specializations" : "Formations d'Excellence"}
           </h2>
+          <p className="text-slate-600 dark:text-[#cbd5e1] text-base sm:text-lg max-w-xl">
+            {isEn
+              ? "Comprehensive software engineering programs, specialized training, and tech certifications."
+              : "Parcours de formations intensives et certifiantes en ingénierie logicielle."}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          
-          {/* PARCOURS ACADEMIQUE (Col 7) */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-              <GraduationCap size={16} className="text-blue-900 dark:text-blue-400" />
-              <span>{isEn ? 'Academic Training' : 'Parcours Académique'}</span>
-            </h3>
-
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="p-7 bg-slate-50/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 rounded-md relative overflow-hidden space-y-4 shadow-xs"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 dark:border-slate-800 pb-4">
-                  <div>
-                    <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
-                      {isEn ? edu.degreeEn : edu.degreeFr}
-                    </h4>
-                    <p className="text-sm font-semibold text-blue-900 dark:text-blue-400">
-                      {edu.school} • <span className="text-slate-400 font-normal">{edu.location}</span>
-                    </p>
+        {/* GRILLE DES FORMATIONS */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {education.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="p-8 border border-slate-200 dark:border-[#ffc576]/30 bg-white dark:bg-[#1f2235]/70 hover:bg-white dark:hover:bg-[#1f2235] hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all duration-300 rounded-sm text-left flex flex-col justify-between group shadow-sm dark:shadow-lg"
+            >
+              <div>
+                {/* Icône & École */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-slate-50 dark:bg-[#313552] rounded-xs border border-slate-200 dark:border-[#ffc576]/30 text-[#d97706] dark:text-[#ffc576] group-hover:scale-105 transition-transform">
+                    <GraduationCap size={24} />
                   </div>
-                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-sm w-fit">
-                    {edu.period}
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#b45309] dark:text-[#ffc576] flex items-center gap-1.5 bg-slate-100 dark:bg-[#313552] px-3 py-1 rounded-xs border border-slate-200 dark:border-white/5">
+                    <Calendar size={12} />
+                    {item.period}
                   </span>
                 </div>
 
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                  {isEn ? edu.descriptionEn : edu.descriptionFr}
+                {/* Nom de la formation (Playfair Display) */}
+                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors leading-snug">
+                  {isEn ? item.degreeEn : item.degreeFr}
+                </h3>
+
+                {/* Institution & Localisation */}
+                <div className="flex items-center gap-2 text-sm text-[#b45309] dark:text-[#ffc576] mb-5 font-semibold">
+                  <span>{item.school}</span>
+                  <span className="text-slate-300 dark:text-white/20">•</span>
+                  <span className="text-slate-500 dark:text-[#9899a8] font-normal flex items-center gap-1">
+                    <MapPin size={13} />
+                    {item.location}
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm text-slate-600 dark:text-[#9899a8] leading-relaxed mb-6">
+                  {isEn ? item.descriptionEn : item.descriptionFr}
                 </p>
 
-                <div className="space-y-2 pt-2">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    {isEn ? "Acquired Skills:" : "Compétences clés acquises :"}
-                  </p>
-                  <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                    {(isEn ? edu.achievementsEn : edu.achievements).map((ach, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
-                        <span>{ach}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Compétences acquises */}
+                <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-white/5">
+                  {(isEn ? item.achievementsEn : item.achievements).map((ach, aIdx) => (
+                    <div key={aIdx} className="flex items-start gap-2.5">
+                      <CheckCircle2 size={15} className="text-[#d97706] dark:text-[#ffc576] shrink-0 mt-0.5" />
+                      <span className="text-xs text-slate-700 dark:text-[#cbd5e1] leading-relaxed">
+                        {ach}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
 
-          {/* CERTIFICATIONS (Col 5) */}
-          <div className="lg:col-span-5 space-y-6 text-left">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-              <Award size={16} className="text-blue-900 dark:text-blue-400" />
-              <span>{isEn ? 'Certifications' : 'Certifications'}</span>
-            </h3>
-
-            <div className="space-y-3">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="p-4 bg-slate-50/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 rounded-md flex items-center justify-between hover:border-blue-900/30 dark:hover:border-blue-500/30 transition-all shadow-xs"
-                >
-                  <div className="pr-4 space-y-1">
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                      {isEn ? cert.titleEn : cert.titleFr}
-                    </h4>
-                    <p className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
-                      {cert.issuer} • <span className="text-blue-900 dark:text-blue-400">{cert.date}</span>
-                    </p>
-                  </div>
-                  <div className="w-2 h-2 rounded-full bg-blue-900 dark:bg-blue-400 shrink-0"></div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
+            </motion.div>
+          ))}
         </div>
+
       </div>
     </section>
   );
