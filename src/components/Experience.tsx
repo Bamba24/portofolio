@@ -68,8 +68,8 @@ export default function Experience() {
       company: "Xarala Academy",
       url: "https://xarala.co",
       location: "Dakar / Remote, Sénégal",
-      period: "Février 2025 – Juillet 2025",
-      duration: "6 mois",
+      period: "juin 2026 – octobre 2026",
+      duration: "4 mois",
       type: "Stage",
       logoText: "XA",
       logoBg: "bg-white dark:bg-[#1f2235]",
@@ -90,7 +90,7 @@ export default function Experience() {
         "Designing REST APIs with Node.js, NestJS, and Prisma ORM",
         "Continuous Git / GitHub collaboration following agile Scrum sprints"
       ],
-      stack: ["Next.js", "React", "Node.js", "NestJS", "TypeScript", "Prisma", "MySQL"]
+      stack: ["Next.js", "React", "Python", "Graphql", "TypeScript", "PostgreSql", "zod", "zustand", "tanstackQuery"]
     }
   ];
 

@@ -102,8 +102,8 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Agile team collaboration and peer reviews",
         "Performance and load-time optimizations"
       ],
-      status: "En cours",
-      statusEn: "In production"
+      status: "Terminé",
+      statusEn: "Finished"
     },
     {
       id: 3,

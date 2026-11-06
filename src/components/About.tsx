@@ -90,16 +90,6 @@ export default function About() {
                 </>
               )}
             </p>
-
-            {/* Checklist des atouts clés */}
-            <div className="pt-4 space-y-2.5">
-              {highlights.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[#d97706] dark:text-[#ffc576] shrink-0 mt-1" />
-                  <span className="text-sm font-medium text-slate-700 dark:text-[#cbd5e1]">{item}</span>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* COLONNE STATS & CHIFFRES CLÉS */}
@@ -111,10 +101,9 @@ export default function About() {
             transition={{ delay: 0.15 }}
           >
             {[
-              { num: "3+", label: isEn ? "Years of active coding" : "Années de pratique active" },
-              { num: "10+", label: isEn ? "Shipped projects" : "Projets complets livrés" },
+              { num: "2+", label: isEn ? "Years of active coding" : "Années de pratique active" },
+              { num: "7+", label: isEn ? "Shipped projects" : "Projets complets livrés" },
               { num: "100%", label: isEn ? "Client satisfaction" : "Engagement & rigueur" },
-              { num: "40k+", label: isEn ? "Platform learners impacted" : "Utilisateurs sur plateformes" }
             ].map((stat, i) => (
               <div 
                 key={i} 
@@ -129,30 +118,6 @@ export default function About() {
               </div>
             ))}
           </motion.div>
-        </div>
-
-        {/* GRILLE DES 4 VALEURS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {values.map((val, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-slate-50 dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/20 p-6 rounded-sm hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all duration-300 text-left group shadow-xs"
-            >
-              <div className="w-12 h-12 rounded-xs border border-[#d97706]/30 dark:border-[#ffc576]/40 flex items-center justify-center mb-5 bg-white dark:bg-[#1f2235] group-hover:border-[#d97706] dark:group-hover:border-[#ffc576] group-hover:bg-[#d97706]/10 dark:group-hover:bg-[#ffc576]/10 transition-colors">
-                {val.icon}
-              </div>
-              <h3 className="font-serif text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors">
-                {val.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-[#9899a8] leading-relaxed">
-                {val.desc}
-              </p>
-            </motion.div>
-          ))}
         </div>
 
       </div>
