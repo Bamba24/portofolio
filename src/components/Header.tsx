@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Menu, X, Languages, Sun, Moon, ArrowRight } from "lucide-react";
+import { Menu, X, Languages, Sun, Moon, ArrowRight, Download } from "lucide-react";
 import { LangueContext } from "../context/langueContext";
 import { ThemeContext } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -94,6 +94,19 @@ export default function Header() {
           </ul>
 
           <div className="flex items-center gap-4 pl-6 border-l border-slate-200 dark:border-white/10">
+            {/* BOUTON TÉLÉCHARGER CV */}
+            <a
+              href="/cv-bamba.pdf"
+              download="CV_Mouhamadou_Bamba_Diagne.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-white/80 hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors p-1"
+              title={isEn ? "Download CV (PDF)" : "Télécharger mon CV (PDF)"}
+            >
+              <Download size={15} />
+              <span className="uppercase text-[11px] tracking-wider">CV</span>
+            </a>
+
             {/* BOUTON LANGUE */}
             {toggleLangue && (
               <button
@@ -182,13 +195,26 @@ export default function Header() {
               ))}
             </ul>
 
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="btn-boyer w-full justify-center"
-            >
-              <span>{isEn ? "Get In Touch" : "Me contacter"}</span>
-              <ArrowRight size={14} className="icon-arrow" />
-            </button>
+            <div className="flex flex-col gap-3">
+              <a
+                href="/cv-bamba.pdf"
+                download="CV_Mouhamadou_Bamba_Diagne.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-boyer w-full justify-center !border-slate-300 dark:!border-white/30"
+              >
+                <Download size={14} className="mr-2" />
+                <span>{isEn ? "Download CV" : "Télécharger mon CV"}</span>
+              </a>
+
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="btn-boyer w-full justify-center"
+              >
+                <span>{isEn ? "Get In Touch" : "Me contacter"}</span>
+                <ArrowRight size={14} className="icon-arrow" />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

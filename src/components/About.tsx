@@ -39,11 +39,11 @@ export default function About() {
   ];
 
   const highlights = [
-    isEn ? "Fullstack JavaScript / TypeScript (Next.js 14/15, React 18/19, Node.js)" : "Fullstack JavaScript / TypeScript (Next.js, React, Node.js, NestJS)",
+    isEn ? "Fullstack development with TypeScript, Next.js & NestJS" : "Développement Fullstack avec TypeScript, Next.js & NestJS",
     isEn ? "Cross-platform mobile apps with React Native & Expo" : "Développement mobile multiplateforme avec React Native & Expo",
-    isEn ? "Enterprise Backend with Java Spring Boot & Python Django" : "Développement d'APIs robustes en Java Spring Boot & Python Django",
-    isEn ? "Relational databases & ORMs (PostgreSQL, MySQL, Prisma)" : "Bases de données relationnelles & ORMs (PostgreSQL, MySQL, Prisma)",
-    isEn ? "Docker, Linux & Cloud deployment (Vercel, Railway, Docker Compose)" : "Conteneurisation Docker & déploiement Cloud (Vercel, Railway, Docker)"
+    isEn ? "Workflow & task automation" : "Conception d'automatisations de processus",
+    isEn ? "DevOps fundamentals with Docker & GitLab" : "Fondamentaux DevOps avec Docker & GitLab",
+    isEn ? "Relational databases & ORMs (PostgreSQL, MySQL, Prisma)" : "Bases de données relationnelles & ORMs (PostgreSQL, MySQL, Prisma)"
   ];
 
   return (
@@ -71,22 +71,22 @@ export default function About() {
             <p>
               {isEn ? (
                 <>
-                  Passionate about software engineering and developer tooling, I have worked on real-world production projects ranging from high-traffic e-learning platforms (<strong className="text-slate-900 dark:text-white">Xarala Academy</strong>) to inventory & POS management systems and enterprise applications.
+                  Passionate about software engineering and modern interface design, I contribute to real-world production applications with experience at companies such as <strong className="text-slate-900 dark:text-white">Xarala Academy</strong> and <strong className="text-slate-900 dark:text-white">Primelec Services</strong>. My experience spans high-traffic e-learning platforms, commercial management systems (POS, stock), and full mobile applications.
                 </>
               ) : (
                 <>
-                  Passionné par l’ingénierie logicielle et le développement d'interfaces modernes, j'interviens sur des applications concrètes en production, allant de plateformes e-learning à fort trafic (<strong className="text-slate-900 dark:text-white">Xarala Academy</strong>, 40 000+ apprenants) à des systèmes de gestion commerciale (POS, stocks) et des applications mobiles complètes.
+                  Passionné par l’ingénierie logicielle et le développement d'interfaces modernes, j'interviens sur des applications concrètes en production acquises notamment au sein de <strong className="text-slate-900 dark:text-white">Xarala Academy</strong> et <strong className="text-slate-900 dark:text-white">Primelec Services</strong>, allant de plateformes e-learning à fort trafic à des systèmes de gestion commerciale (POS, stocks) et des applications mobiles complètes.
                 </>
               )}
             </p>
             <p>
               {isEn ? (
                 <>
-                  My approach focuses on creating <strong className="text-slate-900 dark:text-white">maintainable architectures</strong>, writing clean readable code, and ensuring every interface provides exceptional user experiences with optimal performance.
+                  My approach is centered around <strong className="text-slate-900 dark:text-white">TypeScript</strong>, <strong className="text-slate-900 dark:text-white">Next.js</strong>, and <strong className="text-slate-900 dark:text-white">NestJS</strong> to build robust architectures and responsive user experiences. I also design automated workflows and apply DevOps practices (Docker, GitLab).
                 </>
               ) : (
                 <>
-                  Ma démarche repose sur deux exigences clés : une <strong className="text-slate-900 dark:text-white">architecture technique robuste</strong> (Next.js, TypeScript, APIs REST / GraphQL) et une <strong className="text-slate-900 dark:text-white">expérience utilisateur irréprochable</strong>, ergonomique et réactive.
+                  Ma démarche repose sur une architecture robuste et maintenable articulée autour de <strong className="text-slate-900 dark:text-white">TypeScript</strong>, <strong className="text-slate-900 dark:text-white">Next.js</strong> et <strong className="text-slate-900 dark:text-white">NestJS</strong>, tout en garantissant une expérience utilisateur ergonomique et réactive. J'y intègre également la conception d'automatisations et les fondamentaux du DevOps (Docker, GitLab).
                 </>
               )}
             </p>

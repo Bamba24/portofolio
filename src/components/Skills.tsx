@@ -1,4 +1,4 @@
-import { Globe, Server, Smartphone, Cpu, Sparkles } from 'lucide-react';
+import { Globe, Server, Smartphone, Cpu } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from "framer-motion";
@@ -12,13 +12,13 @@ export default function Skills() {
     {
       id: "backend",
       icon: <Server size={34} className="text-[#d97706] dark:text-[#ffc576]" />,
-      titleFr: "Backend Node.js, Spring Boot & Python",
-      titleEn: "Backend Node.js, Spring Boot & Python",
+      titleFr: "Backend Node.js, express.js et Nest.js",
+      titleEn: "Backend Node.js, express.js and Nest.js",
       descriptionFr:
         "Conception d'APIs REST robustes, sécurisées et bien documentées. Modélisation de schémas de données relationnels (PostgreSQL, MySQL, Prisma), gestion des autorisations et clean architecture.",
       descriptionEn:
         "Designing robust, secure, and documented REST APIs. Relational database modeling (PostgreSQL, MySQL, Prisma), authentication flows, and clean architecture.",
-      tags: ["Node.js", "NestJS", "Java Spring Boot", "Python Django", "Prisma", "PostgreSQL", "MySQL"]
+      tags: ["Node.js", "Express.js", "NestJS", "Prisma", "PostgreSQL", "MySQL"]
     },
     {
       id: "frontend",
@@ -48,19 +48,14 @@ export default function Skills() {
       titleFr: "DevOps, Docker & Déploiement Cloud",
       titleEn: "DevOps, Docker & Cloud Deployment",
       descriptionFr:
-        "Conteneurisation d'environnements de développement et de production avec Docker et Docker Compose. Déploiement continu, hébergement sur plateformes cloud modernes (Vercel, Railway, VPS).",
+        "Conteneurisation d'environnements avec Docker et Docker Compose. Gestion de versions et pipelines avec GitLab et GitHub, automatisation de tâches et déploiement continu sur plateformes cloud (Vercel, Railway, VPS).",
       descriptionEn:
-        "Containerizing dev and production environments with Docker and Docker Compose. Continuous deployment and configuration across cloud platforms (Vercel, Railway, VPS).",
-      tags: ["Docker", "Git / GitHub", "Vercel", "Railway", "Linux / Bash", "CI/CD"]
+        "Containerizing environments with Docker and Docker Compose. Version control and pipelines with GitLab and GitHub, workflow automation, and continuous deployment across cloud platforms (Vercel, Railway, VPS).",
+      tags: ["Docker", "GitLab", "GitHub", "Automatisation", "Vercel", "Railway", "Linux / Bash", "CI/CD"]
     }
   ];
 
-  const fullTechStack = [
-    { category: isEn ? "Languages" : "Langages", items: ["TypeScript", "JavaScript (ES6+)", "Python", "Java", "SQL", "HTML5 / CSS3"] },
-    { category: isEn ? "Frameworks & Libs" : "Frameworks & Librairies", items: ["Next.js (App Router)", "React", "React Native", "Expo", "NestJS", "Spring Boot", "Django", "TailwindCSS"] },
-    { category: isEn ? "Data & State" : "Données & État", items: ["PostgreSQL", "MySQL", "Prisma ORM", "TanStack Query", "TanStack Table", "Zustand", "Zod", "GraphQL"] },
-    { category: isEn ? "Tooling & Infra" : "Outils & Déploiement", items: ["Docker", "Docker Compose", "Git / GitHub", "Vercel", "Railway", "Postman", "Linux", "Figma"] }
-  ];
+ 
 
   return (
     <section 
@@ -123,37 +118,6 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
-
-        {/* VUE D'ENSEMBLE DE LA STACK TECHNIQUE */}
-        <div className="p-8 border border-slate-200 dark:border-[#ffc576]/20 bg-white dark:bg-[#1f2235]/80 rounded-sm text-left shadow-sm">
-          <div className="flex items-center gap-2 mb-6">
-            <Sparkles size={18} className="text-[#d97706] dark:text-[#ffc576]" />
-            <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white">
-              {isEn ? "Complete Technical Stack" : "Stack Technique Complète"}
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {fullTechStack.map((category, idx) => (
-              <div key={idx} className="space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#b45309] dark:text-[#ffc576] block">
-                  {category.category}
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {category.items.map((item, i) => (
-                    <span 
-                      key={i}
-                      className="text-xs text-slate-700 dark:text-[#cbd5e1] bg-slate-100 dark:bg-[#313552] px-2.5 py-1 rounded-xs border border-slate-200 dark:border-white/5"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
   );

@@ -68,29 +68,29 @@ export default function Experience() {
       company: "Xarala Academy",
       url: "https://xarala.co",
       location: "Dakar / Remote, Sénégal",
-      period: "juin 2026 – octobre 2026",
-      duration: "4 mois",
+      period: "Juin 2026 – Octobre 2026",
+      duration: "5 mois",
       type: "Stage",
       logoText: "XA",
       logoBg: "bg-white dark:bg-[#1f2235]",
       logoImage: "/images/xarala.png",
       descriptionFr:
-        "Immersion complète au sein de l'équipe technique de Xarala Academy, acteur majeur de l'EdTech en Afrique de l'Ouest (plus de 40 000 apprenants).",
+        "Immersion complète au sein de l'équipe technique de Xarala Academy, avec participation active sur des applications concrètes en production dont la plateforme e-learning et le CRM de gestion commerciale.",
       descriptionEn:
-        "Full technical immersion within Xarala Academy's engineering team, a leading EdTech platform in West Africa (40,000+ learners).",
+        "Full technical immersion within Xarala Academy's engineering team, actively contributing to production applications including the e-learning platform and the business management CRM.",
       missions: [
-        "Développement et maintenance d'applications web Next.js / TypeScript en production",
-        "Création de modules pour la plateforme e-learning et l'espace étudiant",
-        "Conception d'APIs REST avec Node.js, NestJS et Prisma ORM",
-        "Collaboration continue sur Git / GitHub en méthodologie agile Scrum"
+        "Développement frontend de l'application CRM de gestion de stock et de ventes (POS) avec Next.js, GraphQL, TanStack Query, Zustand et Zod",
+        "Contribution au développement de nouvelles fonctionnalités et amélioration de l'UI sur la plateforme e-learning Xarala Academy",
+        "Collaboration d'équipe en méthodologie agile Scrum, revues de code et intégration continue via GitLab",
+        "Intégration et consommation d'APIs sécurisées avec TypeScript, validation des données et requêtes GraphQL / REST"
       ],
       missionsEn: [
-        "Development and maintenance of production Next.js / TypeScript web applications",
-        "Building e-learning student platform modules",
-        "Designing REST APIs with Node.js, NestJS, and Prisma ORM",
-        "Continuous Git / GitHub collaboration following agile Scrum sprints"
+        "Frontend development for the Stock & Sales Management CRM (POS) using Next.js, GraphQL, TanStack Query, Zustand, and Zod",
+        "Feature development and UI improvements on the production Xarala Academy e-learning platform",
+        "Agile Scrum team collaboration, peer code reviews, and CI workflows on GitLab",
+        "Secure API integration and data handling with TypeScript, schema validation, and GraphQL / REST endpoints"
       ],
-      stack: ["Next.js", "React", "Python", "Graphql", "TypeScript", "PostgreSql", "zod", "zustand", "tanstackQuery"]
+      stack: ["Next.js", "React", "TypeScript", "Python", "GraphQL", "PostgreSQL", "Zod", "Zustand", "TanStack Query", "GitLab"]
     }
   ];
 

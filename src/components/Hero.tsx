@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, Code2 } from 'lucide-react';
+import { ArrowRight, Sparkles, Code2, Download } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from 'framer-motion';
@@ -83,8 +83,8 @@ export default function Hero() {
             {/* Pitch & Valeur ajoutée */}
             <p className="text-base sm:text-lg text-slate-600 dark:text-[#9899a8] max-w-xl leading-relaxed">
               {isEn
-                ? 'Specialized in building high-performance web applications and mobile platforms with clean architectures, smooth interactions, and production rigor.'
-                : 'Spécialisé dans la conception d’applications web et mobiles modernes, robustes et sur-mesure (React, Next.js, Node.js, Spring Boot & React Native) avec un soin rigoureux apporté à l’architecture et à l’expérience utilisateur.'}
+                ? 'Specialized in building high-performance web applications and mobile platforms with clean architectures, smooth interactions, and production rigor (TypeScript, Next.js, NestJS & React Native).'
+                : 'Spécialisé dans la conception d’applications web et mobiles modernes, robustes et sur-mesure (TypeScript, Next.js, React, NestJS & React Native) avec un soin rigoureux apporté à l’architecture et à l’expérience utilisateur.'}
             </p>
 
             {/* Actions CTAs */}
@@ -96,6 +96,17 @@ export default function Hero() {
                 <span>{isEn ? 'View My Work' : 'Voir mes réalisations'}</span>
                 <ArrowRight size={14} className="icon-arrow" />
               </button>
+
+              <a 
+                href="/cv-bamba.pdf"
+                download="CV_Mouhamadou_Bamba_Diagne.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-boyer !border-[#d97706]/70 dark:!border-[#ffc576]/70 !text-[#b45309] dark:!text-[#ffc576] hover:!bg-[#d97706] dark:hover:!bg-[#ffc576] hover:!text-white dark:hover:!text-[#1f2235]"
+              >
+                <Download size={14} className="mr-1.5" />
+                <span>{isEn ? 'Download CV' : 'Mon CV'}</span>
+              </a>
 
               <button 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
