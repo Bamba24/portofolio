@@ -1,4 +1,4 @@
-import { Globe, Server, Smartphone, Cpu } from 'lucide-react';
+import { Globe, Server, Smartphone, Cpu, Layers } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from "framer-motion";
@@ -11,29 +11,29 @@ export default function Skills() {
   const services = [
     {
       id: "backend",
-      icon: <Server size={34} className="text-[#d97706] dark:text-[#ffc576]" />,
-      titleFr: "Backend Node.js, express.js et Nest.js",
-      titleEn: "Backend Node.js, express.js and Nest.js",
+      icon: <Server size={24} className="text-amber-500 dark:text-amber-400" />,
+      titleFr: "Backend Node.js, Express & NestJS",
+      titleEn: "Backend Node.js, Express & NestJS",
       descriptionFr:
-        "Conception d'APIs REST robustes, sécurisées et bien documentées. Modélisation de schémas de données relationnels (PostgreSQL, MySQL, Prisma), gestion des autorisations et clean architecture.",
+        "Conception d'APIs REST robustes, sécurisées et bien documentées. Modélisation de schémas relationnels (PostgreSQL, MySQL, Prisma), gestion des autorisations et clean architecture modulaire.",
       descriptionEn:
-        "Designing robust, secure, and documented REST APIs. Relational database modeling (PostgreSQL, MySQL, Prisma), authentication flows, and clean architecture.",
+        "Designing robust, secure, and documented REST APIs. Relational schema modeling (PostgreSQL, MySQL, Prisma), auth flows, and modular clean architecture.",
       tags: ["Node.js", "Express.js", "NestJS", "Prisma", "PostgreSQL", "MySQL"]
     },
     {
       id: "frontend",
-      icon: <Globe size={34} className="text-[#d97706] dark:text-[#ffc576]" />,
+      icon: <Globe size={24} className="text-amber-500 dark:text-amber-400" />,
       titleFr: "Frontend React & Next.js",
       titleEn: "Frontend React & Next.js",
       descriptionFr:
-        "Création d'applications web modernes et dynamiques avec Next.js (App Router) et React. Maîtrise de TypeScript, TailwindCSS, TanStack Query, gestion d'état et optimisation SEO poussée.",
+        "Création d'applications web modernes et dynamiques avec Next.js (App Router) et React. Maîtrise de TypeScript, TailwindCSS, TanStack Query, validation Zod, requêtes GraphQL et optimisation SEO.",
       descriptionEn:
-        "Building modern dynamic web apps with Next.js (App Router) and React. Advanced TypeScript, TailwindCSS, TanStack Query, client/server state, and in-depth SEO optimization.",
+        "Building modern dynamic web apps with Next.js (App Router) and React. Advanced TypeScript, TailwindCSS, TanStack Query, Zod validation, GraphQL queries, and SEO optimization.",
       tags: ["Next.js", "React", "TypeScript", "TailwindCSS", "TanStack Query", "Zod", "GraphQL"]
     },
     {
       id: "mobile",
-      icon: <Smartphone size={34} className="text-[#d97706] dark:text-[#ffc576]" />,
+      icon: <Smartphone size={24} className="text-amber-500 dark:text-amber-400" />,
       titleFr: "Développement Mobile React Native & Expo",
       titleEn: "Mobile Development React Native & Expo",
       descriptionFr:
@@ -44,7 +44,7 @@ export default function Skills() {
     },
     {
       id: "devops",
-      icon: <Cpu size={34} className="text-[#d97706] dark:text-[#ffc576]" />,
+      icon: <Cpu size={24} className="text-amber-500 dark:text-amber-400" />,
       titleFr: "DevOps, Docker & Déploiement Cloud",
       titleEn: "DevOps, Docker & Cloud Deployment",
       descriptionFr:
@@ -55,61 +55,60 @@ export default function Skills() {
     }
   ];
 
- 
-
   return (
     <section 
       id="services" 
-      className="py-24 bg-slate-100/70 dark:bg-[#313552] text-slate-900 dark:text-white border-t border-slate-200 dark:border-[#ffc576]/15 relative transition-colors duration-300"
+      className="py-24 border-t border-zinc-200 dark:border-white/10 transition-colors"
     >
-      <div className="boyer-container">
+      <div className="portfolio-container">
         
-        {/* EN-TÊTE EXACT JONATHAN BOYER : MES COMPÉTENCES -> SERVICES */}
-        <div className="text-left mb-16">
-          <span className="section__top-title">
-            {isEn ? "My Skills" : "Mes compétences"}
+        {/* EN-TÊTE DE SECTION */}
+        <div className="text-left mb-12">
+          <span className="section-tag">
+            <Layers size={12} />
+            {isEn ? "Engineering Capabilities" : "Mes domaines d'expertise"}
           </span>
-          <h2 className="section__title">
-            {isEn ? "Services & Solutions" : "Services"}
+          <h2 className="section-heading">
+            {isEn ? "Technical Stack & Services" : "Compétences & Services"}
           </h2>
-          <p className="text-slate-600 dark:text-[#cbd5e1] max-w-2xl text-base sm:text-lg">
+          <p className="section-desc">
             {isEn
-              ? "From architecture design to production release, I provide end-to-end fullstack development for modern applications."
-              : "De la conception architecturale à la mise en ligne, j'accompagne vos projets web et mobiles avec un haut niveau d'exigence technique."}
+              ? "From architecture design to production release, I provide end-to-end fullstack engineering for modern applications."
+              : "De la conception architecturale à la mise en production, j'accompagne vos projets web et mobiles avec rigueur et performance."}
           </p>
         </div>
 
-        {/* GRILLE DES 4 SERVICES STYLE JONATHAN BOYER */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        {/* GRILLE DES 4 SERVICES BENTO */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-8 border border-slate-200 dark:border-[#ffc576]/30 bg-white dark:bg-[#1f2235]/60 hover:bg-white dark:hover:bg-[#1f2235] hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all duration-300 rounded-sm text-left flex flex-col justify-between group shadow-sm dark:shadow-lg"
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="bento-card p-7 text-left flex flex-col justify-between group"
             >
               <div>
-                <div className="mb-6 inline-flex p-3 rounded-xs border border-slate-200 dark:border-[#ffc576]/30 bg-slate-50 dark:bg-[#313552] group-hover:border-[#d97706] dark:group-hover:border-[#ffc576] group-hover:scale-105 transition-all">
+                <div className="mb-5 inline-flex p-3 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-white/10 text-amber-500 dark:text-amber-400 group-hover:scale-105 transition-transform">
                   {service.icon}
                 </div>
 
-                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-[#b45309] dark:group-hover:text-[#ffc576] transition-colors leading-snug">
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
                   {isEn ? service.titleEn : service.titleFr}
                 </h3>
 
-                <p className="text-slate-600 dark:text-[#9899a8] leading-relaxed text-sm sm:text-base mb-6">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm mb-6">
                   {isEn ? service.descriptionEn : service.descriptionFr}
                 </p>
               </div>
 
               {/* Tags technologiques */}
-              <div className="pt-4 border-t border-slate-100 dark:border-[#ffc576]/15 flex flex-wrap gap-2">
+              <div className="pt-4 border-t border-zinc-200 dark:border-white/10 flex flex-wrap gap-1.5">
                 {service.tags.map((tag, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 bg-slate-50 dark:bg-[#313552] text-[#b45309] dark:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/20 rounded-xs"
+                    className="text-[11px] font-semibold px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5 rounded-md font-mono"
                   >
                     {tag}
                   </span>

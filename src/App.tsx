@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects, { ProjectType } from './components/Projects';
+import Writing from './components/Writing';
 import Experience from './components/Experience';
 import Education from './components/Education';
 import Social from './components/Social';
@@ -20,7 +21,7 @@ function App() {
   return (
     <LangueProvider>
       <ThemeProvider>
-        <div className="App min-h-screen bg-[#f8fafc] dark:bg-[#1f2235] text-slate-900 dark:text-white transition-colors duration-300">
+        <div className="App min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
           {selectedProject ? (
             <ProjectDetail
               project={selectedProject}
@@ -44,6 +45,7 @@ function App() {
                   setSelectedProject(proj);
                   setAllProjects(list);
                 }} />
+                <Writing />
                 <Experience />
                 <Education />
                 <Social />

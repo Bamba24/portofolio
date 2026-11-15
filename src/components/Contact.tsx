@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Mail, MapPin, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Mail, MapPin, ArrowRight, CheckCircle2, MessageSquare, HelpCircle } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from "framer-motion";
 
@@ -31,60 +31,61 @@ export default function Contact() {
     {
       qFr: "Quelles sont vos disponibilités actuelles ?",
       qEn: "What is your current availability?",
-      aFr: "Je suis actuellement disponible pour de nouvelles missions en freelance ou des opportunités d'ingénierie logicielle.",
-      aEn: "I am currently available for new freelance missions, consulting, and software engineering opportunities."
+      aFr: "Je suis disponible pour des opportunités en CDI / CDD, des missions freelance ou des collaborations d'ingénierie logicielle.",
+      aEn: "I am available for full-time engineering roles, freelance contracts, and software engineering collaborations."
     },
     {
       qFr: "Quels types de projets développez-vous ?",
       qEn: "What kind of projects do you build?",
-      aFr: "Des applications web complètes (Next.js, React, Node.js, Spring Boot), des applications mobiles cross-platform (React Native & Expo), des refontes d'interfaces et des APIs REST sécurisées.",
-      aEn: "Full-scale web applications (Next.js, React, Node.js, Spring Boot), cross-platform mobile apps (React Native & Expo), modern frontend redesigns, and secure REST APIs."
+      aFr: "Des applications web fullstack complètes (Next.js, React, Node.js, NestJS), des systèmes de gestion commerciale (POS, stocks), des applications mobiles cross-platform (React Native & Expo) et des APIs sécurisées.",
+      aEn: "Full-scale web applications (Next.js, React, Node.js, NestJS), business management systems (POS, inventory), cross-platform mobile apps (React Native & Expo), and secure APIs."
     },
     {
-      qFr: "Effectuez-vous des missions à distance (remote) ?",
+      qFr: "Travaillez-vous à distance (remote) ?",
       qEn: "Do you work remotely?",
-      aFr: "Oui, j'effectue l'essentiel de mes missions à distance avec des points synchrones réguliers (Google Meet, Slack, Discord) et un suivi de tickets agile.",
-      aEn: "Yes, I work predominantly remote with regular video syncs (Google Meet, Slack, Discord) and structured agile project tracking."
+      aFr: "Oui, j'effectue l'essentiel de mes collaborations en remote avec un suivi agile rigoureux (Slack, Discord, Google Meet) et des livraisons continues via Git/GitLab.",
+      aEn: "Yes, I work predominantly remote with structured agile sprints (Slack, Discord, Google Meet) and continuous delivery pipelines via Git/GitLab."
     },
     {
       qFr: "Quel est votre délai moyen de réponse ?",
       qEn: "What is your average response time?",
-      aFr: "Je réponds généralement en moins de 24 heures par email ou directement sur WhatsApp.",
-      aEn: "I typically respond in under 24 hours via email or directly via WhatsApp."
+      aFr: "Je réponds généralement en moins de 24 heures par email ou directement via WhatsApp.",
+      aEn: "I typically reply within 24 hours via email or directly via WhatsApp."
     }
   ];
 
   return (
     <section 
       id="contact" 
-      className="py-24 bg-slate-100/70 dark:bg-[#313552] text-slate-900 dark:text-white border-t border-slate-200 dark:border-[#ffc576]/15 relative transition-colors duration-300"
+      className="py-24 border-t border-zinc-200 dark:border-white/10 transition-colors"
     >
-      <div className="boyer-container">
+      <div className="portfolio-container">
         
-        {/* CARTE CONTACT EXACT STYLE JONATHAN BOYER */}
+        {/* CARTE CONTACT BENTO */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="p-8 sm:p-14 bg-white dark:bg-[#1f2235] border border-slate-200 dark:border-[#ffc576]/30 rounded-sm mb-20 text-left shadow-xl"
+          className="bento-card p-8 sm:p-12 mb-16 text-left"
         >
-          <span className="section__top-title">
-            {isEn ? "Request a Quote" : "Obtenir un devis"}
+          <span className="section-tag">
+            <MessageSquare size={12} />
+            {isEn ? "Let's Build Together" : "Démarrer une collaboration"}
           </span>
-          <h2 className="section__title !mb-4">
-            {isEn ? "Get In Touch" : "Me contacter"}
+          <h2 className="section-heading">
+            {isEn ? "Get In Touch" : "Discutons de votre projet"}
           </h2>
           
-          <p className="text-slate-600 dark:text-[#9899a8] text-base sm:text-lg max-w-2xl leading-relaxed mb-10">
+          <p className="section-desc mb-8">
             {isEn
-              ? "Please provide as much detail as possible about your project so I can accurately assess scope, timelines, and technical requirements."
-              : "Merci de donner un maximum de détails sur le projet afin que je puisse évaluer correctement la charge de travail et vos besoins techniques."}
+              ? "Share your project goals, technical scope, or job opportunity. I'll get back to you promptly."
+              : "Partagez vos besoins, objectifs techniques ou propositions d'opportunité. Je vous réponds sous 24h."}
           </p>
 
-          <form onSubmit={handleSend} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <form onSubmit={handleSend} className="space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-[#cbd5e1] block mb-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 block mb-2">
                   {isEn ? "Full Name" : "Nom & Prénom"} *
                 </label>
                 <input
@@ -95,12 +96,12 @@ export default function Contact() {
                   placeholder={isEn ? "John Doe" : "Mouhamadou Bamba"}
                   required
                   minLength={2}
-                  className="w-full bg-slate-50 dark:bg-[#2c304a] border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white rounded-xs px-4 py-3 text-sm focus:border-[#d97706] dark:focus:border-[#ffc576] outline-none transition-colors"
+                  className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white rounded-lg px-4 py-2.5 text-sm focus:border-zinc-900 dark:focus:border-white outline-none transition-colors"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-[#cbd5e1] block mb-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 block mb-2">
                   {isEn ? "Email Address" : "Adresse Email"} *
                 </label>
                 <input
@@ -110,14 +111,14 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="votre-email@domaine.com"
                   required
-                  className="w-full bg-slate-50 dark:bg-[#2c304a] border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white rounded-xs px-4 py-3 text-sm focus:border-[#d97706] dark:focus:border-[#ffc576] outline-none transition-colors"
+                  className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white rounded-lg px-4 py-2.5 text-sm focus:border-zinc-900 dark:focus:border-white outline-none transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-[#cbd5e1] block mb-2">
-                {isEn ? "Project Description" : "Description du projet & Objectifs"} *
+              <label className="text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 block mb-2">
+                {isEn ? "Project Description & Goals" : "Description du projet & Objectifs"} *
               </label>
               <textarea
                 name="message"
@@ -125,43 +126,43 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder={
                   isEn
-                    ? "Tell me about your application, key features, target timeline..."
-                    : "Présentez brièvement vos besoins, vos fonctionnalités clés, vos échéances..."
+                    ? "Tell me about your product, key features, target timeline..."
+                    : "Présentez vos besoins, vos fonctionnalités clés, vos échéances..."
                 }
                 required
                 minLength={10}
-                rows={5}
-                className="w-full bg-slate-50 dark:bg-[#2c304a] border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white rounded-xs p-4 text-sm focus:border-[#d97706] dark:focus:border-[#ffc576] outline-none transition-colors leading-relaxed"
+                rows={4}
+                className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white rounded-lg p-4 text-sm focus:border-zinc-900 dark:focus:border-white outline-none transition-colors leading-relaxed"
               />
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
               <button
                 type="submit"
-                className="btn-boyer !py-3.5 !px-8 text-xs self-start"
+                className="btn-primary self-start"
               >
-                <span>{isEn ? "Send Message via WhatsApp" : "Obtenir un devis via WhatsApp"}</span>
-                <ArrowRight size={14} className="icon-arrow" />
+                <span>{isEn ? "Send via WhatsApp" : "Envoyer directement sur WhatsApp"}</span>
+                <ArrowRight size={14} />
               </button>
 
-              <div className="flex items-center gap-6 text-xs text-slate-500 dark:text-[#9899a8]">
+              <div className="flex items-center gap-4 text-xs text-zinc-500 dark:text-zinc-400">
                 <a 
                   href="mailto:gameurbamba68@gmail.com" 
-                  className="hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors flex items-center gap-1.5"
+                  className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1.5"
                 >
-                  <Mail size={14} />
+                  <Mail size={13} />
                   <span>gameurbamba68@gmail.com</span>
                 </a>
-                <span className="hidden sm:inline text-slate-300 dark:text-white/20">•</span>
+                <span>•</span>
                 <span className="flex items-center gap-1.5">
-                  <MapPin size={14} />
+                  <MapPin size={13} />
                   <span>Sénégal / Remote</span>
                 </span>
               </div>
             </div>
 
             {submitted && (
-              <div className="p-4 bg-emerald-500/10 border border-emerald-500 text-emerald-600 dark:text-emerald-400 text-xs font-semibold rounded-xs flex items-center gap-2">
+              <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium rounded-lg flex items-center gap-2">
                 <CheckCircle2 size={16} />
                 <span>
                   {isEn 
@@ -173,31 +174,34 @@ export default function Contact() {
           </form>
         </motion.div>
 
-        {/* SECTION FAQ STYLE JONATHAN BOYER */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 text-left">
+        {/* SECTION FAQ BENTO */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
           
           <div className="lg:col-span-4">
-            <span className="section__top-title">FAQ</span>
-            <h3 className="section__title !text-3xl">
-              {isEn ? "Frequently Asked Questions" : "Les questions fréquentes"}
+            <span className="section-tag">
+              <HelpCircle size={12} />
+              FAQ
+            </span>
+            <h3 className="section-heading !text-2xl">
+              {isEn ? "Common Questions" : "Questions fréquentes"}
             </h3>
-            <p className="text-slate-600 dark:text-[#9899a8] text-sm leading-relaxed">
+            <p className="section-desc text-sm">
               {isEn
-                ? "Here are the most common questions clients and collaborators ask before starting a project."
-                : "Voici les réponses aux questions les plus courantes avant de lancer une collaboration."}
+                ? "Answers to the most common queries regarding availability, remote workflows, and tech stack."
+                : "Réponses aux interrogations les plus fréquentes concernant mes disponibilités et modes de collaboration."}
             </p>
           </div>
 
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 space-y-4">
             {faqs.map((faq, idx) => (
               <div 
                 key={idx}
-                className="p-6 bg-white dark:bg-[#1f2235]/70 border border-slate-200 dark:border-[#ffc576]/20 rounded-sm hover:border-[#d97706] dark:hover:border-[#ffc576]/60 transition-colors shadow-xs"
+                className="bento-card p-6"
               >
-                <h4 className="font-serif text-lg font-bold text-slate-900 dark:text-white mb-2">
+                <h4 className="text-base font-bold text-zinc-900 dark:text-white mb-2">
                   {isEn ? faq.qEn : faq.qFr}
                 </h4>
-                <p className="text-sm text-slate-600 dark:text-[#9899a8] leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   {isEn ? faq.aEn : faq.aFr}
                 </p>
               </div>

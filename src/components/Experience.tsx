@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { MapPin, ExternalLink, Calendar } from 'lucide-react';
+import { MapPin, ExternalLink, Calendar, Briefcase } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -41,7 +41,7 @@ export default function Experience() {
       duration: "3 mois",
       type: "Stage",
       logoText: "PS",
-      logoBg: "bg-white dark:bg-[#1f2235]",
+      logoBg: "bg-white dark:bg-zinc-900",
       logoImage: "/images/primelec.png",
       descriptionFr:
         "Stage en développement fullstack JavaScript et mobile au sein de Primelec Services avec participation active à des projets d'entreprises réels.",
@@ -72,7 +72,7 @@ export default function Experience() {
       duration: "5 mois",
       type: "Stage",
       logoText: "XA",
-      logoBg: "bg-white dark:bg-[#1f2235]",
+      logoBg: "bg-white dark:bg-zinc-900",
       logoImage: "/images/xarala.png",
       descriptionFr:
         "Immersion complète au sein de l'équipe technique de Xarala Academy, avec participation active sur des applications concrètes en production dont la plateforme e-learning et le CRM de gestion commerciale.",
@@ -101,36 +101,37 @@ export default function Experience() {
   return (
     <section 
       id="experience" 
-      className="py-24 bg-[#f8fafc] dark:bg-[#1f2235] text-slate-900 dark:text-white border-t border-slate-200 dark:border-[#ffc576]/15 relative transition-colors duration-300"
+      className="py-24 border-t border-zinc-200 dark:border-white/10 transition-colors"
     >
-      <div className="boyer-container">
+      <div className="portfolio-container">
         
         {/* EN-TÊTE DE SECTION */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 text-left">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 text-left">
           <div>
-            <span className="section__top-title">
+            <span className="section-tag">
+              <Briefcase size={12} />
               {isEn ? "Career & Track Record" : "Mon parcours"}
             </span>
-            <h2 className="section__title !mb-2">
+            <h2 className="section-heading">
               {isEn ? "Work Experience" : "Expériences professionnelles"}
             </h2>
-            <p className="text-slate-600 dark:text-[#9899a8] text-base max-w-xl">
+            <p className="section-desc">
               {isEn
-                ? "Hands-on engineering experience on live applications and tech platforms."
-                : "Expériences concrètes acquises en agence et sur des plateformes à fort impact."}
+                ? "Hands-on engineering experience on live applications, production SaaS, and tech platforms."
+                : "Expériences concrètes acquises en agence et sur des plateformes SaaS en production."}
             </p>
           </div>
 
           {/* Onglets Filtre */}
-          <div className="flex items-center gap-2 self-start md:self-end">
+          <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-white/10 self-start md:self-end">
             {(['Tous', 'Stages'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-xs transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                   activeTab === tab
-                    ? "bg-[#d97706] text-white dark:bg-[#ffc576] dark:text-[#1f2235] font-bold shadow-xs"
-                    : "bg-white dark:bg-[#313552] text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/20"
+                    ? "bg-white dark:bg-[#18181b] text-zinc-900 dark:text-white shadow-xs border border-zinc-200/80 dark:border-white/10"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                 }`}
               >
                 {tab}
@@ -139,24 +140,24 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* TIMELINE / CARTES D'EXPÉRIENCE */}
-        <div className="space-y-8">
+        {/* TIMELINE / CARTES D'EXPÉRIENCE BENTO */}
+        <div className="space-y-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((exp, index) => (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="boyer-card p-8 sm:p-10 text-left border border-slate-200 dark:border-[#ffc576]/25 hover:border-[#d97706] dark:hover:border-[#ffc576] transition-all duration-300"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="bento-card p-6 sm:p-8 text-left"
               >
-                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
                   
                   {/* Titre & Entreprise */}
                   <div className="flex items-start gap-4">
                     {/* LOGO ENTREPRISE REEL */}
-                    <div className="w-14 h-14 rounded-xs bg-white dark:bg-[#1f2235] border border-slate-200 dark:border-[#ffc576]/40 flex items-center justify-center shrink-0 p-2 overflow-hidden shadow-xs">
+                    <div className="w-12 h-12 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 flex items-center justify-center shrink-0 p-2 overflow-hidden shadow-xs">
                       {exp.logoImage ? (
                         <img
                           src={exp.logoImage}
@@ -164,33 +165,33 @@ export default function Experience() {
                           className="w-full h-full object-contain"
                         />
                       ) : (
-                        <span className="font-serif font-bold text-[#b45309] dark:text-[#ffc576] text-base">
+                        <span className="font-bold text-amber-500 dark:text-amber-400 text-sm">
                           {exp.logoText}
                         </span>
                       )}
                     </div>
 
                     <div>
-                      <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-1">
+                      <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-1">
                         {isEn ? exp.titleEn : exp.titleFr}
                       </h3>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-[#b45309] dark:text-[#ffc576]">
+                      <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
                         {exp.url ? (
                           <a 
                             href={exp.url} 
                             target="_blank" 
                             rel="noreferrer" 
-                            className="font-semibold hover:underline inline-flex items-center gap-1"
+                            className="font-medium hover:text-zinc-900 dark:hover:text-white hover:underline inline-flex items-center gap-1"
                           >
                             <span>{exp.company}</span>
-                            <ExternalLink size={13} />
+                            <ExternalLink size={12} />
                           </a>
                         ) : (
-                          <span className="font-semibold">{exp.company}</span>
+                          <span className="font-medium text-zinc-900 dark:text-white">{exp.company}</span>
                         )}
-                        <span className="text-slate-300 dark:text-white/20">•</span>
-                        <span className="text-slate-500 dark:text-[#9899a8] flex items-center gap-1">
-                          <MapPin size={13} />
+                        <span>•</span>
+                        <span className="flex items-center gap-1 text-xs">
+                          <MapPin size={12} />
                           {exp.location}
                         </span>
                       </div>
@@ -198,9 +199,9 @@ export default function Experience() {
                   </div>
 
                   {/* Période / Badge */}
-                  <div className="flex items-center gap-3 self-start lg:self-auto">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-[#1f2235] text-xs font-semibold text-[#b45309] dark:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/30 rounded-xs">
-                      <Calendar size={13} />
+                  <div className="self-start sm:self-auto">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-100 dark:bg-zinc-800/60 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-full font-mono">
+                      <Calendar size={12} />
                       {exp.period}
                     </span>
                   </div>
@@ -208,16 +209,16 @@ export default function Experience() {
                 </div>
 
                 {/* Description */}
-                <p className="text-base text-slate-600 dark:text-[#cbd5e1] leading-relaxed mb-6">
+                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-5">
                   {isEn ? exp.descriptionEn : exp.descriptionFr}
                 </p>
 
                 {/* Missions */}
-                <div className="space-y-2.5 mb-8 pl-1">
+                <div className="space-y-2 mb-6">
                   {(isEn ? exp.missionsEn : exp.missions).map((mission, mIdx) => (
-                    <div key={mIdx} className="flex items-start gap-3">
-                      <span className="text-[#d97706] dark:text-[#ffc576] font-bold text-sm leading-relaxed">•</span>
-                      <span className="text-sm text-slate-600 dark:text-[#9899a8] leading-relaxed">
+                    <div key={mIdx} className="flex items-start gap-2.5">
+                      <span className="text-amber-500 dark:text-amber-400 font-bold text-sm leading-relaxed">•</span>
+                      <span className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {mission}
                       </span>
                     </div>
@@ -225,11 +226,11 @@ export default function Experience() {
                 </div>
 
                 {/* Stack */}
-                <div className="pt-6 border-t border-slate-100 dark:border-white/5 flex flex-wrap gap-2">
+                <div className="pt-4 border-t border-zinc-200 dark:border-white/10 flex flex-wrap gap-1.5">
                   {exp.stack.map((tech, sIdx) => (
                     <span
                       key={sIdx}
-                      className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 bg-slate-100 dark:bg-[#1f2235] text-[#b45309] dark:text-[#ffc576] border border-slate-200 dark:border-[#ffc576]/20 rounded-xs"
+                      className="text-[11px] font-semibold px-2.5 py-0.5 bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5 rounded-md font-mono"
                     >
                       {tech}
                     </span>

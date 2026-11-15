@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, Code2, Download } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, BookOpen, MapPin, Sparkles, Code2, Layers, CheckCircle2 } from 'lucide-react';
 import { useContext } from 'react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from 'framer-motion';
@@ -8,162 +8,211 @@ export default function Hero() {
   const langue = langueContext?.langue ?? "fr";
   const isEn = langue === 'en';
 
+  const bentoHighlights = [
+    {
+      label: isEn ? "Production Impact" : "Impact en Production",
+      value: "40 000+",
+      desc: isEn ? "Learners served on Xarala Academy platform" : "Apprenants sur la plateforme Xarala Academy",
+      highlight: true
+    },
+    {
+      label: isEn ? "Core Tech Stack" : "Stack de Prédilection",
+      value: "Next.js & NestJS",
+      desc: isEn ? "TypeScript, React, PostgreSQL & Docker" : "TypeScript, React, PostgreSQL & Docker",
+      highlight: false
+    },
+    {
+      label: isEn ? "Technical Writing" : "Veille & Blog Technique",
+      value: "bamba.dev",
+      desc: isEn ? "Bilingual articles & architecture insights" : "Articles d'ingénierie logicielle & retours d'expérience",
+      highlight: false
+    },
+    {
+      label: isEn ? "Availability" : "Disponibilité & Statut",
+      value: isEn ? "Available" : "Disponible",
+      desc: isEn ? "Open for full-time & freelance • Remote" : "Missions & opportunités CDI • Remote / Dakar",
+      highlight: true
+    }
+  ];
+
   return (
     <section 
       id="hero" 
-      className="relative min-h-[90vh] flex items-center bg-[#f8fafc] dark:bg-[#1f2235] text-slate-900 dark:text-white pt-32 pb-20 overflow-hidden transition-colors duration-300"
+      className="relative pt-32 pb-20 border-b border-zinc-200 dark:border-white/10 transition-colors overflow-hidden"
     >
-      {/* ÉLÉMENT GÉOMÉTRIQUE ROTATIF SIGNATURE JONATHAN BOYER */}
+      {/* Halo lumineux d'arrière-plan très subtil */}
       <div 
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -left-20 w-80 h-80 opacity-20 dark:opacity-15 select-none"
-      >
-        <svg viewBox="0 0 200 200" className="w-full h-full text-[#d97706] dark:text-[#ffc576] animate-spin-slow">
-          <polygon
-            points="100,10 120,40 155,25 160,60 195,65 180,95 200,120 170,135 175,170 140,165 125,195 95,180 70,200 55,170 20,175 25,140 -5,125 10,95 -10,70 20,55 15,20 50,25 65,-5 95,10"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeDasharray="6 4"
-          />
-        </svg>
-      </div>
+        aria-hidden="true" 
+        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-amber-500/10 via-emerald-500/5 to-transparent blur-3xl -z-10 opacity-70"
+      />
 
-      <div 
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -right-24 w-96 h-96 opacity-15 dark:opacity-10 select-none"
-      >
-        <svg viewBox="0 0 200 200" className="w-full h-full text-[#d97706] dark:text-[#ffc576] animate-spin-slow">
-          <circle
-            cx="100"
-            cy="100"
-            r="80"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeDasharray="8 6"
-          />
-          <polygon
-            points="100,20 180,100 100,180 20,100"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-        </svg>
-      </div>
-
-      <div className="boyer-container relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="portfolio-container relative z-10 w-full">
+        
+        {/* Grille principale : Présentation + Portrait */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16">
           
-          {/* COLONNE GAUCHE : IDENTITÉ & TEXTE JONATHAN BOYER */}
+          {/* Colonne gauche : Profil & Valeur ajoutée */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
             className="lg:col-span-7 space-y-6 text-left"
           >
-            {/* Intro Hello */}
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#d97706] dark:bg-[#ffc576] animate-pulse"></span>
-              <span className="text-[#b45309] dark:text-[#ffc576] font-medium text-lg sm:text-xl tracking-wide">
-                {isEn ? 'Hello, I am' : 'Bonjour, je suis'}
+            {/* Badge Disponibilité & Localisation */}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="status-badge">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
+                <span>
+                  {isEn 
+                    ? "Available for opportunities & projects" 
+                    : "Disponible pour opportunités & missions"}
+                </span>
+              </div>
+              <span className="text-xs text-zinc-500 flex items-center gap-1 font-mono">
+                <MapPin size={12} />
+                Dakar, Sénégal • Remote
               </span>
             </div>
 
-            {/* Titre Principal (Playfair Display) */}
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white tracking-tight leading-[1.05]">
-              Mouhamadou Bamba <span className="text-[#d97706] dark:text-[#ffc576]">Diagne</span>
-            </h1>
+            {/* Titre Principal & Rôle précis */}
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.08]">
+                Mouhamadou Bamba <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-400 dark:to-amber-500">Diagne</span>
+              </h1>
+              <p className="text-xl sm:text-2xl font-semibold text-zinc-700 dark:text-zinc-300">
+                {isEn 
+                  ? "Fullstack Software Engineer • TypeScript, Next.js & NestJS" 
+                  : "Développeur Fullstack • TypeScript, Next.js & NestJS"}
+              </p>
+            </div>
 
-            {/* Métier / Titre de fonction */}
-            <p className="text-xl sm:text-2xl text-slate-600 dark:text-[#cbd5e1] font-light">
-              {isEn ? 'Fullstack Web & Mobile Developer' : 'Développeur Web & Mobile Fullstack'}
-            </p>
-
-            {/* Pitch & Valeur ajoutée */}
-            <p className="text-base sm:text-lg text-slate-600 dark:text-[#9899a8] max-w-xl leading-relaxed">
+            {/* Pitch & Valeur ajoutée orientée production */}
+            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
               {isEn
-                ? 'Specialized in building high-performance web applications and mobile platforms with clean architectures, smooth interactions, and production rigor (TypeScript, Next.js, NestJS & React Native).'
-                : 'Spécialisé dans la conception d’applications web et mobiles modernes, robustes et sur-mesure (TypeScript, Next.js, React, NestJS & React Native) avec un soin rigoureux apporté à l’architecture et à l’expérience utilisateur.'}
+                ? "I build high-performance web applications and real-time management platforms. Focused on clean architecture, scalable APIs, and smooth user experiences across production environments."
+                : "Je conçois des applications web modernes et des outils de gestion en temps réel (CRM, POS, e-learning). Attaché à la propreté du code, à la robustesse des APIs et à la fluidité de l'expérience utilisateur en production."}
             </p>
 
-            {/* Actions CTAs */}
-            <div className="flex flex-wrap gap-4 items-center pt-4">
-              <button 
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-boyer"
-              >
-                <span>{isEn ? 'View My Work' : 'Voir mes réalisations'}</span>
-                <ArrowRight size={14} className="icon-arrow" />
-              </button>
-
+            {/* CTAs d'action directe conformes aux standards de recrutement */}
+            <div className="flex flex-wrap gap-3.5 items-center pt-2">
               <a 
                 href="/cv-bamba.pdf"
                 download="CV_Mouhamadou_Bamba_Diagne.pdf"
                 target="_blank"
                 rel="noreferrer"
-                className="btn-boyer !border-[#d97706]/70 dark:!border-[#ffc576]/70 !text-[#b45309] dark:!text-[#ffc576] hover:!bg-[#d97706] dark:hover:!bg-[#ffc576] hover:!text-white dark:hover:!text-[#1f2235]"
+                className="btn-primary"
               >
-                <Download size={14} className="mr-1.5" />
-                <span>{isEn ? 'Download CV' : 'Mon CV'}</span>
+                <Download size={15} />
+                <span>{isEn ? "Download Resume (PDF)" : "Télécharger mon CV (PDF)"}</span>
               </a>
 
               <button 
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-boyer !border-slate-300 dark:!border-white/30 !text-slate-700 dark:!text-white/80 hover:!border-[#d97706] dark:hover:!border-[#ffc576] hover:!text-white dark:hover:!text-[#1f2235]"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-secondary"
               >
-                <span>{isEn ? 'Get In Touch' : 'Me contacter'}</span>
-                <ArrowRight size={14} className="icon-arrow" />
+                <span>{isEn ? "View Featured Work" : "Voir mes réalisations"}</span>
+                <ArrowRight size={14} />
               </button>
 
-              <a
-                href="https://github.com/Bamba24"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors ml-2"
+              <button 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-secondary"
               >
-                <Code2 size={16} />
+                <span>{isEn ? "Get In Touch" : "Me contacter"}</span>
+              </button>
+            </div>
+
+            {/* Liens réseaux rapides */}
+            <div className="flex items-center gap-4 pt-2 text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+              <a 
+                href="https://github.com/Bamba24" 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              >
+                <Github size={14} />
                 <span>GitHub</span>
+              </a>
+              <span>•</span>
+              <a 
+                href="https://www.linkedin.com/in/mouhamadou-bamba-diagne-59063a247/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              >
+                <Linkedin size={14} />
+                <span>LinkedIn</span>
+              </a>
+              <span>•</span>
+              <a 
+                href="https://bamba-dev.vercel.app/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              >
+                <BookOpen size={14} />
+                <span>bamba.dev</span>
               </a>
             </div>
           </motion.div>
 
-          {/* COLONNE DROITE : PORTRAIT ÉPURÉ AVEC ACCENT DORÉ */}
+          {/* Colonne droite : Photo de profil épurée */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="lg:col-span-5 relative flex justify-center"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-span-5 flex justify-center"
           >
             <div className="relative w-full max-w-xs sm:max-w-sm">
-              
-              {/* Cadre photo avec subtile ombre */}
-              <div className="relative aspect-square rounded-sm overflow-hidden bg-slate-100 dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/30 shadow-2xl group">
+              <div className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 shadow-2xl group">
                 <img
                   src="/images/pp.png"
                   alt="Mouhamadou Bamba Diagne"
-                  className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 transition-all duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 dark:from-[#1f2235]/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Badge Flottant Disponibilité */}
-              <div className="absolute -bottom-5 -right-3 sm:right-2 bg-white dark:bg-[#313552] border border-slate-200 dark:border-[#ffc576]/60 px-4 py-3 rounded-sm shadow-xl flex items-center gap-3">
-                <Sparkles size={18} className="text-[#d97706] dark:text-[#ffc576] shrink-0 animate-bounce" />
-                <div className="text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-[#9899a8]">
-                    {isEn ? "Status" : "Disponibilité"}
+              {/* Tag flottant Tech Lead */}
+              <div className="absolute -bottom-4 right-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 px-4 py-2.5 rounded-xl shadow-xl flex items-center gap-2.5 text-left">
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                    Spécialisation
                   </p>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">
-                    {isEn ? "Available for projects" : "Disponible pour missions & projets"}
+                  <p className="text-xs font-bold text-zinc-900 dark:text-white">
+                    Next.js • NestJS • TypeScript
                   </p>
                 </div>
               </div>
-
             </div>
           </motion.div>
 
         </div>
+
+        {/* Bento Grid Highlights (Impact & Chiffres Clés) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left pt-6">
+          {bentoHighlights.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 + idx * 0.08 }}
+              className="bento-card p-5"
+            >
+              <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1">
+                {item.label}
+              </span>
+              <p className="text-2xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-1">
+                {item.value}
+              </p>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

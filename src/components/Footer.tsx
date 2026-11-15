@@ -13,51 +13,60 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white dark:bg-[#1f2235] border-t border-slate-200 dark:border-[#ffc576]/20 text-slate-500 dark:text-[#9899a8] py-12 transition-colors duration-300">
-      <div className="boyer-container flex flex-col sm:flex-row items-center justify-between gap-6">
+    <footer className="border-t border-zinc-200 dark:border-white/10 text-zinc-500 dark:text-zinc-400 py-10 transition-colors">
+      <div className="portfolio-container flex flex-col sm:flex-row items-center justify-between gap-6">
         
-        {/* CRÉDITS STYLE JONATHAN BOYER */}
-        <div className="text-center sm:text-left text-xs font-medium space-y-1">
-          <p className="text-slate-700 dark:text-[#cbd5e1]">
-            {isEn 
-              ? "Design inspired by Jonathan Boyer — Integration & Development by" 
-              : "Design inspiré par Jonathan Boyer — Intégration & développement par"}{" "}
-            <span className="text-[#b45309] dark:text-[#ffc576] font-semibold">Mouhamadou Bamba Diagne</span>
+        {/* CRÉDITS */}
+        <div className="text-center sm:text-left text-xs space-y-1">
+          <p className="text-zinc-700 dark:text-zinc-300 font-medium">
+            Mouhamadou Bamba Diagne —{" "}
+            <span className="text-zinc-500 dark:text-zinc-400">
+              {isEn ? "Fullstack Software Engineer" : "Ingénieur Logiciel Fullstack"}
+            </span>
           </p>
-          <p className="text-slate-500 dark:text-[#9899a8] text-[11px]">
-            © {currentYear} • {isEn ? "All rights reserved" : "Tous droits réservés"}
+          <p className="text-zinc-400 dark:text-zinc-500 text-[11px]">
+            © {currentYear} • {isEn ? "Built with Next.js, React & Tailwind CSS" : "Conçu avec Next.js, React & Tailwind CSS"}
           </p>
         </div>
 
         {/* LIENS SOCIAUX RAPIDES & RETOUR EN HAUT */}
         <div className="flex items-center gap-5">
-          <div className="flex items-center gap-4 text-xs font-semibold uppercase tracking-wider">
+          <div className="flex items-center gap-4 text-xs font-medium">
             <a 
               href="https://github.com/Bamba24" 
               target="_blank" 
               rel="noreferrer" 
-              className="text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               GitHub
             </a>
-            <span className="text-slate-300 dark:text-white/10">•</span>
+            <span>•</span>
             <a 
               href="https://www.linkedin.com/in/mouhamadou-bamba-diagne-59063a247/" 
               target="_blank" 
               rel="noreferrer" 
-              className="text-slate-600 dark:text-[#9899a8] hover:text-[#d97706] dark:hover:text-[#ffc576] transition-colors"
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               LinkedIn
+            </a>
+            <span>•</span>
+            <a 
+              href="https://bamba-dev.vercel.app/" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors"
+            >
+              Blog
             </a>
           </div>
 
           <button
             onClick={scrollToTop}
             title={isEn ? "Back to top" : "Retour en haut"}
-            className="w-9 h-9 border border-slate-300 dark:border-[#ffc576]/40 flex items-center justify-center text-[#b45309] dark:text-[#ffc576] hover:bg-[#d97706] dark:hover:bg-[#ffc576] hover:text-white dark:hover:text-[#1f2235] transition-all rounded-xs ml-2 cursor-pointer shadow-2xs"
+            className="w-8 h-8 rounded-lg border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer"
             aria-label="Back to top"
           >
-            <ArrowUp size={16} />
+            <ArrowUp size={14} />
           </button>
         </div>
 
