@@ -40,22 +40,22 @@ export default function Experience() {
       logoText: "XA",
       logoImage: "/images/xarala.png",
       descriptionFr:
-        "Immersion complète au sein de l'équipe technique de Xarala Academy, avec participation active sur des applications concrètes en production dont la plateforme e-learning et le CRM de gestion commerciale.",
+        "Immersion complète au sein de l'équipe technique de Xarala Academy (+20 000 apprenants), avec participation active sur des applications concrètes en production dont la plateforme e-learning et la refonte du CRM de gestion commerciale.",
       descriptionEn:
-        "Full technical immersion within Xarala Academy's engineering team, actively contributing to production applications including the e-learning platform and the business management CRM.",
+        "Full technical immersion within Xarala Academy's engineering team (20,000+ learners), actively contributing to production applications including the e-learning platform and the business management CRM redesign.",
       missions: [
-        "Développement frontend de l'application CRM de gestion de stock et de ventes (POS) avec Next.js, GraphQL, TanStack Query, Zustand et Zod",
-        "Contribution au développement de nouvelles fonctionnalités et amélioration de l'UI sur la plateforme e-learning Xarala Academy",
+        "Refonte et migration frontend du CRM de gestion de stock et de ventes (passage de templates HTML Django/Python vers Next.js avec TanStack Query, TanStack Table, Zustand et Zod) et liaison avec le backend",
+        "Contribution au développement de nouvelles fonctionnalités sur la plateforme e-learning Xarala Academy (+20 000 apprenants) avec Next.js, GraphQL, Redux, TanStack Query et TanStack Table",
         "Collaboration d'équipe en méthodologie agile Scrum, revues de code et intégration continue via GitLab",
         "Intégration et consommation d'APIs sécurisées avec TypeScript, validation des données et requêtes GraphQL / REST"
       ],
       missionsEn: [
-        "Frontend development for the Stock & Sales Management CRM (POS) using Next.js, GraphQL, TanStack Query, Zustand, and Zod",
-        "Feature development and UI improvements on the production Xarala Academy e-learning platform",
+        "Frontend redesign and migration of the Stock & Sales CRM (moving from Django/Python HTML templates to Next.js with TanStack Query, TanStack Table, Zustand, and Zod) connected to the backend",
+        "Feature development on the production Xarala Academy e-learning platform (20,000+ learners) using Next.js, GraphQL, Redux, TanStack Query, and TanStack Table",
         "Agile Scrum team collaboration, peer code reviews, and CI workflows on GitLab",
         "Secure API integration and data handling with TypeScript, schema validation, and GraphQL / REST endpoints"
       ],
-      stack: ["Next.js", "React", "TypeScript", "Python", "GraphQL", "PostgreSQL", "Zod", "Zustand", "TanStack Query", "GitLab"]
+      stack: ["Next.js", "React", "TypeScript", "GraphQL", "Redux", "TanStack Query", "TanStack Table", "Zustand", "Zod", "Python", "PostgreSQL", "GitLab"]
     },
     {
       id: 1,

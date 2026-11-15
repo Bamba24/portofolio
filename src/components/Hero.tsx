@@ -35,7 +35,7 @@ export default function Hero() {
     {
       labelFr: "Frontend & Mobile",
       labelEn: "Frontend & Mobile",
-      items: ["Next.js", "React", "React Native", "Expo", "TypeScript", "TailwindCSS", "TanStack Query", "GraphQL", "Zustand", "Zod"]
+      items: ["Next.js", "React", "React Native", "Expo", "TypeScript", "Redux", "TanStack Query", "TanStack Table", "GraphQL", "Zustand", "Zod", "TailwindCSS"]
     },
     {
       labelFr: "Backend & Data",
@@ -312,7 +312,7 @@ export default function Hero() {
                   {isEn ? "EdTech Impact" : "Impact EdTech"}
                 </span>
                 <strong className="text-lg font-extrabold text-zinc-900 dark:text-white">
-                  40 000+
+                  20 000+
                 </strong>
                 <span className="text-[11px] text-zinc-500 dark:text-zinc-400 block leading-tight mt-0.5">
                   {isEn ? "Xarala learners" : "Apprenants Xarala"}
