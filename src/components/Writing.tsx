@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ArrowUpRight, BookOpen, Clock, Calendar, Sparkles } from 'lucide-react';
+import { ArrowUpRight, BookOpen, Clock } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
 import { motion } from 'framer-motion';
 
@@ -11,8 +11,8 @@ export default function Writing() {
     {
       titleFr: "Next.js App Router, SSG & Optimisation SEO Moderne",
       titleEn: "Next.js App Router, SSG & Modern SEO Optimization",
-      descFr: "Comment structurer une application Next.js pour un pré-rendu statique optimal, des métadonnées dynamiques et une indexation parfaite.",
-      descEn: "How to structure a Next.js application for optimal static pre-rendering, dynamic OpenGraph metadata, and flawless indexing.",
+      descFr: "Structurer une application Next.js pour un pré-rendu statique optimal, des métadonnées OpenGraph dynamiques et une indexation rapide.",
+      descEn: "How to structure a Next.js application for optimal static pre-rendering, dynamic OpenGraph metadata, and fast indexing.",
       date: "2026",
       readTime: "6 min",
       tags: ["Next.js", "SEO", "TypeScript"],
@@ -21,8 +21,8 @@ export default function Writing() {
     {
       titleFr: "Architecture d'APIs Modulaires avec NestJS, TypeScript & Prisma",
       titleEn: "Modular API Architecture with NestJS, TypeScript & Prisma",
-      descFr: "Bonnes pratiques de clean architecture, séparation des responsabilités et validation stricte avec DTOs et ORM relationnel.",
-      descEn: "Clean architecture best practices, separation of concerns, and strict schema validation with DTOs and relational ORMs.",
+      descFr: "Principes de clean architecture, séparation des responsabilités et validation stricte des schémas avec DTOs et ORM relationnel.",
+      descEn: "Clean architecture principles, separation of concerns, and strict schema validation with DTOs and relational ORMs.",
       date: "2026",
       readTime: "8 min",
       tags: ["NestJS", "Backend", "Prisma"],
@@ -32,7 +32,7 @@ export default function Writing() {
       titleFr: "Conteneurisation Docker & Intégration Continue avec GitLab CI",
       titleEn: "Docker Containerization & Continuous Integration with GitLab CI",
       descFr: "Mettre en place un pipeline de livraison reproductible pour garantir la stabilité et la rapidité des déploiements en production.",
-      descEn: "Setting up a reproducible delivery pipeline to ensure deployment stability, testing, and speed in production environments.",
+      descEn: "Setting up a reproducible delivery pipeline to ensure deployment stability, automated checks, and speed in production.",
       date: "2026",
       readTime: "5 min",
       tags: ["Docker", "GitLab CI", "DevOps"],
@@ -41,90 +41,90 @@ export default function Writing() {
   ];
 
   return (
-    <section id="writing" className="py-24 border-t border-zinc-200 dark:border-white/10 transition-colors">
+    <section id="writing" className="py-20 border-t border-zinc-200 dark:border-white/10 transition-colors">
       <div className="portfolio-container">
         
-        {/* En-tête de section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 text-left">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
+          
+          {/* Colonne gauche (4 cols) : Intro éditoriale */}
+          <div className="lg:col-span-4 space-y-4">
             <span className="section-tag">
               <BookOpen size={12} />
               {isEn ? "Technical Writing" : "Veille & Écriture"}
             </span>
-            <h2 className="section-heading">
-              {isEn ? "Engineering Blog & Insights" : "Articles & Retours d'Expérience"}
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-tight">
+              {isEn ? "Writing on bamba.dev" : "Notes & Articles sur bamba.dev"}
             </h2>
-            <p className="section-desc">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {isEn
-                ? "I share hands-on learnings, architectural patterns, and production takeaways on my engineering blog."
-                : "Je documente mes apprentissages concrets, choix d'architecture et bonnes pratiques d'ingénierie logicielle."}
+                ? "I write bilingual articles about fullstack architecture, Next.js performance, NestJS backends, and DevOps workflows."
+                : "Je partage mes retours d'expérience bilingues sur l'architecture fullstack, Next.js, NestJS et l'automatisation DevOps."}
             </p>
+            <div className="pt-2">
+              <a
+                href="https://bamba-dev.vercel.app/en/posts"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-secondary !py-2 !px-4 !text-xs"
+              >
+                <span>{isEn ? "Read all articles on bamba.dev" : "Lire tous les articles sur bamba.dev"}</span>
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
           </div>
 
-          <a
-            href="https://bamba-dev.vercel.app/en/posts"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-secondary self-start md:self-end"
-          >
-            <span>{isEn ? "Visit bamba.dev" : "Explorer bamba.dev"}</span>
-            <ArrowUpRight size={14} />
-          </a>
-        </div>
+          {/* Colonne droite (8 cols) : Liste éditoriale style Lee Robinson */}
+          <div className="lg:col-span-8 bento-card divide-y divide-zinc-200/80 dark:divide-white/10 overflow-hidden">
+            {articles.map((article, index) => (
+              <motion.a
+                key={index}
+                href={article.url}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: index * 0.08 }}
+                className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-zinc-50/80 dark:hover:bg-white/[0.02] transition-colors cursor-pointer block"
+              >
+                <div className="space-y-1.5 max-w-xl">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[11px] font-mono text-zinc-400">
+                      {article.date}
+                    </span>
+                    <span className="text-zinc-300 dark:text-zinc-700">•</span>
+                    {article.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/5"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-        {/* Grille des articles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {articles.map((article, index) => (
-            <motion.a
-              key={index}
-              href={article.url}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bento-card p-6 flex flex-col justify-between text-left group cursor-pointer"
-            >
-              <div>
-                <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 mb-4 font-mono">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar size={12} />
-                    {article.date}
-                  </span>
-                  <span className="flex items-center gap-1.5">
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
+                    {isEn ? article.titleEn : article.titleFr}
+                  </h3>
+
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {isEn ? article.descEn : article.descFr}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 self-start sm:self-center shrink-0">
+                  <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
                     <Clock size={12} />
                     {article.readTime}
                   </span>
+                  <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white group-hover:border-amber-500/40 transition-all">
+                    <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
                 </div>
+              </motion.a>
+            ))}
+          </div>
 
-                <h3 className="text-lg font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors mb-3 leading-snug">
-                  {isEn ? article.titleEn : article.titleFr}
-                </h3>
-
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
-                  {isEn ? article.descEn : article.descFr}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between mt-auto">
-                <div className="flex flex-wrap gap-1.5">
-                  {article.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white group-hover:border-zinc-400 dark:group-hover:border-zinc-600 transition-all shrink-0 ml-2">
-                  <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </div>
-              </div>
-            </motion.a>
-          ))}
         </div>
 
       </div>

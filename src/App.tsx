@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
 import Projects, { ProjectType } from './components/Projects';
-import Writing from './components/Writing';
 import Experience from './components/Experience';
-import Education from './components/Education';
-import Social from './components/Social';
+import Writing from './components/Writing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectDetail from './components/ProjectDetail';
@@ -39,16 +35,14 @@ function App() {
               <Header />
               <main>
                 <Hero />
-                <About />
-                <Skills />
-                <Projects onSelectProject={(proj, list) => {
-                  setSelectedProject(proj);
-                  setAllProjects(list);
-                }} />
-                <Writing />
+                <Projects
+                  onSelectProject={(proj, list) => {
+                    setSelectedProject(proj);
+                    setAllProjects(list);
+                  }}
+                />
                 <Experience />
-                <Education />
-                <Social />
+                <Writing />
                 <Contact />
               </main>
               <Footer />

@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
-import { ArrowRight, ExternalLink, Github, Sparkles, Layers, CheckCircle2 } from 'lucide-react';
+import { useContext } from 'react';
+import { ArrowRight, ExternalLink, Github, Sparkles, Layers, CheckCircle2, Globe, Terminal } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export interface ProjectType {
   id: number;
@@ -32,7 +32,6 @@ interface ProjectsProps {
 
 export default function Projects({ onSelectProject }: ProjectsProps) {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
-  const [selectedCategory, setSelectedCategory] = useState<'Tous' | 'Phares' | 'Fullstack' | 'Web'>('Tous');
   const isEn = langue === 'en';
 
   const projects: ProjectType[] = [
@@ -72,8 +71,8 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Strict client validation with Zod and React Hook Form",
         "Full containerization with Docker multi-stage build"
       ],
-      status: "Terminé",
-      statusEn: "Finished"
+      status: "Production",
+      statusEn: "Production"
     },
     {
       id: 9,
@@ -105,8 +104,8 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Agile team collaboration and GitLab CI workflows",
         "Performance and load-time optimizations"
       ],
-      status: "Terminé",
-      statusEn: "Finished"
+      status: "Production",
+      statusEn: "Production"
     },
     {
       id: 2,
@@ -142,8 +141,8 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Native dark mode and refined typography",
         "Accessibility compliance (skip links, ARIA)"
       ],
-      status: "Terminé",
-      statusEn: "Finished"
+      status: "Production",
+      statusEn: "Production"
     },
     {
       id: 4,
@@ -179,7 +178,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "High-performance responsive interface optimized for conversion"
       ],
       status: "Terminé",
-      statusEn: "Finished"
+      statusEn: "Completed"
     },
     {
       id: 3,
@@ -214,7 +213,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Responsive interface optimized for mobile and tablets"
       ],
       status: "En cours",
-      statusEn: "In building"
+      statusEn: "In progress"
     },
     {
       id: 10,
@@ -245,7 +244,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Reactive Next.js frontend with typed validation"
       ],
       status: "En cours",
-      statusEn: "In building"
+      statusEn: "In progress"
     },
     {
       id: 11,
@@ -272,191 +271,314 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         "Secured requests and token authentication"
       ],
       status: "En cours",
-      statusEn: "In building"
+      statusEn: "In progress"
     }
   ];
 
-  const categories: Array<{ id: 'Tous' | 'Phares' | 'Fullstack' | 'Web'; labelFr: string; labelEn: string }> = [
-    { id: 'Tous', labelFr: 'Tous les projets', labelEn: 'All Projects' },
-    { id: 'Phares', labelFr: '★ Projets Phares', labelEn: '★ Featured Work' },
-    { id: 'Fullstack', labelFr: 'Fullstack', labelEn: 'Fullstack' },
-    { id: 'Web', labelFr: 'Web Frontend', labelEn: 'Web Frontend' }
-  ];
-
-  const filteredProjects = selectedCategory === 'Tous'
-    ? projects
-    : selectedCategory === 'Phares'
-    ? projects.filter(p => p.featured)
-    : projects.filter(p => p.category === selectedCategory);
+  const primarySpotlight = projects[0]; // POS / CRM
+  const secondarySpotlights = projects.slice(1, 4); // Xarala, bamba.dev, E-commerce
+  const labProjects = projects.slice(4); // Coran, Spring Boot, Django
 
   return (
-    <section 
-      id="projects" 
-      className="py-24 border-t border-zinc-200 dark:border-white/10 transition-colors relative"
+    <section
+      id="projects"
+      className="py-20 border-t border-zinc-200 dark:border-white/10 transition-colors relative"
     >
       <div className="portfolio-container">
         
-        {/* En-tête de section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 text-left">
+        {/* EN-TÊTE DE SECTION */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 text-left">
           <div>
             <span className="section-tag">
               <Layers size={12} />
-              {isEn ? "Curated Work & Systems" : "Réalisations & Systèmes"}
+              {isEn ? "Featured Case Studies" : "Études de Cas & Production"}
             </span>
             <h2 className="section-heading">
-              {isEn ? "Featured Case Studies & Projects" : "Projets & Études de Cas"}
+              {isEn ? "Selected Engineering Work" : "Systèmes Réalisés & Architecture"}
             </h2>
             <p className="section-desc">
-              {isEn 
-                ? "A curated selection of production applications, real-time client systems, and fullstack architectures." 
-                : "Une sélection rigoureuse d'applications réelles en production, outils métiers et architectures fullstack."}
+              {isEn
+                ? "Production applications, high-traffic platforms, and fullstack systems built with modern engineering standards."
+                : "Applications déployées en production, plateformes à fort trafic et architectures fullstack."}
             </p>
-          </div>
-
-          {/* Filtres de catégorie Bento */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 self-start md:self-end">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-xs"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-                }`}
-              >
-                {isEn ? cat.labelEn : cat.labelFr}
-              </button>
-            ))}
           </div>
         </div>
 
-        {/* Grille de projets modernes Bento */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.article
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.35 }}
-                className="bento-card flex flex-col justify-between overflow-hidden group text-left h-full"
-              >
-                {/* Aperçu image avec cadrage soigné */}
-                <div 
-                  onClick={() => onSelectProject?.(project, projects)}
-                  className="relative aspect-video w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900 cursor-pointer border-b border-zinc-100 dark:border-white/5"
+        {/* SPOTLIGHT #1 : GRANDE CARTE HORIZONTALE ASYMÉTRIQUE (CRM & POS) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bento-card overflow-hidden mb-6 text-left group"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+            {/* Aperçu avec barre de navigateur style Linear / Raycast */}
+            <div
+              onClick={() => onSelectProject?.(primarySpotlight, projects)}
+              className="lg:col-span-7 bg-zinc-100 dark:bg-zinc-900/90 border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-white/10 p-4 sm:p-6 flex flex-col justify-between cursor-pointer overflow-hidden"
+            >
+              {/* Browser top bar */}
+              <div className="flex items-center justify-between px-3 py-2 bg-white dark:bg-zinc-950 rounded-t-xl border border-b-0 border-zinc-200 dark:border-white/10">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+                </div>
+                <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                  <Globe size={10} className="text-emerald-500" />
+                  crm2.noflai.com
+                </span>
+                <span className="text-[10px] font-mono text-emerald-500 font-semibold">
+                  LIVE
+                </span>
+              </div>
+
+              {/* Capture */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-b-xl border border-zinc-200 dark:border-white/10 bg-zinc-950">
+                <img
+                  src={primarySpotlight.image}
+                  alt={isEn ? primarySpotlight.titleEn : primarySpotlight.titleFr}
+                  className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            {/* Détails d'architecture à droite */}
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 text-[11px] font-mono font-bold uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 rounded-full flex items-center gap-1">
+                    <Sparkles size={11} />
+                    {isEn ? "Flagship Production" : "Projet Phare • Production"}
+                  </span>
+                  <span className="text-xs font-mono text-zinc-400">
+                    {primarySpotlight.category}
+                  </span>
+                </div>
+
+                <h3
+                  onClick={() => onSelectProject?.(primarySpotlight, projects)}
+                  className="text-2xl font-extrabold text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors cursor-pointer leading-tight"
                 >
-                  <img
-                    src={project.image}
-                    alt={isEn ? project.titleEn : project.titleFr}
-                    className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
-                      project.imagePosition === 'top'
-                        ? 'object-cover object-top'
-                        : project.imagePosition === 'contain'
-                        ? 'object-contain p-3'
-                        : 'object-cover object-center'
-                    }`}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/10 dark:bg-black/25 group-hover:bg-transparent transition-colors duration-300" />
-                  
-                  {/* Badge Statut & Catégorie */}
-                  <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <span className="px-2.5 py-1 text-[10px] font-mono font-semibold uppercase tracking-wider bg-white/90 dark:bg-zinc-900/90 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-white/10 backdrop-blur-md rounded-md shadow-xs">
-                      {project.category}
+                  {isEn ? primarySpotlight.titleEn : primarySpotlight.titleFr}
+                </h3>
+
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  {isEn ? primarySpotlight.descriptionEn : primarySpotlight.descriptionFr}
+                </p>
+
+                {/* Points d'architecture clés */}
+                <div className="space-y-2 pt-1">
+                  {(isEn ? primarySpotlight.featuresEn : primarySpotlight.featuresFr).slice(0, 3).map((feat, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-zinc-700 dark:text-zinc-300">
+                      <CheckCircle2 size={14} className="text-emerald-500 shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Stack pills */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {primarySpotlight.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10"
+                    >
+                      {tech}
                     </span>
-                    {project.featured && (
-                      <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 rounded-md backdrop-blur-md flex items-center gap-1">
-                        <Sparkles size={10} />
-                        Production
+                  ))}
+                </div>
+              </div>
+
+              {/* CTAs */}
+              <div className="pt-6 mt-6 border-t border-zinc-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
+                <button
+                  onClick={() => onSelectProject?.(primarySpotlight, projects)}
+                  className="btn-primary !py-2 !px-4 !text-xs"
+                >
+                  <span>{isEn ? "Read Case Study" : "Lire l'étude de cas"}</span>
+                  <ArrowRight size={13} />
+                </button>
+
+                {primarySpotlight.demo && (
+                  <a
+                    href={primarySpotlight.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-secondary !py-2 !px-3.5 !text-xs"
+                  >
+                    <span>{isEn ? "Live App" : "Voir en direct"}</span>
+                    <ExternalLink size={13} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* SPOTLIGHTS SECONDAIRES (GRILLE BENTO 3 COLONNES : XARALA, BAMBA.DEV, E-COMMERCE) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+          {secondarySpotlights.map((project, idx) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08 }}
+              className="bento-card flex flex-col justify-between overflow-hidden group text-left"
+            >
+              <div>
+                {/* Browser Frame Header */}
+                <div
+                  onClick={() => onSelectProject?.(project, projects)}
+                  className="bg-zinc-100 dark:bg-zinc-900/80 p-3 border-b border-zinc-200 dark:border-white/10 cursor-pointer"
+                >
+                  <div className="flex items-center justify-between px-2.5 py-1.5 bg-white dark:bg-zinc-950 rounded-t-lg border border-b-0 border-zinc-200 dark:border-white/10">
+                    <div className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                      <span className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                      <span className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                    </div>
+                    <span className="text-[10px] font-mono text-zinc-400 truncate max-w-[140px]">
+                      {project.demo ? project.demo.replace(/^https?:\/\//, '') : project.category}
+                    </span>
+                    <span className="text-[9px] font-mono text-emerald-500 font-semibold uppercase">
+                      {isEn ? project.statusEn : project.status}
+                    </span>
+                  </div>
+                  <div className="relative aspect-video w-full overflow-hidden rounded-b-lg border border-zinc-200 dark:border-white/10 bg-zinc-950">
+                    <img
+                      src={project.image}
+                      alt={isEn ? project.titleEn : project.titleFr}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5">
+                  <div className="flex flex-wrap gap-1.5 mb-2.5">
+                    {project.technologies.slice(0, 4).map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/5"
+                      >
+                        {tech}
                       </span>
-                    )}
+                    ))}
                   </div>
 
-                  <div className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-mono font-semibold uppercase tracking-wider bg-zinc-900/85 text-zinc-100 border border-white/10 backdrop-blur-md rounded-md">
-                    {isEn ? project.statusEn : project.status}
+                  <h3
+                    onClick={() => onSelectProject?.(project, projects)}
+                    className="text-base font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors cursor-pointer mb-2 leading-snug"
+                  >
+                    {isEn ? project.titleEn : project.titleFr}
+                  </h3>
+
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
+                    {isEn ? project.descriptionEn : project.descriptionFr}
+                  </p>
+                </div>
+              </div>
+
+              <div className="px-5 py-3.5 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between">
+                <button
+                  onClick={() => onSelectProject?.(project, projects)}
+                  className="text-xs font-semibold text-zinc-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <span>{isEn ? "Case Study" : "Étude de cas"}</span>
+                  <ArrowRight size={12} />
+                </button>
+
+                <div className="flex items-center gap-2">
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-mono text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center gap-1 transition-colors"
+                    >
+                      <span>Live</span>
+                      <ExternalLink size={12} />
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                    >
+                      <Github size={14} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* PARTIE 2 : TABLEAU D'INDEX "LABORATOIRE & PROJETS EN COURS" (STYLE LEEROB / PACO) */}
+        <div className="bento-card p-6 sm:p-8 text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-zinc-200 dark:border-white/10">
+            <div className="flex items-center gap-2.5">
+              <Terminal size={16} className="text-amber-500" />
+              <div>
+                <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                  {isEn ? "Engineering Lab & Ongoing Training Projects" : "Laboratoire & Projets en Cours de Développement"}
+                </h3>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  {isEn
+                    ? "Architectures currently in active development and enterprise specialization."
+                    : "Architectures fullstack actuellement en développement actif ou en spécialisation."}
+                </p>
+              </div>
+            </div>
+            <span className="text-[11px] font-mono text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full self-start sm:self-auto">
+              {labProjects.length} {isEn ? "active builds" : "projets actifs"}
+            </span>
+          </div>
+
+          <div className="divide-y divide-zinc-200/70 dark:divide-white/5">
+            {labProjects.map((proj) => (
+              <div
+                key={proj.id}
+                onClick={() => onSelectProject?.(proj, projects)}
+                className="py-4 first:pt-0 last:pb-0 flex flex-col md:flex-row md:items-center justify-between gap-3 group cursor-pointer hover:bg-zinc-50/60 dark:hover:bg-white/[0.02] -mx-3 px-3 rounded-lg transition-colors"
+              >
+                <div className="space-y-1 max-w-xl">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                    <h4 className="text-sm font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
+                      {isEn ? proj.titleEn : proj.titleFr}
+                    </h4>
                   </div>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 pl-4">
+                    {isEn ? proj.descriptionEn : proj.descriptionFr}
+                  </p>
                 </div>
 
-                {/* Corps de la carte */}
-                <div className="p-6 flex flex-col flex-1 justify-between">
-                  <div>
-                    {/* Tags technologiques */}
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.technologies.slice(0, 3).map((tech, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-850 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <span className="text-[10px] font-mono text-zinc-400 self-center">
-                          +{project.technologies.length - 3}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Titre */}
-                    <h3 
-                      onClick={() => onSelectProject?.(project, projects)}
-                      className="text-lg font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors mb-2.5 cursor-pointer leading-snug"
-                    >
-                      {isEn ? project.titleEn : project.titleFr}
-                    </h3>
-
-                    {/* Description concise */}
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3 mb-5">
-                      {isEn ? project.descriptionEn : project.descriptionFr}
-                    </p>
+                <div className="flex flex-wrap items-center gap-2 pl-4 md:pl-0">
+                  <div className="flex flex-wrap gap-1">
+                    {proj.technologies.slice(0, 4).map((t, i) => (
+                      <span
+                        key={i}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/10"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* Actions au bas de la carte */}
-                  <div className="pt-4 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between mt-auto">
-                    {/* Action "Étude de cas" */}
-                    <button
-                      onClick={() => onSelectProject?.(project, projects)}
-                      className="text-xs font-semibold text-zinc-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <span>{isEn ? "Case Study" : "Étude de cas"}</span>
-                      <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                    </button>
-
-                    {/* Liens externes directs */}
-                    <div className="flex items-center gap-1.5">
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noreferrer"
-                          title="Visiter le site en ligne"
-                          className="p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                        >
-                          <ExternalLink size={15} />
-                        </a>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noreferrer"
-                          title="Code source GitHub"
-                          className="p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                        >
-                          <Github size={15} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                  <span className="text-xs font-semibold text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white flex items-center gap-1 ml-2">
+                    <span>{isEn ? "Inspect" : "Détails"}</span>
+                    <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                  </span>
                 </div>
-
-              </motion.article>
+              </div>
             ))}
-          </AnimatePresence>
+          </div>
         </div>
 
       </div>

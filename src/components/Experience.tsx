@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
-import { MapPin, ExternalLink, Calendar, Briefcase } from 'lucide-react';
+import { useContext } from 'react';
+import { MapPin, ExternalLink, Calendar, Briefcase, GraduationCap, Download, CheckCircle2 } from 'lucide-react';
 import { LangueContext } from '../context/langueContext';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export interface ExperienceItem {
   id: number;
@@ -14,7 +14,6 @@ export interface ExperienceItem {
   duration?: string;
   type: 'Stage' | 'Projet';
   logoText: string;
-  logoBg: string;
   logoImage?: string;
   descriptionFr: string;
   descriptionEn: string;
@@ -27,40 +26,7 @@ export default function Experience() {
   const { langue } = useContext(LangueContext) || { langue: 'fr' };
   const isEn = langue === 'en';
 
-  const [activeTab, setActiveTab] = useState<'Tous' | 'Stages'>('Tous');
-
   const experiences: ExperienceItem[] = [
-    {
-      id: 1,
-      titleFr: "Stagiaire Développeur Fullstack & Mobile",
-      titleEn: "Fullstack & Mobile Developer Intern",
-      company: "Primelec Services",
-      url: "https://primelec-services.com",
-      location: "France / Remote",
-      period: "Janvier 2026 – Mars 2026",
-      duration: "3 mois",
-      type: "Stage",
-      logoText: "PS",
-      logoBg: "bg-white dark:bg-zinc-900",
-      logoImage: "/images/primelec.png",
-      descriptionFr:
-        "Stage en développement fullstack JavaScript et mobile au sein de Primelec Services avec participation active à des projets d'entreprises réels.",
-      descriptionEn:
-        "Internship in fullstack JavaScript and mobile development at Primelec Services, contributing to real-world corporate projects.",
-      missions: [
-        "Développement d’interfaces web dynamiques avec React & Next.js",
-        "Participation au développement d'applications mobiles avec React Native & Expo",
-        "Correction de bugs, optimisation des performances et refonte UI",
-        "Collaboration en équipe en méthode agile sur des projets clients"
-      ],
-      missionsEn: [
-        "Frontend web development with React & Next.js",
-        "Participation in mobile application development using React Native & Expo",
-        "Bug fixing, performance optimization, and UI refactoring",
-        "Agile team collaboration on live client projects"
-      ],
-      stack: ["React", "Next.js", "React Native", "TypeScript", "TailwindCSS"]
-    },
     {
       id: 2,
       titleFr: "Stagiaire Développeur Web & Mobile Fullstack",
@@ -72,7 +38,6 @@ export default function Experience() {
       duration: "5 mois",
       type: "Stage",
       logoText: "XA",
-      logoBg: "bg-white dark:bg-zinc-900",
       logoImage: "/images/xarala.png",
       descriptionFr:
         "Immersion complète au sein de l'équipe technique de Xarala Academy, avec participation active sur des applications concrètes en production dont la plateforme e-learning et le CRM de gestion commerciale.",
@@ -91,155 +56,294 @@ export default function Experience() {
         "Secure API integration and data handling with TypeScript, schema validation, and GraphQL / REST endpoints"
       ],
       stack: ["Next.js", "React", "TypeScript", "Python", "GraphQL", "PostgreSQL", "Zod", "Zustand", "TanStack Query", "GitLab"]
+    },
+    {
+      id: 1,
+      titleFr: "Stagiaire Développeur Fullstack & Mobile",
+      titleEn: "Fullstack & Mobile Developer Intern",
+      company: "Primelec Services",
+      url: "https://primelec-services.com",
+      location: "France / Remote",
+      period: "Janvier 2026 – Mars 2026",
+      duration: "3 mois",
+      type: "Stage",
+      logoText: "PS",
+      logoImage: "/images/primelec.png",
+      descriptionFr:
+        "Stage en développement fullstack JavaScript et mobile au sein de Primelec Services avec participation active à des projets d'entreprises réels.",
+      descriptionEn:
+        "Internship in fullstack JavaScript and mobile development at Primelec Services, contributing to real-world corporate projects.",
+      missions: [
+        "Développement d’interfaces web dynamiques avec React & Next.js",
+        "Participation au développement d'applications mobiles avec React Native & Expo",
+        "Correction de bugs, optimisation des performances et refonte UI",
+        "Collaboration en équipe en méthode agile sur des projets clients"
+      ],
+      missionsEn: [
+        "Frontend web development with React & Next.js",
+        "Participation in mobile application development using React Native & Expo",
+        "Bug fixing, performance optimization, and UI refactoring",
+        "Agile team collaboration on live client projects"
+      ],
+      stack: ["React", "Next.js", "React Native", "TypeScript", "TailwindCSS"]
     }
   ];
 
-  const filtered = activeTab === 'Tous'
-    ? experiences
-    : experiences.filter(e => e.type === 'Stage');
+  const education = [
+    {
+      degreeFr: "Certification Développeur Fullstack & Mobile",
+      degreeEn: "Fullstack & Mobile Developer Certification",
+      school: "Xarala Academy",
+      location: "Dakar / En ligne",
+      period: "Fév. 2025 – Juil. 2025",
+      status: "Certifié",
+      statusEn: "Certified",
+      highlightsFr: [
+        "Projets Web & Mobile complets en production",
+        "React, Next.js, TypeScript, Node.js, NestJS, Prisma & MySQL",
+        "Développement Mobile multiplateforme React Native & Expo"
+      ],
+      highlightsEn: [
+        "End-to-end production Web & Mobile applications",
+        "React, Next.js, TypeScript, Node.js, NestJS, Prisma & MySQL",
+        "Cross-platform Mobile Development with React Native & Expo"
+      ]
+    },
+    {
+      degreeFr: "Concepteur Développeur Java Spring Boot & Next.js",
+      degreeEn: "Java Spring Boot & Next.js Developer Training",
+      school: "Force-N",
+      location: "Sénégal / En ligne",
+      period: isEn ? "In progress (2026)" : "En cours (2026)",
+      status: "En cours",
+      statusEn: "In progress",
+      highlightsFr: [
+        "Architectures backend d'entreprise & APIs REST Spring Boot",
+        "Interfaces frontend réactives Next.js & TypeScript"
+      ],
+      highlightsEn: [
+        "Enterprise backend architectures & Spring Boot REST APIs",
+        "Reactive Next.js & TypeScript frontend interfaces"
+      ]
+    },
+    {
+      degreeFr: "Formation Développeur Python",
+      degreeEn: "Python Developer Training",
+      school: "Force-N",
+      location: "Sénégal / En ligne",
+      period: isEn ? "In progress (2026)" : "En cours (2026)",
+      status: "En cours",
+      statusEn: "In progress",
+      highlightsFr: [
+        "Programmation orientée objet, structures de données & scripts d'automatisation"
+      ],
+      highlightsEn: [
+        "Object-oriented programming, data structures & automation scripts"
+      ]
+    }
+  ];
 
   return (
-    <section 
-      id="experience" 
-      className="py-24 border-t border-zinc-200 dark:border-white/10 transition-colors"
+    <section
+      id="experience"
+      className="py-20 border-t border-zinc-200 dark:border-white/10 transition-colors"
     >
       <div className="portfolio-container">
         
         {/* EN-TÊTE DE SECTION */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 text-left">
-          <div>
-            <span className="section-tag">
-              <Briefcase size={12} />
-              {isEn ? "Career & Track Record" : "Mon parcours"}
-            </span>
-            <h2 className="section-heading">
-              {isEn ? "Work Experience" : "Expériences professionnelles"}
-            </h2>
-            <p className="section-desc">
-              {isEn
-                ? "Hands-on engineering experience on live applications, production SaaS, and tech platforms."
-                : "Expériences concrètes acquises en agence et sur des plateformes SaaS en production."}
-            </p>
-          </div>
-
-          {/* Onglets Filtre */}
-          <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-white/10 self-start md:self-end">
-            {(['Tous', 'Stages'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-3.5 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-                  activeTab === tab
-                    ? "bg-white dark:bg-[#18181b] text-zinc-900 dark:text-white shadow-xs border border-zinc-200/80 dark:border-white/10"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+        <div className="mb-12 text-left">
+          <span className="section-tag">
+            <Briefcase size={12} />
+            {isEn ? "Career & Academic Track" : "Parcours & Formations"}
+          </span>
+          <h2 className="section-heading">
+            {isEn ? "Experience & Certifications" : "Expériences & Certifications"}
+          </h2>
+          <p className="section-desc">
+            {isEn
+              ? "My professional engineering timeline alongside my specialized technical certifications."
+              : "Mon parcours en entreprise sur des produits réels, accompagné de mes certifications techniques."}
+          </p>
         </div>
 
-        {/* TIMELINE / CARTES D'EXPÉRIENCE BENTO */}
-        <div className="space-y-6">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((exp, index) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bento-card p-6 sm:p-8 text-left"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
-                  
-                  {/* Titre & Entreprise */}
-                  <div className="flex items-start gap-4">
-                    {/* LOGO ENTREPRISE REEL */}
-                    <div className="w-12 h-12 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 flex items-center justify-center shrink-0 p-2 overflow-hidden shadow-xs">
-                      {exp.logoImage ? (
-                        <img
-                          src={exp.logoImage}
-                          alt={exp.company}
-                          className="w-full h-full object-contain"
-                        />
-                      ) : (
-                        <span className="font-bold text-amber-500 dark:text-amber-400 text-sm">
-                          {exp.logoText}
-                        </span>
-                      )}
-                    </div>
+        {/* GRILLE ASYMÉTRIQUE 2 COLONNES : EXPÉRIENCES (7 COLS) + FORMATIONS (5 COLS) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start text-left">
+          
+          {/* COLONNE GAUCHE (7 COLS) : EXPÉRIENCES PROFESSIONNELLES */}
+          <div className="lg:col-span-7 space-y-5">
+            <div className="flex items-center justify-between px-1">
+              <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+                <Briefcase size={14} className="text-amber-500" />
+                {isEn ? "Professional Experience" : "Expériences en Entreprise"}
+              </h3>
+              <span className="text-[11px] font-mono text-zinc-400">
+                Xarala • Primelec
+              </span>
+            </div>
 
-                    <div>
-                      <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-1">
-                        {isEn ? exp.titleEn : exp.titleFr}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                        {exp.url ? (
-                          <a 
-                            href={exp.url} 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="font-medium hover:text-zinc-900 dark:hover:text-white hover:underline inline-flex items-center gap-1"
-                          >
-                            <span>{exp.company}</span>
-                            <ExternalLink size={12} />
-                          </a>
+            <div className="relative pl-6 border-l border-zinc-200 dark:border-zinc-800 space-y-6">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="relative bento-card p-6"
+                >
+                  {/* Point sur la timeline verticale */}
+                  <span className="absolute -left-[31px] top-7 w-3 h-3 rounded-full bg-amber-500 ring-4 ring-[#fafafa] dark:ring-[#09090b]" />
+
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-11 h-11 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 flex items-center justify-center shrink-0 p-1.5 overflow-hidden shadow-2xs">
+                        {exp.logoImage ? (
+                          <img
+                            src={exp.logoImage}
+                            alt={exp.company}
+                            className="w-full h-full object-contain"
+                          />
                         ) : (
-                          <span className="font-medium text-zinc-900 dark:text-white">{exp.company}</span>
+                          <span className="font-bold text-amber-500 text-xs">
+                            {exp.logoText}
+                          </span>
                         )}
-                        <span>•</span>
-                        <span className="flex items-center gap-1 text-xs">
-                          <MapPin size={12} />
-                          {exp.location}
-                        </span>
+                      </div>
+
+                      <div>
+                        <h4 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white leading-snug">
+                          {isEn ? exp.titleEn : exp.titleFr}
+                        </h4>
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
+                          {exp.url ? (
+                            <a
+                              href={exp.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-semibold text-zinc-900 dark:text-zinc-200 hover:text-amber-500 dark:hover:text-amber-400 inline-flex items-center gap-1"
+                            >
+                              <span>{exp.company}</span>
+                              <ExternalLink size={11} />
+                            </a>
+                          ) : (
+                            <span className="font-semibold">{exp.company}</span>
+                          )}
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <MapPin size={11} />
+                            {exp.location}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Période / Badge */}
-                  <div className="self-start sm:self-auto">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-100 dark:bg-zinc-800/60 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-full font-mono">
-                      <Calendar size={12} />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-zinc-100 dark:bg-zinc-900 text-[11px] font-mono text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-md self-start shrink-0">
+                      <Calendar size={11} />
                       {exp.period}
                     </span>
                   </div>
 
-                </div>
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4">
+                    {isEn ? exp.descriptionEn : exp.descriptionFr}
+                  </p>
 
-                {/* Description */}
-                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-5">
-                  {isEn ? exp.descriptionEn : exp.descriptionFr}
-                </p>
+                  <div className="space-y-1.5 mb-5">
+                    {(isEn ? exp.missionsEn : exp.missions).map((mission, mIdx) => (
+                      <div key={mIdx} className="flex items-start gap-2">
+                        <span className="text-amber-500 font-bold text-xs leading-relaxed">•</span>
+                        <span className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                          {mission}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Missions */}
-                <div className="space-y-2 mb-6">
-                  {(isEn ? exp.missionsEn : exp.missions).map((mission, mIdx) => (
-                    <div key={mIdx} className="flex items-start gap-2.5">
-                      <span className="text-amber-500 dark:text-amber-400 font-bold text-sm leading-relaxed">•</span>
-                      <span className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                        {mission}
+                  <div className="pt-3.5 border-t border-zinc-100 dark:border-white/5 flex flex-wrap gap-1.5">
+                    {exp.stack.map((tech, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="text-[10px] font-mono font-medium px-2 py-0.5 bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded"
+                      >
+                        {tech}
                       </span>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-                {/* Stack */}
-                <div className="pt-4 border-t border-zinc-200 dark:border-white/10 flex flex-wrap gap-1.5">
-                  {exp.stack.map((tech, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="text-[11px] font-semibold px-2.5 py-0.5 bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5 rounded-md font-mono"
-                    >
-                      {tech}
+          {/* COLONNE DROITE (5 COLS) : FORMATIONS, CERTIFICATIONS & CV */}
+          <div id="education" className="lg:col-span-5 space-y-5">
+            <div className="flex items-center justify-between px-1">
+              <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+                <GraduationCap size={14} className="text-amber-500" />
+                {isEn ? "Education & Certifications" : "Formations & Certifications"}
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {education.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08 }}
+                  className="bento-card p-5"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
+                      {item.school}
                     </span>
-                  ))}
-                </div>
+                    <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/5">
+                      {item.period}
+                    </span>
+                  </div>
 
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                  <h4 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white mb-3 leading-snug">
+                    {isEn ? item.degreeEn : item.degreeFr}
+                  </h4>
+
+                  <div className="space-y-1.5">
+                    {(isEn ? item.highlightsEn : item.highlightsFr).map((h, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <CheckCircle2 size={13} className="text-emerald-500 shrink-0 mt-0.5" />
+                        <span className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                          {h}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Carte CTA Téléchargement CV Complet */}
+              <div className="bento-card p-5 bg-gradient-to-br from-amber-500/5 via-transparent to-emerald-500/5 flex items-center justify-between gap-4">
+                <div>
+                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
+                    {isEn ? "Full Resume / CV" : "Curriculum Vitae Complet"}
+                  </h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                    {isEn
+                      ? "Download the printable PDF version with full details."
+                      : "Version PDF détaillée prête pour le recrutement."}
+                  </p>
+                </div>
+                <a
+                  href="/cv-bamba.pdf"
+                  download="CV_Mouhamadou_Bamba_Diagne.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary !py-2 !px-3.5 !text-xs shrink-0"
+                >
+                  <Download size={13} />
+                  <span>PDF</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
